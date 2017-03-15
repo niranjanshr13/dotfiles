@@ -13,7 +13,3 @@ Always move forward, even when your back hurts.
 - https://github.com/niranjanshr13
 - https://twitter.com/niranjanshr13
 - https://www.linkedin.com/in/niranjanshr13
-# test-dotfiles
-# test-dotfiles
-# test-dotfiles
-# test-dotfiles
