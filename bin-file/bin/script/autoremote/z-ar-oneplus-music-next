@@ -1,0 +1,3 @@
+#!/bin/bash
+curl -sI "http://autoremotejoaomgcd.appspot.com/sendmessage?key="$AUTOREMOTE_ONEPLUS_ONE_KEY"&message=music_play" > /dev/null
+notify-send "Music Next Signal Sended"

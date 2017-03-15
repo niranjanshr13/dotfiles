@@ -1,0 +1,26 @@
+# Add text on image with PIL module.
+# http://python-catalin.blogspot.com/2010/06/add-text-on-image-with-pil-module.html
+import PIL
+from PIL import ImageFont
+from PIL import Image
+from PIL import ImageDraw
+font = ImageFont.truetype("/usr/share/fonts/dejavu/DejaVuSans.ttf",25)
+img=Image.new("RGBA", (200,200),(120,20,20))
+draw = ImageDraw.Draw(img)
+draw.text((0, 0),"This is a test",(255,255,0),font=font)
+draw = ImageDraw.Draw(img)
+draw = ImageDraw.Draw(img)
+img.save("a_test.png")
+
+
+## Manipulate without downloading file.
+import requests
+import io
+from PIL import Image
+
+imageLink = ''
+
+req = requests.get(imageLink)
+file_jpg = io.BytesIO(req.content)
+im = Image.open(file_jpg)
+im.size

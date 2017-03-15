@@ -1,0 +1,4 @@
+# im-config(8) generated on Sun, 24 Jan 2016 19:20:36 -0500
+run_im ibus
+# im-config signiture: 2251b32ecff91c155124a0b9c7583501  -
+SHELL=tmux

@@ -1,0 +1,273 @@
+# Variables
+# =========
+# testing
+#	bindsym button3 kill
+
+# key binding symbol helper.
+# 	xmodmap -pke
+
+#-----
+
+client.focused #000000 #000000 #fdf6e3 #859900
+
+# Color Set
+# =========
+set $base00 #101218
+set $base01 #1f222d
+set $base02 #252936
+set $base03 #7780a1
+set $base04 #C0C5CE
+set $base05 #d1d4e0
+set $base06 #C9CCDB
+set $base07 #ffffff
+set $base08 #ee829f
+set $base09 #f99170
+set $base0A #ffefcc
+set $base0B #a5ffe1
+set $base0C #97e0ff
+set $base0D #97bbf7
+set $base0E #c0b7f9
+set $base0F #fcc09e
+set $bg-color #000000
+set $text-color #f3f4f5
+
+# Configuring button in Variable
+# ================
+set $mod Mod4
+set $ALT Mod1
+
+# Workspace Variable
+# ================== 
+set $workspace1 "1:"
+set $workspace2 "2:"
+set $workspace3 "3:"
+set $workspace4 "4:"
+set $workspace5 "5:"
+set $workspace6 "6:"
+set $workspace7 "7:"
+set $workspace8 "8:"
+set $workspace9 "9:"
+set $workspace10 "10:"
+# =====================
+# =====================
+
+# Keybinding System
+# =================
+
+bindsym $ALT+F4 exec i3 kill	#kill focused window
+bindsym $mod+Shift+r exec i3 restart	#sourced i3
+bindsym $mod+Escape exec "$(xinput list-props 14 | grep -qE \\"Device Enabled.*1$\\" && xinput disable 14 || xinput enable 14 && i3 restart)"			#mouse disable and enable mode
+
+# logs you out
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Logoff the user' -b 'Yes, exit i3' 'i3-msg exit'"
+# i3lock
+bindsym $mod+q exec i3lock -c 004000
+	#bindsym $mod+q exec i3lock -i ~/.i3/i3_wallpaper.png
+bindsym $mod+m exec mpv http://opus.stillstream.fm:8000/stillstream > /dev/null 2&>1
+
+# Keybinding fn keys
+# ==================
+# Pulse Audio controls
+# ====================
+bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master 1+ toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
+
+# Sreen brightness controls
+# =========================
+bindsym XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
+bindsym $mod+F4 exec redshift # nightmode
+
+# Custom Keybinding Shortcut
+# ==========================
+bindsym $mod+question exec z-notify-master.sh # master helper
+bindsym $mod+t exec xterm
+bindsym $mod+Return exec xterm
+#	bindsym $mod+t exec xfce4-terminal
+#	bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+g exec chromium-browser "github.com" &
+bindsym $mod+f exec z-qt-facebook.py $FB_USER $FB_PASS
+	#bindsym $mod+f exec chromium-browser "facebook.com" &
+bindsym $mod+c exec chromium-browser &
+bindsym $mod+s exec dmenu_run
+	#bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combind"
+#bindsym $mod+Shift+f exec feh $(xclip -o)
+#bindsym Control+question exec bindsym $mod+0 workspace $workspace10 
+
+# Keybinding to autoremote
+# ========================
+bindsym Control+Shift+question exec "z-notify-autoremote.sh"
+	#bindsym Control+Shift+space exec "z-ar-oneplus-music-stop"
+	#bindsym Control+Shift+braceleft exec "z-ar-oneplus-music-previous"
+	#bindsym Control+Shift+braceright exec "z-ar-oneplus-music-next"
+	#bindsym Control+Shift+plus exec "z-ar-oneplus-volume-up"
+
+# https://i3wm.org/docs/userguide.html#line_continuation
+bindsym Control+Shift+space exec \
+"curl -sI \\"http://autoremotejoaomgcd.appspot.com/sendmessage?key=\\"$AUTOREMOTE_ONEPLUS_ONE_KEY\\"&message=music_stop\\" \
+&& notify-send \\"Music Play/Pause Signal Sended\\""
+
+bindsym Control+Shift+braceleft exec \
+"curl -sI \\"http://autoremotejoaomgcd.appspot.com/sendmessage?key=\\"$AUTOREMOTE_ONEPLUS_ONE_KEY\\"&message=music_previous\\" \
+&& notify-send \\"Music Previous Signal Sended\\""
+
+bindsym Control+Shift+braceright exec \
+"curl -sI \\"http://autoremotejoaomgcd.appspot.com/sendmessage?key=\\"$AUTOREMOTE_ONEPLUS_ONE_KEY\\"&message=music_play\\" \
+&& notify-send \\"Music Next Signal Sended\\""
+
+# Keybinding Screen
+# =================
+# =================
+
+# change focus
+# ============
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+# ===================
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+h split h	#split in horizontal
+bindsym $mod+v split v # split in vertical
+bindsym $mod+$ALT+space floating toggle #toggle tiling / floating
+
+# change focus between tiling / floating windows
+# ==============================================
+bindsym $mod+space focus mode_toggle
+
+# ============
+
+# keybinding workspace
+# ====================
+	# switiching workspace
+	# ====================
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+	# move focused container to workspace
+	# ===================================
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# Assign Program
+# ==============
+assign [class="chromium-browser"] $workspace2
+for_window [title=".*njn_any_music_player.*"] move to workspace $workspace3
+#for_window [title=".*Facebook.*"] move to workspace $workspace5
+#for_window [title=".*Twitter.*"] move to workspace $workspace5
+#for_window [title="peerflix  -v -r"] move to workspace $workspace19
+#for_window [class="vlc"] move to workspace $workspace4
+#for_window [class="Vlc"] move to workspace $workspace4
+#for_window [title="htop"] move to workspace $workspace9
+#for_window [class="vlc"] floating enable
+for_window [title="qt4.web.facebook"] resize set 640 640
+#for_window [title="facebook.py"] resize set 640 640
+
+
+for_window [class="Firefox"] floating enable
+for_window [class="feh"] floating enable
+for_window [class="MPlayer"] floating enable
+#for_window [title="ping 8.8.8.8"] move to workspace $workspace9
+
+# =============
+# =============
+
+# resize window
+bindsym $mod+r mode "resize"
+mode "resize" {
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bar {
+	position top
+	status_command i3status -c ~/.i3/i3status.conf
+	font pango: System San Francisco Display, FontAwesome 11
+colors {
+      separator $base03
+#     background $base01
+      statusline $base04
+#                        border  background text
+      focused_workspace  $base01 $base01    $base07
+      active_workspace   $base01 $base02    $base03
+      inactive_workspace $base01 $base01    $base03
+      urgent_workspace   $base01 $base01    $base08
+     }
+}
+
+
+# Run always
+# ==========
+#exec --no-startup-id nm-applet
+exec --no-startup-id xsetroot -solid "#000000" 
+exec xrdb ~/.Xresources
+
+# Boring Stuff
+# ============
+# ============
+
+# Font Stuff 
+# =========================
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:System San Francisco Display 10
+
+# Not Useful (So I dont use it)
+# =============================
+# Use Mouse+$mod to drag floating windows to their wanted position
+# floating_modifier $mod
+
+# change container layout (stacked, tabbed, toggle split) (need to be changed)
+# ============================================================================
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+e layout toggle split
+
+# focus the parent container
+# ==========================
+# bindsym $mod+a focus parent
+
+# focus the child container
+# =========================
+# bindsym $mod+d focus child
+
+# Media player controls ((( Doesn't Work ))
+# bindsym XF86AudioPlay exec playerctl play
+# bindsym XF86AudioPause exec playerctl pause
+# bindsym XF86AudioNext exec playerctl next
+# bindsym XF86AudioPrev exec playerctl previous
+
+# fix below "keybinding
+# bindsym $mod+b exec j4-dmenu-desktop --dmenu="dmenu -f -i -fn 'DejaVu Sans-10' -l 20' --term='xterm'
+
+# reload the configuration file
+# bindsym $mod+Shift+c reload
+

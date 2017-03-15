@@ -1,0 +1,4 @@
+z-music-play() {
+youtube-dl -q --max-downloads 1 --no-playlist --default-search ${2:-ytsearch} "$@" -o - | mplayer -vo null /dev/fd/3 3<&0 </dev/tty;
+}
+

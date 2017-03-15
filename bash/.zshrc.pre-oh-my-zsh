@@ -1,0 +1,164 @@
+export ZSH=/home/njn/.oh-my-zsh
+
+
+# look in "~/.oh-my-zsh/themes/" for Zsh theme
+ZSH_THEME="robbyrussel"
+
+
+# zsh config
+# =========
+# export
+# ======
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/njn/bin"
+export UPDATE_ZSH_DAYS=60
+export LANG=en_US.UTF-8
+export EDITOR='nano -$'
+export HISTSIZE=100
+export SAVEHIST=100
+
+
+#Normal Aliases
+#---------------
+alias ss='startx'
+alias q='exit'
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias ll='ls -alF'
+alias la='ls -a --color=auto'
+alias l='ls -CF'
+alias z-kill-chrome='kill -9 $(ps aux  | grep chromium | grep -v 'grep' | awk '{ print $2 }') '
+alias bd='cd ../'
+alias rm='trash-put'
+alias mk='mkdir'                                                                                ## mkdir alias
+alias c='cd'                                                                                    ## cd alias
+alias l='ls'                                                                                    ## ls aliases
+alias cs='clear'                                                                                ## clear terminal
+alias sl='ls'                                                                                   ## alias for ls
+alias cls='clear'                                                                               ## clear terminal
+alias csl='clear'                                                                               ## Clear alias
+alias nano='nano -$'                                                                            ## Customizing nano
+alias vv='vim'                                                                                  ## alias vim
+alias nn='nano'                                                                                 ## alias nano
+alias nano='nano -$'                                                                            ## Customizing nano
+alias nn='nano'                                                                                 ## alias nano
+alias zo='xdg-open'                                                                             ## use xdg-open command
+alias z-screenshot='scrot'                                                                      ## take a screenshot
+alias chrome='chromium-browser'                                                                 ## alias for chromium-browser
+alias z-gist-list='gist --list'                                                                 ## List all gist on the internet
+alias z-xclip='xclip -i -sel clip'                                                              ## right way to use xclip
+alias z-src-refresh='source ~/.zshrc'                                                           ## refresh source
+alias zz='source ~/.zshrc'                                                                      ## refresh source
+alias eog='feh'                                                                                 ## aliases eog of feh
+alias zo-fb='chrome "facebook.com" > /dev/null 2>&1 & '                                         ## open facebook.com
+alias zp='ping 8.8.8.8'                                                                         ## ping internet
+alias ff='firefox'                                                                              ## alias for firefox
+alias cc='chrome'                                                                               ## alias for chrome
+alias qq='exit'                                                                                 ## alias for exit
+alias cx='chmod +x'                                                                             ## chmod executable.
+alias z-unzip='patool extract'                                                                  ## Extract from archieve
+alias z-shutdown='init 0'                                                                       ## Poweroff aliases
+alias z-reboot='init 6'                                                                         ## Reboot aliases
+alias feh='feh --scale-down'                                                                    ## Customizing feh
+alias rr='ranger'                                                                               ## ranger alias
+alias yt='youtube-dl'                                                                           ## Youtube-dl alias
+alias z-loop='while : ; do $@ ; done'
+alias z-git-push='git push'
+# =====
+alias z-git-push='git push'
+alias z-git-commit='git commit'
+alias z-git-status='git status'
+alias z-git-add='git add'
+# =====
+# Directory
+alias zct='cd /tmp/'                                                                            ## Shortcut to tmp 
+# =====
+alias z-peerflix="peerflix "$@" -v -r"                                                          ## peerflix module
+# =====
+z-redshift() {
+xbacklight -inc 100
+xbacklight -dec 97
+redshift -b 0.7 2>&1 /dev/null &
+}
+# =====
+z-down4me() {
+checker=$(curl -s "isup.me/$1" | grep 'class="domain"' | grep -o ".*<a" | sed 's/  //g' | sed 's/<a//g')
+if [ "$checker" != "" ]
+then
+echo "$checker"
+else
+echo 'Internet is down'
+fi
+}
+# ====
+z-batt-stat() {
+echo "Computer is currently $(cat /sys/class/power_supply/BAT1/status)"
+echo "$(cat /sys/class/power_supply/BAT1/capacity)% Battery Level"
+}
+# ====
+zpp() {
+sudo rfkill unblock all
+}
+# ====
+z-myip() {
+ipthing () {
+
+echo "Internal IP       =       $(ifconfig | perl -nle'/dr:(\S+)/ && print $1' | grep -v 127.0.0.1 | sed ':a;N;$!ba;s/\n/, /g')"
+echo "Gateway           =       $(ip route show | awk '$3 ~ /^[1-9]+/ {print $3;}')"
+echo "Mac Address       =       $(ifconfig -a | grep HWaddr | awk '{print $5 }' | sed ':a;N;$!ba;s/\n/, /g' )"
+
+}
+
+if [ "$(curl -s http://ipinfo.io/ip)" = "" ]
+then 
+echo "Looks like internet is down"
+ipthing
+else
+ipthing
+echo "External IP       =       $(curl -s ipinfo.io/ip)"
+echo "City              =       $(curl -s ipinfo.io/city)"
+echo "State             =       $(curl -s ipinfo.io/region)"
+echo "Country           =       $(curl -s ipinfo.io/country)"
+echo "Zip               =       $(curl -s ipinfo.io/postal)"
+echo "GPS-Co            =       $(curl -s ipinfo.io/loc)"
+fi
+}
+# ===
+z-pastebin() {
+if [[ "$@" = '' ]]
+then
+echo "type any argument to be in paste"
+else
+if [[ "$(curl -s  http://ipinfo.io/ip)" = '' ]]
+then
+echo "Internet Is down"
+else
+echo "$@" | curl -s -F "f:1=<-" http://ix.io
+fi
+fi
+}
+# ====
+zn-scan-network() {
+# show all the mac-address on the network.
+fing -r 1 --silent | grep 'HW Address' | awk '{print $3}' | sed 's/://g'
+}
+# ====
+zn-word() {
+mkdir -p /tmp/password/
+curl -s 'https://wiki.skullsecurity.org/Passwords' | grep txt.bz2 | grep -o "http.*.bz2" | sed "s/>.*//g" | sed 's/"//g' > /tmp/password/list
+aria2c -s16 -x16 -j5 -i /tmp/password/list -d /tmp/password/
+bunzip2 -c /tmp/password/*.bz2 > /tmp/password/wordlist
+rm /tmp/password/list
+rm /tmp/password/*.bz2
+cat /tmp/password/* | sort | uniq > /tmp/password/finished.lst
+rm /tmp/password/wordlist
+}
+z-selenium_firefox() {
+docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix niranjanshr13/selenium_firefox
+}
+z-selenium_pantomjs() {
+docker run -it niranjanshr13/selenium_phantomjs bash
+}
+# ====
+

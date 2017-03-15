@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/njn/.vim/bundle/vim-snippets/snippets'
+let g:netrw_dirhist_2='/home/njn/.zcash'
+let g:netrw_dirhist_3='/tmp/plx/BBC Three'
+let g:netrw_dirhist_4='/mnt/anime-song-cool-animation'
+let g:netrw_dirhist_5='/tmp/ppp'

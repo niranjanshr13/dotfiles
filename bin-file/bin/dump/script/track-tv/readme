@@ -1,0 +1,34 @@
+#tv-track
+Check tv schedule and show. totally customizable and depends upon tvguide.com and only works with tv show.
+
+-----------------------------------------------------------------
+#App Needed:-
+* curl :- may need to install
+* grep :- might already installed
+* sed  :- might already installed
+* cat  :- might already installed
+  
+-----------------------------------------------------------------
+#Important
+user should use specific way in file name 'tv-list.txt'. file name can changed but inside of it should use precisily way it is designed.
+For Example:-
+this is flash tv series link :- "http://www.tvguide.com/tvshows/the-flash/644014/" 
+Unique ID(UID) :- should always be place after tv show name colon':' 
+####Eg- 'the flash : 644014' without quote
+-----------------------------------------------------------------
+#Usages:-
+       #  Parameter :- 
+              *all
+              *tv-number or tv show name "use lowercase" don't need to be fullname just a small portion
+              *use today
+                     *Type 'all'                 :	For all the tv-list
+                     *Type 'number / name'       :	For specific tv
+                     *Type 'today'               :	to get today's only tv show
+-----------------------------------------------------------------
+###Can be modified:-
+ * filename 'tv-list.txt'
+
+-----------------------------------------------------------------
+Things todo.
+* Change same script into function.
+* Create a tomorrow parameter.
