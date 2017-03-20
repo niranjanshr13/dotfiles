@@ -1,4 +1,4 @@
-# Add text on image with PIL module.
+#{{{Add text on image with PIL module.
 # http://python-catalin.blogspot.com/2010/06/add-text-on-image-with-pil-module.html
 import PIL
 from PIL import ImageFont
@@ -11,9 +11,8 @@ draw.text((0, 0),"This is a test",(255,255,0),font=font)
 draw = ImageDraw.Draw(img)
 draw = ImageDraw.Draw(img)
 img.save("a_test.png")
-
-
-## Manipulate without downloading file.
+#}}}
+#{{{ Manipulate without downloading file.
 import requests
 import io
 from PIL import Image
@@ -24,3 +23,4 @@ req = requests.get(imageLink)
 file_jpg = io.BytesIO(req.content)
 im = Image.open(file_jpg)
 im.size
+#}}}

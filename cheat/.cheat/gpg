@@ -1,35 +1,24 @@
 # Create a key
  gpg --gen-key
 
-
 # Show keys
+To list a summary of all keys
+gpg --list-keys
 
-  To list a summary of all keys
+To show your public key
+gpg --armor --export
 
-    gpg --list-keys
-
-  To show your public key
-
-    gpg --armor --export
-
-  To show the fingerprint for a key
-
-    gpg --fingerprint KEY_ID
+To show the fingerprint for a key
+gpg --fingerprint KEY_ID
 
 # Search for keys
-
-  gpg --search-keys 'user@emailaddress.com'
-
+gpg --search-keys 'user@emailaddress.com'
 
 # To Encrypt a File
-
-  gpg --encrypt --recipient 'user@emailaddress.com' example.txt
-
+gpg --encrypt --recipient 'user@emailaddress.com' example.txt
 
 # To Decrypt a File
-
-  gpg --output example.txt --decrypt example.txt.gpg
-
+gpg --output example.txt --decrypt example.txt.gpg
 
 # Export keys
 

@@ -10,7 +10,7 @@
 
 client.focused #000000 #000000 #fdf6e3 #859900
 
-# Color Set
+#{{{ Color Set
 # =========
 set $base00 #101218
 set $base01 #1f222d
@@ -30,13 +30,15 @@ set $base0E #c0b7f9
 set $base0F #fcc09e
 set $bg-color #000000
 set $text-color #f3f4f5
+#}}} ======
 
-# Configuring button in Variable
+#{{{ Configuring button in Variable
 # ================
 set $mod Mod4
 set $ALT Mod1
+#}}} ====
 
-# Workspace Variable
+#{{{ Workspace Variable
 # ================== 
 set $workspace1 "1:"
 set $workspace2 "2:"
@@ -48,38 +50,44 @@ set $workspace7 "7:"
 set $workspace8 "8:"
 set $workspace9 "9:"
 set $workspace10 "10:"
-# =====================
-# =====================
+#}}} =====================
 
-# Keybinding System
+#{{{ Keybinding System
 # =================
 
 bindsym $ALT+F4 exec i3 kill	#kill focused window
 bindsym $mod+Shift+r exec i3 restart	#sourced i3
 bindsym $mod+Escape exec "$(xinput list-props 14 | grep -qE \\"Device Enabled.*1$\\" && xinput disable 14 || xinput enable 14 && i3 restart)"			#mouse disable and enable mode
+#}}}
 
-# logs you out
+#{{{ logs you out
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Logoff the user' -b 'Yes, exit i3' 'i3-msg exit'"
-# i3lock
+#}}}
+
+#{{{ i3lock
 bindsym $mod+q exec i3lock -c 004000
 	#bindsym $mod+q exec i3lock -i ~/.i3/i3_wallpaper.png
 bindsym $mod+m exec mpv http://opus.stillstream.fm:8000/stillstream > /dev/null 2&>1
+#}}}
 
-# Keybinding fn keys
+#{{{ Keybinding fn keys
 # ==================
-# Pulse Audio controls
+#{{{ Pulse Audio controls
 # ====================
 bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master 1+ toggle # mute sound
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
 
-# Sreen brightness controls
+#{{{ Sreen brightness controls
 # =========================
 bindsym XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
 bindsym $mod+F4 exec redshift # nightmode
+#}}}
+#}}}}
+#}}}
 
-# Custom Keybinding Shortcut
+#{{{ Custom Keybinding Shortcut
 # ==========================
 bindsym $mod+question exec z-notify-master.sh # master helper
 bindsym $mod+t exec xterm
@@ -94,8 +102,8 @@ bindsym $mod+s exec dmenu_run
 	#bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combind"
 #bindsym $mod+Shift+f exec feh $(xclip -o)
 #bindsym Control+question exec bindsym $mod+0 workspace $workspace10 
-
-# Keybinding to autoremote
+#}}}}
+#{{{ Keybinding to autoremote
 # ========================
 bindsym Control+Shift+question exec "z-notify-autoremote.sh"
 	#bindsym Control+Shift+space exec "z-ar-oneplus-music-stop"
@@ -115,11 +123,9 @@ bindsym Control+Shift+braceleft exec \
 bindsym Control+Shift+braceright exec \
 "curl -sI \\"http://autoremotejoaomgcd.appspot.com/sendmessage?key=\\"$AUTOREMOTE_ONEPLUS_ONE_KEY\\"&message=music_play\\" \
 && notify-send \\"Music Next Signal Sended\\""
+#}}}
 
-# Keybinding Screen
-# =================
-# =================
-
+#{{{ Keybinding Screen
 # change focus
 # ============
 bindsym $mod+Left focus left
@@ -141,10 +147,9 @@ bindsym $mod+$ALT+space floating toggle #toggle tiling / floating
 # ==============================================
 bindsym $mod+space focus mode_toggle
 
-# ============
+#}}} ============
 
-# keybinding workspace
-# ====================
+#{{{ keybinding workspace
 	# switiching workspace
 	# ====================
 bindsym $mod+1 workspace $workspace1
@@ -170,9 +175,9 @@ bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
+#}}}
 
-# Assign Program
-# ==============
+#{{{ Assign Program
 assign [class="chromium-browser"] $workspace2
 for_window [title=".*njn_any_music_player.*"] move to workspace $workspace3
 #for_window [title=".*Facebook.*"] move to workspace $workspace5
@@ -191,10 +196,9 @@ for_window [class="feh"] floating enable
 for_window [class="MPlayer"] floating enable
 #for_window [title="ping 8.8.8.8"] move to workspace $workspace9
 
-# =============
-# =============
+#}}} =============
 
-# resize window
+#{{{ resize window
 bindsym $mod+r mode "resize"
 mode "resize" {
         # same bindings, but for the arrow keys
@@ -223,7 +227,7 @@ colors {
       urgent_workspace   $base01 $base01    $base08
      }
 }
-
+#}}}
 
 # Run always
 # ==========

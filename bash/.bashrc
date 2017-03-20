@@ -1,9 +1,8 @@
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+#{{{ Bash history
 HISTSIZE=100
 HISTFILESIZE=100
-
-# =====
-# Normal Aliases
+#}}}
+#{{{ Normal Aliases
 alias ss='startx'
 alias mplayer='mpv'
 alias q='exit'
@@ -18,16 +17,16 @@ alias l='ls -CF'
 alias z-kill-chrome='kill -9 $(ps aux  | grep chromium | grep -v 'grep' | awk '{ print $2 }') '
 alias bd='cd ../'
 alias rm='trash-put'
-alias mk='mkdir'										## mkdir alias
-alias c='cd'											## cd alias
-alias l='ls'                                                                                    ## ls aliases
-alias cs='clear'										## clear terminal
-alias sl='ls'                                                                                   ## alias for ls
-alias cls='clear'                                                                               ## clear terminal
-alias csl='clear'                                                                               ## Clear alias
-alias nano='vim'                                                                            ## Customizing nano
-alias vv='vim'											## alias vim
-alias nn='vim'											## alias nano
+alias mk='mkdir'
+alias c='cd'
+alias l='ls'
+alias cs='clear'
+alias sl='ls'                                                                                   
+alias cls='clear'                                                                               
+alias csl='clear'                                                                               
+alias nano='vim'                                                                            
+alias vv='vim'										
+alias nn='vim'										
 alias zo='xdg-open'		                                                                ## use xdg-open command
 alias z-screenshot='scrot'                                                                      ## take a screenshot
 alias chrome='chromium-browser'									## alias for chromium-browser
@@ -52,18 +51,16 @@ alias z-git-push='git push'
 alias z-git-commit='git commit'
 alias z-git-stat='git status'
 alias z-git-add='git add'
-# =====
-# Directory
-alias zct='cd /tmp/'										## Shortcut to tmp 
-# =====
+alias zct='cd /tmp/'
+#}}}
 alias z-peerflix="peerflix "$@" -v -r"                                                          ## peerflix module
-# =====
+#{{{ Redshift
 z-redshift() {
 	xbacklight -inc 100
 	xbacklight -dec 97
 	redshift -b 0.7 2>&1 /dev/null &
 }
-# =====
+#}}} =====
 z-down4me() {
 checker=$(curl -s "isup.me/$1" | grep 'class="domain"' | grep -o ".*<a" | sed 's/  //g' | sed 's/<a//g')
 if [ "$checker" != "" ]
@@ -129,15 +126,6 @@ rm /tmp/password/wordlist
 
 # --------
 
-z-rdp-college() {
-	rdesktop \
-	-g 1920x1040 \
-	"$COLLEGE_RDP_WEBSITE" \
-	-u "$COLLEGE_USERNAME" \
-	-p $COLLEGE_PASSWORD \
-	-P -z 2>/dev/null &
-}
-
 z-ffmpeg_comb_vid_img() {
 # $1 = image
 # $2 = mp3
@@ -146,8 +134,8 @@ ffmpeg -loop 1 -i $1 -i $2 -shortest -c:v libx264 -c:a copy $3
 }
 
 
-# Configuration Files
-# -------------------
+#{{{ Configuration Files
+
 z-cfg-vim-snippet-py() {
 	nano $HOME/.vim/bundle/vim-snippets/snippets/python.snippets
 }
@@ -164,7 +152,7 @@ z-cfg-bash(){
 	nano ~/.bashrc
 }
 
-# -------------------
+# }}}
 
 zp() {
 
@@ -177,21 +165,12 @@ fi
 }
 
 
-
-# server ssh
-# ----------
-z-ssh-aws-one() {
-	ssh -i $SSH_AWS_ONE_KEY $SSH_AWS_ONE_IP
-}
-
-
-
 z-sms-2-phone(){
 	z-smtp.gmail.py $PHONE_EMAIL_USER $PHONE_EMAIL_PASS $PHONE_EMAIL_TO $1
 }
 
 
-
+# {{{ Rclone
 
 z-rclone-list(){
 	rclone listremotes
@@ -201,16 +180,64 @@ z-rclone-available-size(){
 	rclone size $1 
 }
 
-
+#}}}
 
 z-reptyr(){
 	reptyr
 }
 
+# {{{ Docker Aliases
+
 z-dock-rmall(){
 	docker stop $(docker ps | awk {'print $3'})
 	docker rmi -f $(docker ps | awk {'print $3'})
 }
+
+z-x11-reload() {
+        # Things todo: if X11 apps doesn't work in docker.
+        export DISPLAY=":0.0"
+        xhost +$USER
+        xhost +
+}
+
+
+z-dock-selenium_ffox(){
+        docker run -it --rm \
+        -e DISPLAY=$DISPLAY \
+        -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+        niranjanshr13/selenium_firefox \
+        /bin/bash
+}
+
+z-dock-selenium_pantomjs() {
+        docker run -it \
+        niranjanshr13/selenium_phantomjs \
+        /bin/bash
+}
+
+z-dock-jdownloader() {
+# https://github.com/PlusMinus0/headless-jd2-docker
+        docker run -d --name jdownloader-headless \
+        -v /config/jd2:/opt/JDownloader/cfg \
+        -v /home/user/Downloads:/root/Downloads \
+        plusminus/jdownloader2-headless
+}
+
+z-dock-python3() {
+        docker run -it --rm \
+        python:3.3.6-slim \
+        /bin/bash
+}
+
+z-dock-pyautogui() {
+        docker run -it --rm \
+        -e DISPLAY=$DISPLAY \
+        -v /tmp/.X11-unix:/tmp/.X11-unix \
+        niranjanshr13/python3_pyautogui \
+        /bin/bash
+}
+
+# }}}
 
 z-primewire(){
 # https://pypi.python.org/pypi/primewire/1.0.2
@@ -240,7 +267,22 @@ z-send-tv(){
 z-down-safaribooks(){
 	youtube-dl -u $SAFARI_EMAIL -p $SAFARI_PASSWORD -o '%(playlist_index)s. %(title)s.%(ext)s' $@
 }
-
+#{{{ Remote access
 z-rdp-aws(){
 	rdesktop -g 1920x1040 $AWS_WINDOWS_ONE_IP -u "Administrator" -p $AWS_WINDOWS_PASSWORD -P -z 2> /dev/null &
 }
+
+z-ssh-aws-one() {
+        ssh -i $SSH_AWS_ONE_KEY $SSH_AWS_ONE_IP
+}
+
+z-rdp-college() {
+        rdesktop \
+        -g 1920x1040 \
+        "$COLLEGE_RDP_WEBSITE" \
+        -u "$COLLEGE_USERNAME" \
+        -p $COLLEGE_PASSWORD \
+        -P -z 2>/dev/null &
+}
+
+#}}}
