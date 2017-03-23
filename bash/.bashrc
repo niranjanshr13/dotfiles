@@ -52,8 +52,8 @@ alias z-git-commit='git commit'
 alias z-git-stat='git status'
 alias z-git-add='git add'
 alias zct='cd /tmp/'
-#}}}
 alias z-peerflix="peerflix "$@" -v -r"                                                          ## peerflix module
+#}}}
 #{{{ Redshift
 z-redshift() {
 	xbacklight -inc 100
@@ -61,6 +61,7 @@ z-redshift() {
 	redshift -b 0.7 2>&1 /dev/null &
 }
 #}}} =====
+#{{{ Is website down  
 z-down4me() {
 checker=$(curl -s "isup.me/$1" | grep 'class="domain"' | grep -o ".*<a" | sed 's/  //g' | sed 's/<a//g')
 if [ "$checker" != "" ]
@@ -70,23 +71,27 @@ else
 echo 'Internet is down'
 fi
 }
-# ====
+#}}}
+#{{{ Battery Status
 z-batt-stat() {
 	echo "Computer is currently $(cat /sys/class/power_supply/BAT1/status)"
 	echo "$(cat /sys/class/power_supply/BAT1/capacity)% Battery Level"
 }
-# ====
+#}}}
+#{{{ Fixing the wifi
 zpp() {
 	sudo rfkill unblock all
 }
-# ====
+#}}}
+#{{{ Wifi Information
 z-myip () {
 echo "curl -s 'ipinfo.io'"
 echo "Internal IP = $(ifconfig | perl -nle'/dr:(\S+)/ && print $1' | grep -v 127.0.0.1 | sed ':a;N;$!ba;s/\n/, /g')"
 echo "Gateway     = $(ip route show | awk '$3 ~ /^[1-9]+/ {print $3;}')"
 echo "Mac Address = $(ifconfig -a | grep HWaddr | awk '{print $5 }' | sed ':a;N;$!ba;s/\n/, /g' )"
 }
-# ===
+#}}}
+#{{{ Send to Pastebin
 z-pastebin() {
 if [[ "$@" = '' ]]
 then
@@ -100,19 +105,19 @@ echo "$@" | curl -s -F "f:1=<-" http://ix.io
 fi
 fi
 }
-# ====
+#}}}
+#{{{ Searching Mac-Address by Scanning Network 
 zn-scan-network() {
 	# show all the mac-address on the network.
 	fing -r 1 --silent | grep 'HW Address' | awk '{print $3}' | sed 's/://g'
 }
-# ====
+#}}}
+#{{{ find instagram follower
 zn-instagram-follower-count() {
 curl -s http://socialblade.com/instagram/user/$1 | grep '<div class="stats-top-data-content" style="font-size: 0.9em;">' | head -1 | grep -o '>.*' | sed 's/>//g' | sed 's/\/div//g' | sed 's/<//g' | sed 's/,//g'
 }
-# ====
-
-# Hacking
-# -------
+#}}}
+#{{{ Hacking Password Collection
 zn-word() {
 mkdir -p /tmp/password/
 curl -s 'https://wiki.skullsecurity.org/Passwords' | grep txt.bz2 | grep -o "http.*.bz2" | sed "s/>.*//g" | sed 's/"//g' > /tmp/password/list
@@ -123,17 +128,15 @@ rm /tmp/password/*.bz2
 cat /tmp/password/* | sort | uniq > /tmp/password/finished.lst
 rm /tmp/password/wordlist
 }
-
-# --------
-
+#}}}
+#{{{ ffmpeg combine image and make it a video
 z-ffmpeg_comb_vid_img() {
 # $1 = image
 # $2 = mp3
 # $3 = output.mp4
 ffmpeg -loop 1 -i $1 -i $2 -shortest -c:v libx264 -c:a copy $3
 }
-
-
+#}}}
 #{{{ Configuration Files
 
 z-cfg-vim-snippet-py() {
@@ -153,23 +156,21 @@ z-cfg-bash(){
 }
 
 # }}}
-
+#{{{ Pinging
 zp() {
-
-if [[ "$1" == "" ]]
-then
-ping 8.8.8.8
-else
-ping 192.168.0.$1
-fi
+	if [[ "$1" == "" ]]
+	then
+	ping 8.8.8.8
+	else
+	ping 192.168.0.$1
+	fi
 }
-
-
+#}}}
+#{{{ Send sms from Email
 z-sms-2-phone(){
 	z-smtp.gmail.py $PHONE_EMAIL_USER $PHONE_EMAIL_PASS $PHONE_EMAIL_TO $1
 }
-
-
+#}}}
 # {{{ Rclone
 
 z-rclone-list(){
@@ -181,11 +182,11 @@ z-rclone-available-size(){
 }
 
 #}}}
-
+#{{{ Reptyr
 z-reptyr(){
 	reptyr
 }
-
+#}}}
 # {{{ Docker Aliases
 
 z-dock-rmall(){
@@ -238,7 +239,7 @@ z-dock-pyautogui() {
 }
 
 # }}}
-
+#{{{ Play primewire video from cmd
 z-primewire(){
 # https://pypi.python.org/pypi/primewire/1.0.2
 # pip3 install primewire
@@ -247,26 +248,30 @@ z-primewire(){
 	# primewire John Wick
 	primewire $@ | grep -i openload | head -1  | xargs youtube-dl -g | xargs mpv -fs 
 }
-
+#}}}
+#{{{ Send primewire to phone from autoremote
 z-send-primewire(){
 	primewireLink=$(primewire $@ | grep -i openload | head -1 | xargs youtube-dl -g)
 	curl -sI "http://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_ONEPLUS_ONE_KEY&message=play=:=$primewireLink" > /dev/null 2>&1
 }
-
+#}}}
+#{{{ Send primewire to tv from autoremote
 z-send-primewire-tv(){
 	 primewireLink=$(primewire $@ | grep -i openload | head -1 | xargs youtube-dl -g)
 	curl -sI "http://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_TV&message=play=:=$primewireLink" > /dev/null 2>&1
 }
-
+#}}}
+#{{{ Send any online video to tv by youtube-dl
 z-send-tv(){
 	urlLink=$(youtube-dl -g $@)
 	curl -sI "http://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_TV&message=play=:="$urlLink"" > /dev/null 2>&1
 }
-
-
+#}}}
+#{{{Download Safaribook
 z-down-safaribooks(){
 	youtube-dl -u $SAFARI_EMAIL -p $SAFARI_PASSWORD -o '%(playlist_index)s. %(title)s.%(ext)s' $@
 }
+#}}}
 #{{{ Remote access
 z-rdp-aws(){
 	rdesktop -g 1920x1040 $AWS_WINDOWS_ONE_IP -u "Administrator" -p $AWS_WINDOWS_PASSWORD -P -z 2> /dev/null &
