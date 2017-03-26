@@ -44,8 +44,3 @@ steps:
     4. use find command and delete the same file name
 '''
 
-
-
-
-
-

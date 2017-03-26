@@ -1,12 +1,12 @@
-# List all loaded/active units
+#{{{ List all loaded/active units
 systemctl list-units
-
-# Check service
+#}}}
+#{{{ Check service
 systemctl (status|start|restart|stop|reload|enable|disable) foo.service
-
-# List currently loaded targets
+#}}}
+#{{{ List currently loaded targets
 systemctl list-units --type=target
-
-# Change current target
+#}}}
+#{{{ Change current target
 systemctl isolate foo.target
-
+#}}}

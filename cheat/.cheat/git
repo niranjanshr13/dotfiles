@@ -1,40 +1,40 @@
-# To set your identity:
+#{{{ To set your identity:
 git config --global user.name "John Doe"
 git config --global user.email johndoe@example.com
-
-# To set your editor:
+#}}}
+#{{{ To set your editor:
 git config --global core.editor emacs
-
-# To enable color:
+#}}}
+#{{{ To enable color:
 git config --global color.ui true
-
-# To stage all changes for commit:
+#}}}
+#{{{ To stage all changes for commit:
 git add --all
-
-# To stash changes locally, this will keep the changes in a separate changelist
+#}}}
+#{{{ To stash changes locally, this will keep the changes in a separate changelist
 # called stash and the working directory is cleaned. You can apply changes
 # from the stash anytime
 git stash
-
-# To stash changes with a message
+#}}}
+#{{{ To stash changes with a message
 git stash save "message"
-
-# To list all the stashed changes
+#}}}
+#{{{ To list all the stashed changes
 git stash list
-
-# To apply the most recent change and remove the stash from the stash list
+#}}}
+#{{{ To apply the most recent change and remove the stash from the stash list
 git stash pop
-
+#}}}
 # To apply any stash from the list of stashes. This does not remove the stash
 # from the stash list
 git stash apply stash@{6}
 
-# To commit staged changes
+#{{{ To commit staged changes
 git commit -m "Your commit message"
-
-# To edit previous commit message
+#}}}
+#{{{ To edit previous commit message
 git commit --amend
-
+#}}}
 # Git commit in the past
 git commit --date="`date --date='2 day ago'`"
 git commit --date="Jun 13 18:30:25 IST 2015"
@@ -48,15 +48,15 @@ git filter-branch --env-filter \
          export GIT_COMMITTER_DATE="Sat May 19 01:01:01 2007 -0700"
      fi'
 
-# To removed staged and working directory changes
+#{{{ To removed staged and working directory changes
 git reset --hard
-
-# To go 2 commits back
+#}}}
+#{{{ To go 2 commits back
 git reset --hard HEAD~2
-
-# To remove untracked files
+#}}}
+#{{{ To remove untracked files
 git clean -f -d
-
+#}}}
 # To remove untracked and ignored files
 git clean -f -d -x
 

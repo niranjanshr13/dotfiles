@@ -27,25 +27,25 @@ alias csl='clear'
 alias nano='vim'                                                                            
 alias vv='vim'										
 alias nn='vim'										
-alias zo='xdg-open'		                                                                ## use xdg-open command
-alias z-screenshot='scrot'                                                                      ## take a screenshot
-alias chrome='chromium-browser'									## alias for chromium-browser
-alias z-gist-list='gist --list'                                                                 ## List all gist on the internet
-alias z-xclip='xclip -i -sel clip'                                                              ## right way to use xclip
-alias z-src-refresh='source ~/.zshrc'                                                           ## refresh source
-alias zz='source ~/.zshrc'									## refresh source
-alias eog='feh'											## aliases eog of feh
-alias zo-fb='chrome "facebook.com" > /dev/null 2>&1 & '						## open facebook.com
-alias ff='firefox'										## alias for firefox
-alias cc='chrome'										## alias for chrome
-alias qq='exit'											## alias for exit
-alias cx='chmod +x'										## chmod executable.
-alias z-unzip='patool extract'									## Extract from archieve
-alias z-shutdown='init 0'									## Poweroff aliases
-alias z-reboot='init 6'										## Reboot aliases
-alias feh='feh --scale-down'									## Customizing feh
-alias rr='ranger'										## ranger alias
-alias yt='youtube-dl'										## Youtube-dl alias
+alias zo='xdg-open'		                                               
+alias z-screenshot='scrot'                                                    
+alias chrome='chromium-browser'						
+alias z-gist-list='gist --list'                                        
+alias z-xclip='xclip -i -sel clip'                                    
+alias z-src-refresh='source ~/.zshrc'                                
+alias zz='source ~/.zshrc'					
+alias eog='feh'						
+alias zo-fb='chrome "facebook.com" > /dev/null 2>&1 & '
+alias ff='firefox'				
+alias cc='chrome'			
+alias qq='exit'			
+alias cx='chmod +x'	
+alias z-unzip='patool extract'							
+alias z-shutdown='init 0'								
+alias z-reboot='init 6'										
+alias feh='feh --scale-down'							
+alias rr='ranger'									
+alias yt='youtube-dl'										
 alias z-loop='while : ; do $@ ; done'
 alias z-git-push='git push'
 alias z-git-commit='git commit'
@@ -83,7 +83,7 @@ zpp() {
 	sudo rfkill unblock all
 }
 #}}}
-#{{{ Wifi Information
+#{{{ Network Information
 z-myip () {
 echo "curl -s 'ipinfo.io'"
 echo "Internal IP = $(ifconfig | perl -nle'/dr:(\S+)/ && print $1' | grep -v 127.0.0.1 | sed ':a;N;$!ba;s/\n/, /g')"
@@ -97,12 +97,7 @@ if [[ "$@" = '' ]]
 then
 echo "type any argument to be in paste"
 else
-if [[ "$(curl -s  http://ipinfo.io/ip)" = '' ]]
-then
-echo "Internet Is down"
-else
 echo "$@" | curl -s -F "f:1=<-" http://ix.io
-fi
 fi
 }
 #}}}
@@ -152,9 +147,28 @@ z-cfg-vim(){
 }
 
 z-cfg-bash(){
-	nano ~/.bashrc
+	nano $HOMER/.bashrc
 }
 
+z-cfg-i3(){
+	nano $HOME/.i3/config
+}
+
+z-cfg-ranger(){
+	nano $HOME/.config/ranger/rc.conf 	
+}
+
+z-cfg-crontab(){
+	nano /etc/crontab
+}
+
+z-cfg-rclocal(){
+	nano /etc/rc.local
+}
+
+z-cfg-Xresources(){
+	nano ~/.Xresources
+}
 # }}}
 #{{{ Pinging
 zp() {
@@ -238,6 +252,13 @@ z-dock-pyautogui() {
         /bin/bash
 }
 
+z-dock-images(){
+	docker images
+}
+
+z-dock-psa(){
+	docker ps -a
+}
 # }}}
 #{{{ Play primewire video from cmd
 z-primewire(){
@@ -289,5 +310,4 @@ z-rdp-college() {
         -p $COLLEGE_PASSWORD \
         -P -z 2>/dev/null &
 }
-
 #}}}

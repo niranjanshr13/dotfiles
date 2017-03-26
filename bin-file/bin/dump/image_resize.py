@@ -1,4 +1,4 @@
-#!/usr/bin/env pythno3
+#!/usr/bin/env python3
 import os
 import io
 import requests

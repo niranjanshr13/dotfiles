@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+#{{{ Importing Module
 import pip
 
 # Installing Packager
@@ -7,8 +8,7 @@ def Install(package):
 
 # Installing Packages
 Install('requests')
-
-#------------------
+#}}}
 
 import requests
 loopStat = 0

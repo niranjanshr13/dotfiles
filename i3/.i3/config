@@ -228,6 +228,8 @@ exec xrdb ~/.Xresources
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 font pango:System San Francisco Display 10
 #}}}
+
+#{{{ I don't Use it anymore
 # Not Useful (So I dont use it)
 # =============================
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -258,3 +260,4 @@ font pango:System San Francisco Display 10
 
 # reload the configuration file
 # bindsym $mod+Shift+c reload
+#}}}
