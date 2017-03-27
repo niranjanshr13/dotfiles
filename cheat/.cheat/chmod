@@ -1,7 +1,7 @@
-#{{{ Add execute for all (myscript.sh)
+#{{{ Execute for all user 
 chmod a+x myscript.sh
 #}}}
-#{{{ Set user to read/write and group/global read (myscript.sh), octal notation
+#{{{ Set user to read/write and group/global read 
 chmod 644 myscript.sh
 #}}}
 #{{{ Set user to read/write/execute and group/global read/execute (myscript.sh), octal notation

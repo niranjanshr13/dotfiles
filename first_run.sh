@@ -1,15 +1,11 @@
 #!/bin/bash
-
-
 PACKAGE_MANAGER="apt"
-
-sudo mkdir /home/public
-sudo chmod 777 /home/public
-cd /home/public
-git clone https://github.com/niranjanshr13/dotfiles
-
-## Installation
-
+#{{{Cloning github
+mkdir -p /home/public/dotfiles
+chmod 777 /home/public
+git clone https://github.com/niranjanshr13/dotfiles.git /home/public/
+#}}}
+#{{{ Application List
 Installation(){
 	curl \
 	docker.io \
@@ -26,7 +22,6 @@ Installation(){
 	scrot \
 	sqlitebrowser \
 	sqlite3 \
-	mpv \
 	ffmpeg \
 	ranger \
 	feh \
@@ -46,32 +41,27 @@ Installation(){
 	vim \
 	scrot \
 }
-
+#}}}
+#{{{ Installing Package
 for PACKAGE_MANAGER in Installation()
 do
 sudo apt install -y $PACKAGE_MANAGER
 done
-
-
-# Rclone
-# ------
+#}}}
+#{{{ Rclone
 curl http://downloads.rclone.org/rclone-current-linux-amd64.zip > /tmp/rclone.zip
 unzip /tmp/rclone.zip -d /tmp/rclone
 chmod a+x /tmp/rclone/rclone
 mv /tmp/rclone /bin/rclone
-
-
-# Installing Cheat-Sheet
-# ----------------------
+#}}}#}}}#}}}
+#{{{ Installing Cheat-Sheet
 sudo pip3 install cheat
 mkdir /tmp/cheatsheet/
 mv /usr/local/lib/python3.5/dist-packages/cheat/cheatsheets/__* /tmp/cheatsheet/
 rm /usr/local/lib/python3.5/dist-packages/cheat/cheatsheets/*
 mv /tmp/cheatsheet/* /usr/local/lib/python3.5/dist-packages/cheat/cheatsheets/
-
-
-# python3 module
-# --------------
+#}}}
+#{{{ python3 module
 sudo pip3 install \
 	qutebrowser \
 #	praw \
@@ -83,35 +73,28 @@ sudo pip3 install \
 	pip \
 	qrcode
 #	fbchat 
-
-# Installing Youtube-dl
-# =====================
+#}}}
+#{{{ Installing Youtube-dl
 sudo wget https://yt-dl.org/latest/youtube-dl -O /usr/local/bin/youtube-dl
 sudo chmod a+x /usr/local/bin/youtube-dl
 sudo youtube-dl hash -r
 sudo youtube-dl -U
-
-# Docker Installation
-# -------------------
+#}}}
+#{{{ Docker Config
 sudo groupadd docker
 sudo gpasswd -a ${USER} docker
 # sudo usermod -aG docker $USER
-
-
-# install keybase
-# ===============
+#}}}}
+#{{{ install keybase
 #curl -O https://dist.keybase.io/linux/deb/keybase-latest-amd64.deb && sudo dpkg -i keybase-latest-amd64.deb && rm keybase-latest-amd64.deb
-
-# install ripme.jar
-# =================
+#}}}
+#{{{ install ripme.jar
 # wget http://rarchives.com/ripme.jar -0 ~/.custom_shortcut/app/ripme.jar
-
-# Installing npm softwares
-# ========================
+#}}}
+#{{{ Installing npm softwares
 #curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
-
-# Installing npm module
-# =====================
+#}}}
+#{{{ Installing npm module
 #sudo npm install -g \
 	#xlyrics \
 	#clitr \
@@ -119,18 +102,15 @@ sudo gpasswd -a ${USER} docker
 	#tumblr-downloader \
 	#peerflix \
 	#torrentflix
-
-# Installing GIST
-# ===============
+#}}}
+#{{{ Installing GIST
 # sudo gem install gist
-
-# Changing grub timeout.
-# =====================
+#}}}
+#{{{Changing grub timeout.
 # sudo sed -i 's/GRUB_TIMEOUT=10/GRUB_TIMEOUT=3/g' /etc/default/grub
 # grub-mkconfig -o /boot/grub/grub.cfg
-
-# Adblock in the system
-# =====================
+#}}}
+#{{{Adblock in the system
 #curl -s http://winhelp2002.mvps.org/hosts.txt > /tmp/adblock/host_file_block
 #curl -s http://adaway.org/hosts.txt >> /tmp/adblock/host_file_block
 #curl -s https://www.malwaredomainlist.com/hostslist/hosts.txt >> /tmp/adblock/host_file_block
@@ -138,18 +118,15 @@ sudo gpasswd -a ${USER} docker
 #sed -i 's/127.0.0.1/0.0.0.0/g' /tmp/adblock/host_file_block
 #sudo cat ~/host_file_block >> /etc/hosts
 #rm /tmp/adblock/host_file_block
-
-# Git Project following
+#}}}
+#{{{ Git Project following
 # ====================
 # https://github.com/rohanpai/Robinhood
-
-# use this command to show all install application
+#}}}
+#{{{ List all installed app
 # sudo dpkg --get-selections
-
-# find all the module installed in python3-pip
+#}}}
+#{{{ List all installed python module
 # import pip
 # pip.get_installed_distributions
-
-# Creating Directories
-# ====================
-#mkdir -p /tmp/adblock/
+#}}}

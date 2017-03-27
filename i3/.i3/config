@@ -91,6 +91,7 @@ bindsym $mod+g exec chromium-browser "github.com" &
 bindsym $mod+f exec z-qt-facebook.py $FB_USER $FB_PASS
 	#bindsym $mod+f exec chromium-browser "facebook.com" &
 bindsym $mod+c exec chromium-browser &
+bindsym $mod+y exec mpv $(youtube-dl -g $(xclip -o))
 bindsym $mod+s exec dmenu_run
 	#bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combind"
 #bindsym $mod+Shift+f exec feh $(xclip -o)
@@ -228,7 +229,6 @@ exec xrdb ~/.Xresources
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 font pango:System San Francisco Display 10
 #}}}
-
 #{{{ I don't Use it anymore
 # Not Useful (So I dont use it)
 # =============================

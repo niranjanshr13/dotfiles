@@ -10,7 +10,7 @@ HH:MM
 now + N {minutes | hours | days | weeks}
 MM/DD/YY
 #}}}
-#{{{ To list pending jobs
+#{{{ List pending jobs
 atq
 #}}}
 #{{{ To remove a job (use id from atq)
