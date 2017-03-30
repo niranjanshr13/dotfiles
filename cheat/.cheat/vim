@@ -44,6 +44,8 @@ P               paste before cursor
 <Del> or x      delete a character
 dd              delete a line
 d{motion}       delete text that {motion} moves over
+D or d$		delete from cursor to the end of line.
+d^		delete from beinging to cursor.
 #}}}
 #{{{ Search and replace with the `:substitute` (aka `:s`) command
 :s/foo/bar/	replace the first match of 'foo' with 'bar' on the current line only
@@ -51,6 +53,25 @@ d{motion}       delete text that {motion} moves over
 :%s/foo/bar/g	replace all matches of 'foo' with 'bar' in the entire file (`:%s`)
 :%s/foo/bar/gc	ask to manually confirm (`c` flag) each replacement 
 #}}}
-# {{{ Vim automatic folding.
-# 3{ and closing }
-}}}
+#{{{ Vim automatic folding.
+3{ and closing }
+	Example: #{{{
+			#}}}
+#}}}
+#{{{Vim completion
+#http://georgebrock.github.io/talks/vim-completion/
+#{{{ Simple Word Completion
+[ctrl+p] = finds the previous matching word. {Insert Mode}
+[ctrl+n] = finds the next matching word. {Insert Mode}
+#}}}
+#{{{ Context-aware word completion
+[ctrl+x] = put vim in completion mode. {Insert Mode}
+[ctrl+x][ctrl+p] = Repeat the command to continue adding matches. (Insert Mode)
+#}}}
+#{{{ Context-aware line completion
+[ctrl+x][ctrl+l] = autocomplete the similar line.
+#}}}
+#{{{ Language-aware completion
+[ctrl+x][ctrl+o] = autocomplete the class / def if the filetype plugin is enable
+#}}}
+#}}}

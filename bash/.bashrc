@@ -60,7 +60,7 @@ z-redshift() {
 	xbacklight -dec 97
 	redshift -b 0.7 2>&1 /dev/null &
 }
-#}}} =====
+#}}} 
 #{{{ Is website down  
 z-down4me() {
 checker=$(curl -s "isup.me/$1" | grep 'class="domain"' | grep -o ".*<a" | sed 's/  //g' | sed 's/<a//g')
@@ -124,6 +124,9 @@ cat /tmp/password/* | sort | uniq > /tmp/password/finished.lst
 rm /tmp/password/wordlist
 }
 #}}}
+#{{{ Select 1 frame out of every 10 frames
+	ffmpeg -i $1 -vf "select=not(mod(n\,10))" -vsync vfr -q:v 2 img_%03d.jpg
+#}}}
 #{{{ ffmpeg combine image and make it a video
 z-ffmpeg_comb_vid_img() {
 # $1 = image
@@ -186,15 +189,12 @@ z-sms-2-phone(){
 }
 #}}}
 # {{{ Rclone
-
 z-rclone-list(){
 	rclone listremotes
 }
-
 z-rclone-available-size(){
 	rclone size $1 
 }
-
 #}}}
 #{{{ Reptyr
 z-reptyr(){

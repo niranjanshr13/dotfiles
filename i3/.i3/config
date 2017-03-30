@@ -11,7 +11,6 @@
 client.focused #000000 #000000 #fdf6e3 #859900
 
 #{{{ Color Set
-# =========
 set $base00 #101218
 set $base01 #1f222d
 set $base02 #252936
@@ -30,14 +29,12 @@ set $base0E #c0b7f9
 set $base0F #fcc09e
 set $bg-color #000000
 set $text-color #f3f4f5
-#}}} ======
+#}}} 
 #{{{ Configuring button in Variable
-# ================
 set $mod Mod4
 set $ALT Mod1
-#}}} ====
+#}}} 
 #{{{ Workspace Variable
-# ================== 
 set $workspace1 "1:"
 set $workspace2 "2:"
 set $workspace3 "3:"
@@ -48,10 +45,8 @@ set $workspace7 "7:"
 set $workspace8 "8:"
 set $workspace9 "9:"
 set $workspace10 "10:"
-#}}} =====================
+#}}} 
 #{{{ Keybinding System
-# =================
-
 bindsym $ALT+F4 exec i3 kill	#kill focused window
 bindsym $mod+Shift+r exec i3 restart	#sourced i3
 bindsym $mod+Escape exec "$(xinput list-props 14 | grep -qE \\"Device Enabled.*1$\\" && xinput disable 14 || xinput enable 14 && i3 restart)"			#mouse disable and enable mode
@@ -65,7 +60,6 @@ bindsym $mod+q exec i3lock -c 004000
 bindsym $mod+m exec mpv http://opus.stillstream.fm:8000/stillstream > /dev/null 2&>1
 #}}}
 #{{{ Keybinding fn keys
-# ==================
 #{{{ Pulse Audio controls
 # ====================
 bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master 1+ toggle # mute sound
@@ -81,7 +75,6 @@ bindsym $mod+F4 exec redshift # nightmode
 #}}}}
 #}}}
 #{{{ Custom Keybinding Shortcut
-# ==========================
 bindsym $mod+question exec z-notify-master.sh # master helper
 bindsym $mod+t exec xterm
 bindsym $mod+Return exec xterm
@@ -120,14 +113,12 @@ bindsym Control+Shift+braceright exec \
 #}}}
 #{{{ Keybinding Screen
 # change focus
-# ============
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-# ===================
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -137,13 +128,11 @@ bindsym $mod+v split v # split in vertical
 bindsym $mod+$ALT+space floating toggle #toggle tiling / floating
 
 # change focus between tiling / floating windows
-# ==============================================
 bindsym $mod+space focus mode_toggle
 
-#}}} ============
+#}}}
 #{{{ keybinding workspace
-	# switiching workspace
-	# ====================
+# switiching workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
@@ -155,8 +144,7 @@ bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10
 
-	# move focused container to workspace
-	# ===================================
+# move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
@@ -181,13 +169,12 @@ for_window [title=".*njn_any_music_player.*"] move to workspace $workspace3
 for_window [title="qt4.web.facebook"] resize set 640 640
 #for_window [title="facebook.py"] resize set 640 640
 
-
 for_window [class="Firefox"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="MPlayer"] floating enable
 #for_window [title="ping 8.8.8.8"] move to workspace $workspace9
 
-#}}} =============
+#}}}
 #{{{ resize window
 bindsym $mod+r mode "resize"
 mode "resize" {
@@ -225,7 +212,6 @@ exec xrdb ~/.Xresources
 #}}}
 #{{{Font
 # Font Stuff 
-# =========================
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 font pango:System San Francisco Display 10
 #}}}
