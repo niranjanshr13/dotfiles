@@ -21,8 +21,6 @@ B               previous start of whitespace-delimited word
 $               end of line
 gg              go to first line in file
 G               go to end of file
-gk		move down one displayed line
-gj		move up one displayed line
 #}}}
 #{{{ Insertion
 #   To exit from insert mode use Esc or Ctrl-C
@@ -44,11 +42,11 @@ P               paste before cursor
 <Del> or x      delete a character
 dd              delete a line
 d{motion}       delete text that {motion} moves over
-D or d$		delete from cursor to the end of line.
-d^		delete from beinging to cursor.
+D or d$			delete from cursor to the end of line.
+d^				delete from beinging to cursor.
 #}}}
 #{{{ Search and replace with the `:substitute` (aka `:s`) command
-:s/foo/bar/	replace the first match of 'foo' with 'bar' on the current line only
+:s/foo/bar/		replace the first match of 'foo' with 'bar' on the current line only
 :s/foo/bar/g	replace all matches (`g` flag) of 'foo' with 'bar' on the current line only
 :%s/foo/bar/g	replace all matches of 'foo' with 'bar' in the entire file (`:%s`)
 :%s/foo/bar/gc	ask to manually confirm (`c` flag) each replacement 
@@ -74,4 +72,9 @@ d^		delete from beinging to cursor.
 #{{{ Language-aware completion
 [ctrl+x][ctrl+o] = autocomplete the class / def if the filetype plugin is enable
 #}}}
+#}}}
+#{{{ Stop the vim
+Ctrl+s	=	To freeze the vim session 
+Ctrl+q	=	To Unfreeze the vim session
+
 #}}}

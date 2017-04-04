@@ -18,24 +18,29 @@ Plugin 'valloric/youcompleteme'
 
 call vundle#end()
 "}}}
-
-" setting foldclose  
-"	setlocal foldmethod=indent
-	setlocal foldclose=all
-
 "{{{ Color Scheme
 " http://vimawesome.com
 " http://vimcolors.com
 colorscheme darkblue
 "}}}
 "{{{ Setting set
-set foldmethod=marker
-set relativenumber
-filetype on
-syntax on
+set foldmethod=marker,syntax
+set tabstop=4
+setlocal foldclose=all
 filetype plugin indent on
-setlocal foldmethod=syntax
+syntax on
+set relativenumber
+"}}}
+"{{{ Setting of Toggle of rnu and no number
+function! NumberToggle()
+    if(&rnu == 0)
+        set rnu
+    else
+        set nornu
+    endif
+endfunction
 "}}}
 "{{{ Setting key-binding
 map <F5> :!%:p
+nnoremap <C-l> :call NumberToggle()<CR>
 "}}}

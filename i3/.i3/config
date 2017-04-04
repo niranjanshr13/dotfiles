@@ -3,10 +3,10 @@
 # testing
 #	bindsym button3 kill
 
-# key binding symbol helper.
+#{{{ key binding helper.
 # 	xmodmap -pke
-
-#-----
+#	xev
+#}}}
 
 client.focused #000000 #000000 #fdf6e3 #859900
 
@@ -49,30 +49,28 @@ set $workspace10 "10:"
 #{{{ Keybinding System
 bindsym $ALT+F4 exec i3 kill	#kill focused window
 bindsym $mod+Shift+r exec i3 restart	#sourced i3
+bindsym Print exec scrot	#screenshot screen
 bindsym $mod+Escape exec "$(xinput list-props 14 | grep -qE \\"Device Enabled.*1$\\" && xinput disable 14 || xinput enable 14 && i3 restart)"			#mouse disable and enable mode
 #}}}
 #{{{ logs you out
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Logoff the user' -b 'Yes, exit i3' 'i3-msg exit'"
 #}}}
 #{{{ i3lock
-bindsym $mod+q exec i3lock -c 004000
+bindsym $mod+q exec i3lock -c 000000
 	#bindsym $mod+q exec i3lock -i ~/.i3/i3_wallpaper.png
 bindsym $mod+m exec mpv http://opus.stillstream.fm:8000/stillstream > /dev/null 2&>1
 #}}}
 #{{{ Keybinding fn keys
 #{{{ Pulse Audio controls
-# ====================
 bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master 1+ toggle # mute sound
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
-
+#}}}
 #{{{ Sreen brightness controls
-# =========================
 bindsym XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
 bindsym $mod+F4 exec redshift # nightmode
 #}}}
-#}}}}
 #}}}
 #{{{ Custom Keybinding Shortcut
 bindsym $mod+question exec z-notify-master.sh # master helper

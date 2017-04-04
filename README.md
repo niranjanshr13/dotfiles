@@ -1,4 +1,4 @@
-### Aliases and Functions are usually in:
+# Documentation
 	.bashrc
 	.docker.alias
 	.zshrc

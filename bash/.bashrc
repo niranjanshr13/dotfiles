@@ -3,6 +3,8 @@ HISTSIZE=100
 HISTFILESIZE=100
 #}}}
 #{{{ Normal Aliases
+alias nload='nload -u M'
+alias z-nload='nload -u M'
 alias ss='startx'
 alias mplayer='mpv'
 alias q='exit'
@@ -203,9 +205,13 @@ z-reptyr(){
 #}}}
 # {{{ Docker Aliases
 
-z-dock-rmall(){
+z-dock-run-rm(){
 	docker stop $(docker ps | awk {'print $3'})
 	docker rmi -f $(docker ps | awk {'print $3'})
+}
+
+z-dock-stop-rm(){
+	docker rm $(docker ps -qa --no-trunc --filter "status=exited")
 }
 
 z-x11-reload() {
@@ -309,5 +315,10 @@ z-rdp-college() {
         -u "$COLLEGE_USERNAME" \
         -p $COLLEGE_PASSWORD \
         -P -z 2>/dev/null &
+}
+#}}}
+#{{{ Fixing Xresources on Xterm
+z-xrdb() {
+	xrdb ~/.Xresources
 }
 #}}}
