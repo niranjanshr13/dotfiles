@@ -2,6 +2,9 @@
 HISTSIZE=100
 HISTFILESIZE=100
 #}}}
+#{{{Export
+#export CHEATPATH="$CHEATPATH:/path/dir"
+#}}}
 #{{{ Normal Aliases
 alias nload='nload -u M'
 alias z-nload='nload -u M'
@@ -25,13 +28,14 @@ alias l='ls'
 alias cs='clear'
 alias sl='ls'                                                                                   
 alias cls='clear'                                                                               
+alias lsa='ls -a'
 alias csl='clear'                                                                               
 alias nano='vim'                                                                            
 alias vv='vim'										
 alias nn='vim'										
-alias zo='xdg-open'		                                               
+alias zo='xdg-open'		                                   
 alias z-screenshot='scrot'                                                    
-alias chrome='chromium-browser'						
+alias chrome='chromium-browser > /dev/null'						
 alias z-gist-list='gist --list'                                        
 alias z-xclip='xclip -i -sel clip'                                    
 alias z-src-refresh='source ~/.zshrc'                                
@@ -95,12 +99,7 @@ echo "Mac Address = $(ifconfig -a | grep HWaddr | awk '{print $5 }' | sed ':a;N;
 #}}}
 #{{{ Send to Pastebin
 z-pastebin() {
-if [[ "$@" = '' ]]
-then
-echo "type any argument to be in paste"
-else
 echo "$@" | curl -s -F "f:1=<-" http://ix.io
-fi
 }
 #}}}
 #{{{ Searching Mac-Address by Scanning Network 
@@ -126,8 +125,9 @@ cat /tmp/password/* | sort | uniq > /tmp/password/finished.lst
 rm /tmp/password/wordlist
 }
 #}}}
+#{{{ffmpeg alias
 #{{{ Select 1 frame out of every 10 frames
-	ffmpeg -i $1 -vf "select=not(mod(n\,10))" -vsync vfr -q:v 2 img_%03d.jpg
+	alias z-ffmpeg-extract-one-frame='ffmpeg -i $1 -vf "select=not(mod(n\,10))" -vsync vfr -q:v 2 img_%03d.jpg'
 #}}}
 #{{{ ffmpeg combine image and make it a video
 z-ffmpeg_comb_vid_img() {
@@ -137,7 +137,8 @@ z-ffmpeg_comb_vid_img() {
 ffmpeg -loop 1 -i $1 -i $2 -shortest -c:v libx264 -c:a copy $3
 }
 #}}}
-#{{{ Configuration Files
+#}}}
+#{{{ config Files
 
 z-cfg-vim-snippet-py() {
 	nano $HOME/.vim/bundle/vim-snippets/snippets/python.snippets
@@ -203,25 +204,20 @@ z-reptyr(){
 	reptyr
 }
 #}}}
-# {{{ Docker Aliases
-
+# {{{Docker Aliases
 z-dock-run-rm(){
 	docker stop $(docker ps | awk {'print $3'})
 	docker rmi -f $(docker ps | awk {'print $3'})
 }
-
 z-dock-stop-rm(){
 	docker rm $(docker ps -qa --no-trunc --filter "status=exited")
 }
-
 z-x11-reload() {
         # Things todo: if X11 apps doesn't work in docker.
         export DISPLAY=":0.0"
         xhost +$USER
         xhost +
 }
-
-
 z-dock-selenium_ffox(){
         docker run -it --rm \
         -e DISPLAY=$DISPLAY \
@@ -229,13 +225,11 @@ z-dock-selenium_ffox(){
         niranjanshr13/selenium_firefox \
         /bin/bash
 }
-
 z-dock-selenium_pantomjs() {
         docker run -it \
         niranjanshr13/selenium_phantomjs \
         /bin/bash
 }
-
 z-dock-jdownloader() {
 # https://github.com/PlusMinus0/headless-jd2-docker
         docker run -d --name jdownloader-headless \
@@ -243,13 +237,11 @@ z-dock-jdownloader() {
         -v /home/user/Downloads:/root/Downloads \
         plusminus/jdownloader2-headless
 }
-
 z-dock-python3() {
         docker run -it --rm \
         python:3.3.6-slim \
         /bin/bash
 }
-
 z-dock-pyautogui() {
         docker run -it --rm \
         -e DISPLAY=$DISPLAY \
@@ -257,11 +249,9 @@ z-dock-pyautogui() {
         niranjanshr13/python3_pyautogui \
         /bin/bash
 }
-
 z-dock-images(){
 	docker images
 }
-
 z-dock-psa(){
 	docker ps -a
 }
@@ -294,11 +284,6 @@ z-send-tv(){
 	curl -sI "http://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_TV&message=play=:="$urlLink"" > /dev/null 2>&1
 }
 #}}}
-#{{{Download Safaribook
-z-down-safaribooks(){
-	youtube-dl -u $SAFARI_EMAIL -p $SAFARI_PASSWORD -o '%(playlist_index)s. %(title)s.%(ext)s' $@
-}
-#}}}
 #{{{ Remote access
 z-rdp-aws(){
 	rdesktop -g 1920x1040 $AWS_WINDOWS_ONE_IP -u "Administrator" -p $AWS_WINDOWS_PASSWORD -P -z 2> /dev/null &
@@ -321,4 +306,17 @@ z-rdp-college() {
 z-xrdb() {
 	xrdb ~/.Xresources
 }
+#}}}
+#{{{ Youtube-dl Aliases
+#{{{List Youtube-dl support link
+	alias z-youtubedl-ls='youtube-dl --list-extractors'
+	z-down-safaribooks(){
+	youtube-dl -u $SAFARI_EMAIL -p $SAFARI_PASSWORD -o '%(playlist_index)s. %(title)s.%(ext)s' $@
+	}
+#}}}
+#{{{ Download Safaribooks
+    z-down-safaribooks(){
+    youtube-dl -u $SAFARI_EMAIL -p $SAFARI_PASSWORD -o '%(playlist_index)s. %(title)s.%(ext)s' $@
+    }
+#}}}
 #}}}
