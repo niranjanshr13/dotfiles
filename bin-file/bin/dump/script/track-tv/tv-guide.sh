@@ -1,5 +1,5 @@
 #!/bin/bash
-#-------This script is meant to check tv schedule and it depends upon tvguide.com---------------------------------------
+#-------This script is meant to check tv schedule and it depends upon tvguide.com-------
 
 #creates today date { only month and day }
 today_date=$(date "+%b %d")

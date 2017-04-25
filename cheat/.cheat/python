@@ -1,7 +1,7 @@
-#{{{ Python v2.7
+#{{{ Python v2.7 http-server
 python -m SimpleHTTPServer
 #}}}
-#{{{ Python 3
+#{{{ Python 3 http-server
 python -m http.server 8000
 #}}}
 #{{{ SMTP-Server for debugging, messages will be discarded, and printed on stdout.
@@ -14,5 +14,4 @@ for i in range(readline.get_current_history_length()):
 #}}}
 #{{{ Python History
 ~/.python_history
-
 #}}}

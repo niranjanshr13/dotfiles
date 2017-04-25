@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
+#{{{ Importing Module
 import os
 import io
 import requests
 from PIL import Image
 import tempfile
-
+#}}}
 
 '''
 read online image and create a thumbnail without saving at first
-
 '''
-
-
 
 img_url = 'http://cdn.zonarutoppuden.com/ns/peliculas-naruto-shippuden.jpg'
 out_dir = 'x'

@@ -1,16 +1,21 @@
-# Set unread marker on all windows
+#{{{Set unread marker on all windows
 Ctrl-s Ctrl-u
-
-# Switch buffer left
+#}}}
+#{{{Switch buffer left
 Ctrl-p, Alt-left
-# Switch buffer right
+#}}}
+#{{{Switch buffer right
 Ctrl-n, Alt-right
-# Next buffer with activity
+#}}}
+#{{{Next buffer with activity
 Alt-a
-# Switch buffers
+#}}}
+#{{{Switch buffers
 Alt-0...9
-
-# Scroll buffer title
+#}}}
+#{{{Scroll buffer title
 F9/F10
-# Scroll nick list
+#}}}
+#{{{Scroll nick list
 F11/F12
+#}}}

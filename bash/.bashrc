@@ -1,6 +1,6 @@
 #{{{ Bash history
-HISTSIZE=100
-HISTFILESIZE=100
+	HISTSIZE=100
+	HISTFILESIZE=100
 #}}}
 #{{{Export
 #export CHEATPATH="$CHEATPATH:/path/dir"
@@ -19,7 +19,7 @@ alias egrep='egrep --color=auto'
 alias ll='ls -alF'
 alias la='ls -a --color=auto'
 alias l='ls -CF'
-alias z-kill-chrome='kill -9 $(ps aux  | grep chromium | grep -v 'grep' | awk '{ print $2 }') '
+alias z-kill-chrome='kill -9 $(ps aux  | grep chromium | grep -v 'grep' | awk '{ print $2 }')'
 alias bd='cd ../'
 alias rm='trash-put'
 alias mk='mkdir'
@@ -99,7 +99,7 @@ echo "Mac Address = $(ifconfig -a | grep HWaddr | awk '{print $5 }' | sed ':a;N;
 #}}}
 #{{{ Send to Pastebin
 z-pastebin() {
-echo "$@" | curl -s -F "f:1=<-" http://ix.io
+	echo "$@" | curl -s -F "f:1=<-" http://ix.io
 }
 #}}}
 #{{{ Searching Mac-Address by Scanning Network 
@@ -139,7 +139,6 @@ ffmpeg -loop 1 -i $1 -i $2 -shortest -c:v libx264 -c:a copy $3
 #}}}
 #}}}
 #{{{ config Files
-
 z-cfg-vim-snippet-py() {
 	nano $HOME/.vim/bundle/vim-snippets/snippets/python.snippets
 }
@@ -191,7 +190,7 @@ z-sms-2-phone(){
 	z-smtp.gmail.py $PHONE_EMAIL_USER $PHONE_EMAIL_PASS $PHONE_EMAIL_TO $1
 }
 #}}}
-# {{{ Rclone
+#{{{ Rclone
 z-rclone-list(){
 	rclone listremotes
 }
@@ -204,7 +203,7 @@ z-reptyr(){
 	reptyr
 }
 #}}}
-# {{{Docker Aliases
+#{{{ Docker Aliases
 z-dock-run-rm(){
 	docker stop $(docker ps | awk {'print $3'})
 	docker rmi -f $(docker ps | awk {'print $3'})
@@ -213,10 +212,10 @@ z-dock-stop-rm(){
 	docker rm $(docker ps -qa --no-trunc --filter "status=exited")
 }
 z-x11-reload() {
-        # Things todo: if X11 apps doesn't work in docker.
-        export DISPLAY=":0.0"
-        xhost +$USER
-        xhost +
+	# Things todo: if X11 apps doesn't work in docker.
+	export DISPLAY=":0.0"
+	xhost +$USER
+	xhost +
 }
 z-dock-selenium_ffox(){
         docker run -it --rm \
@@ -286,7 +285,11 @@ z-send-tv(){
 #}}}
 #{{{ Remote access
 z-rdp-aws(){
-	rdesktop -g 1920x1040 $AWS_WINDOWS_ONE_IP -u "Administrator" -p $AWS_WINDOWS_PASSWORD -P -z 2> /dev/null &
+	rdesktop -g 1920x1040 \ 
+	$AWS_WINDOWS_ONE_IP \
+	-u "Administrator" \
+	-p $AWS_WINDOWS_PASSWORD \
+	-P -z 2> /dev/null &
 }
 
 z-ssh-aws-one() {

@@ -1,3 +1,6 @@
+#{{{Curl conversion to requests
+https://curl.trillworks.com
+#}}}
 #{{{ Download all sequentially numbered files (1-24)
 curl http://example.com/pic[1-24].jpg
 #}}}

@@ -57,15 +57,15 @@ $ git cherry-pick https://github.com/xoebus/hub/commit/177eeb8
 → git fetch xoebus
 → git cherry-pick 177eeb8
 
-# `am` can be better than cherry-pick since it doesn't create a remote
+#{{{`am` can be better than cherry-pick since it doesn't create a remote
 $ git am https://github.com/xoebus/hub/commit/177eeb8
-
-# open the GitHub compare view between two releases
+#}}}
+#{{{open the GitHub compare view between two releases
 $ git compare v0.9..v1.0
-
-# put compare URL for a topic branch to clipboard
+#}}}
+#{{{put compare URL for a topic branch to clipboard
 $ git compare -u feature | pbcopy
-
+#}}}
 # create a repo for a new project
 $ git init
 $ git add . && git commit -m "It begins."

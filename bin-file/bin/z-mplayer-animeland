@@ -1,24 +1,16 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
-'''
-This module is to run animeland.tv website directly to mplayer.
-
-
-
-'''
-
+#{{{ Importing Module
 import requests
 import cfscrape
 import os
 import sys
-
+#}}}
 
 websiteLink = sys.argv[1]
 
-
 scraper = cfscrape.create_scraper()
 scrapingLink = scraper.get(websiteLink)
-
 
 for firstScrape in scrapingLink.text.split('"'):
     if 'muembed' in firstScrape:
@@ -28,4 +20,4 @@ for firstScrape in scrapingLink.text.split('"'):
                 finalScrape = thirdScrape
 
 
-os.system('mplayer -fs -really-quiet ' + finalScrape)
+os.system('mpv ' + finalScrape)

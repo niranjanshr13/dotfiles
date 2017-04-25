@@ -38,6 +38,7 @@ Installation(){
 	xterm \
 	vim \
     xorg \
+	irrsi \
 	scrot \
     zsh \
 }
