@@ -21,6 +21,8 @@ B               previous start of whitespace-delimited word
 $               end of line
 gg              go to first line in file
 G               go to end of file
+f{				find next '{'
+3f{				next 3 {
 #}}}
 #{{{ Insertion
 #   To exit from insert mode use Esc or Ctrl-C
@@ -76,5 +78,8 @@ d^				delete from beinging to cursor.
 #{{{ Stop the vim
 Ctrl+s	=	To freeze the vim session 
 Ctrl+q	=	To Unfreeze the vim session
-
+#}}}
+#{{{ Sort selected lines in Vim
+Shift-V =	Selecting lines
+:sort	=	sorting those line with alphabetic
 #}}}

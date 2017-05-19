@@ -1,0 +1,9 @@
+#{{{ To fix the wifi connection with PEAP.
+1. Try disabling the network-manager.
+ - service network-manager stop
+2. Installing WICD.
+ - And try to connect with its encryption algorithm
+3. DNS Fix.
+ - /etc/resolv.conf
+	 - nameserver 8.8.8.8
+#}}}

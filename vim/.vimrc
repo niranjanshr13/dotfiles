@@ -3,35 +3,45 @@
 "	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 "Vim Websites
 "       http://vim.wikia.com/wiki/Special:Random
+" Setting up different .vimrc file
+" 		vim --cmd 'set rtp^=alternate_dir'
 "}}}
 "{{{ Installing Plugins
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'valloric/youcompleteme'
-	let g:ycm_python_binary_path = '/usr/bin/env python3'
-
+Plugin 'kien/ctrlp.vim'
+Plugin 'tomtom/tlib_vim'
+"Plugin 'flazz/vim-colorschemes'
+"Plugin 'valloric/youcompleteme'
+"	let g:ycm_python_binary_path = '/usr/bin/env python3'
 call vundle#end()
 "}}}
 "{{{ Color Scheme
 " http://vimawesome.com
 " http://vimcolors.com
-colorscheme darkblue
+colorscheme Revolution 
+colorscheme base
+"colorscheme darkblue
 "}}}
 "{{{ Setting set
-set foldmethod=marker,syntax
-set tabstop=4
-setlocal foldclose=all
 filetype plugin indent on
-syntax on
+set clipboard=unnamed
+set encoding=utf-8
+set foldmethod=marker,syntax
+set ignorecase
 set relativenumber
+set showcmd
+set smartcase
+set tabstop=4
+set undolevels=1000
+setlocal foldclose=all
+syntax on
 "}}}
-"{{{ Setting of Toggle of rnu and no number
+"{{{ Function: Toggle of rnu and no
+nnoremap <C-l> :call NumberToggle()<CR>
 function! NumberToggle()
     if(&rnu == 0)
         set rnu
@@ -40,7 +50,34 @@ function! NumberToggle()
     endif
 endfunction
 "}}}
-"{{{ Setting key-binding
+"{{{ Function: Toggle mouse mode
+nnoremap <C-z> :call MouseToggle()<CR>
+function! MouseToggle()
+	if(&mouse == 'a')
+		set mouse=
+	else
+		set mouse=a 
+	endif
+endfunction
+"}}}
+"{{{ Mapping Keys
+"{{{ Disabling Arrow Key
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+"}}}
+"{{{ Normal Mode
+nnoremap ; :
+nnoremap <C-m> <NOP>
+"}}}
+"{{{ Ex Mode
+command Q q!
+"}}}
 map <F5> :!%:p
-nnoremap <C-l> :call NumberToggle()<CR>
+"}}}
+"{{{ Testing
+"{{{ Installing Vundle
+command VundleGitInstall :! git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
+"}}}
 "}}}
