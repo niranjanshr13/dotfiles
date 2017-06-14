@@ -7,39 +7,40 @@ git clone https://github.com/niranjanshr13/dotfiles.git /home/public/
 #}}}
 #{{{ Application List
 Installation(){
-    byobu \
 	curl \
-    chromium-browser \
 	docker.io \
-    feh \
-    freerdp-x11 \
-    ffmpeg \
+	git \
+	htop \
+	i3 \
+	irrsi \
+	mpv \
+	mutt \
+	nohup \
+	pactl \
+	patool \
+	pinta \
 	python3 \
 	python3-pip \
-	i3 \
-	git \
+	ranger \
 	ranger \
 	rdesktop \
 	redshift \
 	reptyr \
 	scrot \
-	sqlitebrowser \
+	scrot \
 	sqlite3 \
-	ranger \
+	sqlitebrowser \
 	ssh \
-	mpv \
-	mutt \
+	vim \
 	xbacklight \
-	nohup \
-	htop \
-	patool \
-	pactl \
 	xsel \
 	xterm \
-	vim \
+    byobu \
+    chromium-browser \
+    feh \
+    ffmpeg \
+    freerdp-x11 \
     xorg \
-	irrsi \
-	scrot \
     zsh \
 }
 #}}}

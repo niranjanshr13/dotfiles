@@ -83,3 +83,6 @@ Ctrl+q	=	To Unfreeze the vim session
 Shift-V =	Selecting lines
 :sort	=	sorting those line with alphabetic
 #}}}
+#{{{ Later. Vim
+:options
+#}}}

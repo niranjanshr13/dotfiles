@@ -20,3 +20,7 @@ ffmpeg -i video2.mp4 -c copy -bsf h264_mp4toannexb temp2.ts
 ffmpeg -i video3.mp4 -c copy -bsf h264_mp4toannexb temp3.ts
 ffmpeg -i "concat:temp1.ts|temp2.ts|temp3.ts" -c copy -bsf aac_adtstoasc output.mp4
 #}}}
+#{{{ Increase volume in a video without re-encoding the video
+ffmpeg -i inputfile -vcodec copy -af "volume=10dB" outputfile
+ffmpeg -i inputfile -vcodec copy -af "volume=-5dB" outputfile
+#}}}

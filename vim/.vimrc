@@ -31,6 +31,7 @@ filetype plugin indent on
 set clipboard=unnamed
 set encoding=utf-8
 set foldmethod=marker,syntax
+set hlsearch
 set ignorecase
 set relativenumber
 set showcmd
@@ -70,14 +71,23 @@ noremap <Right> <NOP>
 "{{{ Normal Mode
 nnoremap ; :
 nnoremap <C-m> <NOP>
+nnoremap <BS> <NOP>
+nnoremap <F6> :exec '!'.getline('.')<CR>
 "}}}
 "{{{ Ex Mode
 command Q q!
+command Wq wq!
 "}}}
-map <F5> :!%:p
+"{{{ Leader Mode
+let mapleader=","
+nnoremap <leader>t gt
+"}}}
 "}}}
 "{{{ Testing
 "{{{ Installing Vundle
 command VundleGitInstall :! git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
 "}}}
+#{{{ Testing map
+map <F5> :!%:p
+#}}}
 "}}}
