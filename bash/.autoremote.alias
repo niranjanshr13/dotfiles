@@ -2,6 +2,3 @@
 z-ar-oneplus-volume() {
 curl -s "http://autoremotejoaomgcd.appspot.com/sendmessage?key="$AUTOREMOTE_ONEPLUS_ONE_KEY"&message=volume=:=$1" > /dev/null
 }
-
-
-

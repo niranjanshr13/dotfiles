@@ -1,0 +1,3 @@
+#{{{ 7z without compression + file encrypted
+7z a -pPassword -mhe=on -m0=Copy Directory.7z . 
+#}}}

@@ -30,6 +30,7 @@ alias ls='ls --color=auto'
 alias lsa='ls -a'
 alias mk='mkdir'
 alias mplayer='mpv'
+alias py='python3'
 alias nano='vim'                                                                            
 alias nload='nload -u M'
 alias nn='vim'										
@@ -39,9 +40,10 @@ alias rm='trash-put'
 alias rr='ranger'									
 alias sl='ls'                                                                                   
 alias ss='startx'
-alias vv='vim'										
-alias yt='youtube-dl'										
-alias z-gist-list='gist --list'                                        
+alias vv='vim'
+alias v='vim'
+alias yt='youtube-dl'
+alias z-gist-list='gist --list'
 alias z-git-add='git add'
 alias z-git-commit='git commit'
 alias z-git-push='git push'
@@ -49,7 +51,7 @@ alias z-git-stat='git status'
 alias z-kill-chrome='kill -9 $(ps aux  | grep chromium | grep -v 'grep' | awk '{ print $2 }')'
 alias z-loop='while : ; do $@ ; done'
 alias z-nload='nload -u M'
-alias z-peerflix="peerflix "$@" -v -r"                                                          ## peerflix module
+alias z-peerflix="peerflix "$@" -v -r"
 alias z-reboot='init 6'										
 alias z-screenshot='scrot'                                                    
 alias z-shutdown='init 0'								
@@ -224,7 +226,7 @@ z-dock-selenium_ffox(){
         -e DISPLAY=$DISPLAY \
         -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
         niranjanshr13/selenium_firefox \
-        /bin/bash
+        /bin/sh
 }
 z-dock-selenium_pantomjs() {
         docker run -it \
