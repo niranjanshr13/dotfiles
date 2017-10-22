@@ -59,10 +59,15 @@ set $workspace10 "10"
 #}}}
 #}}} 
 #{{{ Keybinding System
-bindsym $ALT+F4 exec i3 kill	#kill focused window
-bindsym $mod+Shift+r exec i3 restart	#sourced i3
-bindsym Print exec scrot	#screenshot screen
-bindsym $mod+Escape exec "$(xinput list-props 14 | grep -qE \\"Device Enabled.*1$\\" && xinput disable 14 || xinput enable 14 && i3 restart)"			#mouse disable and enable mode
+#kill focused window
+bindsym $ALT+F4 exec i3 kill	
+#sourced i3
+bindsym $mod+Shift+r exec i3 restart
+#screenshot screen
+bindsym Print exec scrot && i3-nagbar -t warning -m 'Screenshot'
+#mouse toggle (disable and enable mode)
+bindsym F7 exec "$(xinput list-props $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') | grep -qE \\"Device Enabled.*1$\\" && xinput disable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') || xinput enable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') && i3 restart)"
+#bindsym $mod+Escape exec "$(xinput list-props $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') | grep -qE \\"Device Enabled.*1$\\" && xinput disable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') || xinput enable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') && i3 restart)"
 #}}}
 #{{{ logs you out
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Logoff the user' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -79,8 +84,10 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
 #}}}
 #{{{ Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec sudo chmod a+rw /sys/class/backlight/intel_backlight/brightness && echo 700 > /sys/class/backlight/intel_backlight/brightness # increase screen brightness
+bindsym XF86MonBrightnessDown exec sudo chmod a+rw /sys/class/backlight/intel_backlight/brightness && echo 1 > /sys/class/backlight/intel_backlight/brightness # increase screen brightness
 bindsym $mod+F4 exec redshift # nightmode
 #}}}
 #}}}
@@ -91,14 +98,16 @@ bindsym $mod+Return exec xterm
 #	bindsym $mod+t exec xfce4-terminal
 #	bindsym $mod+Return exec xfce4-terminal
 bindsym $mod+g exec chromium-browser "github.com" &
+bindsym $mod+Shift+c exec = &
 bindsym $mod+f exec z-qt-facebook.py $FB_USER $FB_PASS
-	#bindsym $mod+f exec chromium-browser "facebook.com" &
+#	bindsym $mod+f exec chromium-browser "facebook.com" &
 bindsym $mod+c exec chromium-browser &
 bindsym $mod+y exec mpv $(youtube-dl -g $(xclip -o))
-bindsym $mod+s exec dmenu_run
-	#bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combind"
-#bindsym $mod+Shift+f exec feh $(xclip -o)
-#bindsym Control+question exec bindsym $mod+0 workspace $workspace10 
+#bindsym $mod+s exec dmenu_run
+bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combind"
+	#bindsym $mod+Shift+f exec feh $(xclip -o)
+	#bindsym Control+question exec bindsym $mod+0 workspace $workspace10 
+bindsym Control+$mod+Shift+b exec bindsym firefox
 #}}}}
 #{{{ Keybinding to autoremote
 # ========================
@@ -133,9 +142,12 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
-bindsym $mod+h split h	#split in horizontal
-bindsym $mod+v split v # split in vertical
-bindsym $mod+$ALT+space floating toggle #toggle tiling / floating
+# split in horizontal
+bindsym $mod+h split h
+# split in vertical
+bindsym $mod+v split v
+# toggle tiling / floating
+bindsym $mod+$ALT+space floating toggle 
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -168,22 +180,10 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 #}}}
 #{{{ Assign Program
 assign [class="chromium-browser"] $workspace2
-for_window [title=".*njn_any_music_player.*"] move to workspace $workspace3
-#for_window [title=".*Facebook.*"] move to workspace $workspace5
-#for_window [title=".*Twitter.*"] move to workspace $workspace5
 #for_window [title="peerflix  -v -r"] move to workspace $workspace19
-#for_window [class="vlc"] move to workspace $workspace4
-#for_window [class="Vlc"] move to workspace $workspace4
-#for_window [title="htop"] move to workspace $workspace9
-#for_window [class="vlc"] floating enable
-for_window [title="qt4.web.facebook"] resize set 640 640
-#for_window [title="facebook.py"] resize set 640 640
-
-for_window [class="Firefox"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="MPlayer"] floating enable
 #for_window [title="ping 8.8.8.8"] move to workspace $workspace9
-
 #}}}
 #{{{ resize window
 bindsym $mod+r mode "resize"
@@ -199,10 +199,12 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+# Statusbar
 bar {
+#	status_command i3status -c ~/.i3/i3status.conf
+	status_command i3blocks -c ~/.i3/i3blocks.conf
 	position top
-	status_command i3status -c ~/.i3/i3status.conf
-	font pango: System San Francisco Display, FontAwesome 11
+	font pango: Monospace 15
 colors {
       separator $base03
 #     background $base01

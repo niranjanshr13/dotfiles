@@ -1,17 +1,24 @@
 #!/bin/bash
-PACKAGE_MANAGER="apt"
+
+#
+sudo echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> '/etc/sudoers'
+
+PACKAGE_MANAGER="pacman -Sy"
 #{{{Cloning github
 mkdir -p /home/public/dotfiles
 chmod 777 /home/public
+$PACKAGE_MANAGER git
 git clone https://github.com/niranjanshr13/dotfiles.git /home/public/
 #}}}
 #{{{ Application List
 Installation(){
+	pulseaudio-alsa \
+	dosfstools \
 	curl \
 	docker.io \
-	git \
 	htop \
 	i3 \
+	i3lock \
 	irrsi \
 	mpv \
 	mutt \
@@ -22,32 +29,29 @@ Installation(){
 	python3 \
 	python3-pip \
 	ranger \
-	ranger \
 	rdesktop \
 	redshift \
 	reptyr \
 	scrot \
-	scrot \
-	sqlite3 \
 	sqlitebrowser \
 	ssh \
 	vim \
 	xbacklight \
 	xsel \
-	xterm \
-    byobu \
-    chromium-browser \
-    feh \
-    ffmpeg \
-    freerdp-x11 \
-    xorg \
-    zsh \
+    	byobu \
+    	chromium-browser \
+    	feh \
+    	ffmpeg \
+    	freerdp-x11 \
+    	xorg \
+    	zsh \
+    	rofi
 }
 #}}}
 #{{{ Installing Package
 for PACKAGE_MANAGER in Installation()
 do
-sudo apt install -y $PACKAGE_MANAGER
+sudo pacman -Sy -y $PACKAGE_MANAGER
 done
 #}}}
 #{{{ Rclone
@@ -58,21 +62,17 @@ mv /tmp/rclone /bin/rclone
 #}}}#}}}#}}}
 #{{{ Installing Cheat-Sheet
 sudo pip3 install cheat
-mkdir /tmp/cheatsheet/
-mv /usr/local/lib/python3.5/dist-packages/cheat/cheatsheets/__* /tmp/cheatsheet/
-rm /usr/local/lib/python3.5/dist-packages/cheat/cheatsheets/*
-mv /tmp/cheatsheet/* /usr/local/lib/python3.5/dist-packages/cheat/cheatsheets/
+rm $(ls /usr/local/lib/python3.5/dist-packages/cheat/cheatsheets/ | grep -v '__')
 #}}}
 #{{{ python3 module
 sudo pip3 install \
-	qutebrowser \
+#	qutebrowser \
 #	praw \
-	instagram-scraper \
+#	instagram-scraper \
 #	flick_api	\
 #	temp-mail \
 	rainbowstream \
 #	pyopt \
-	pip \
 	qrcode
 #	fbchat 
 #}}}

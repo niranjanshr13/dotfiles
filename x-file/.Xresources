@@ -19,10 +19,10 @@ xtere*eightBitControl: false
 xterm*eightBitOutput: true
 ! -- Enables True-Type rendering:
 xterm*renderFont: true
-xterm*faceName: DejaVuSansMono
-xterm*faceNameDoublesize: DejaVuSansMono
+xterm*faceName: Monospace
+xterm*faceNameDoublesize: Monospace
 xterm*wideChars: true
-xterm*wideFont: DejaVuSansMono
+xterm*wideFont: Monospace 
 ! -- Define the size increments used when changing font size
 xterm*faceSize: 10
 xterm*faceSize1: 6
@@ -70,3 +70,9 @@ xterm*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35
 ! xterm.vt100.translations: #override\n\
 !        <Key>Tab: string("\033")\n\
 
+! rofi theme
+rofi.color-enabled: true
+rofi.color-window: #273238, #273238, #1e2529
+rofi.color-normal: #273238, #c1c1c1, #273238, #394249, #ffffff
+rofi.color-active: #273238, #80cbc4, #273238, #394249, #80cbc4
+rofi.color-urgent: #273238, #ff1844, #273238, #394249, #ff1844

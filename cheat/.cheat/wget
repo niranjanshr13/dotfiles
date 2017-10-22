@@ -16,3 +16,7 @@ wget -S --spider -O - http://google.com
 #{{{ Change the User-Agent to 'User-Agent: toto'
 wget -U 'toto' http://google.com
 #}}}
+#{{{ download everything. (local website)
+wget --mirror --convert-links --adjust-extension --page-requisites http://www.erowid.org
+#}}}
+

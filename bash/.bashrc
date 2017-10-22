@@ -2,6 +2,11 @@
 	HISTSIZE=100
 	HISTFILESIZE=100
 #}}}
+#{{{ bash autocompletion
+if [ -f /etc/bash_completion ]; then
+ . /etc/bash_completion
+fi
+#}}}
 #{{{Export
 #export CHEATPATH="$CHEATPATH:/path/dir"
 #}}}
@@ -12,18 +17,17 @@ alias c='cd'
 alias cc='chrome'			
 alias chrome='chromium-browser > /dev/null'						
 alias cls='clear'                                                                               
-alias cs='clear'
 alias csl='clear'                                                                               
+alias c='clear'                                                                               
 alias cx='chmod +x'	
 alias df='df -h'
 alias egrep='egrep --color=auto'
-alias eog='feh'						
+alias eog='feh --scale-down'						
 alias feh='feh --scale-down'							
 alias ff='firefox'				
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias l='ls -CF'
-alias l='ls'
 alias la='ls -a --color=auto'
 alias ll='ls -alF'
 alias ls='ls --color=auto'
@@ -37,7 +41,7 @@ alias nn='vim'
 alias q='exit'
 alias qq='exit'			
 alias rm='trash-put'
-alias rr='ranger'									
+alias r='ranger'									
 alias sl='ls'                                                                                   
 alias ss='startx'
 alias vv='vim'
@@ -48,9 +52,9 @@ alias z-git-add='git add'
 alias z-git-commit='git commit'
 alias z-git-push='git push'
 alias z-git-stat='git status'
-alias z-kill-chrome='kill -9 $(ps aux  | grep chromium | grep -v 'grep' | awk '{ print $2 }')'
+alias z-kill-chrome='kill -9 $(ps aux  | grep chromium | grep -v 'grep' | awk "{print $2}")'
 alias z-loop='while : ; do $@ ; done'
-alias z-nload='nload -u M'
+alias n='nload -u M'
 alias z-peerflix="peerflix "$@" -v -r"
 alias z-reboot='init 6'										
 alias z-screenshot='scrot'                                                    
@@ -83,10 +87,10 @@ fi
 }
 #}}}
 #{{{ Battery Status
-z-batt-stat() {
-	echo "Computer is currently $(cat /sys/class/power_supply/BAT1/status)"
-	echo "$(cat /sys/class/power_supply/BAT1/capacity)% Battery Level"
-}
+#z-batt-stat() {
+#	echo "Computer is currently $(cat /sys/class/power_supply/BAT1/status)"
+#	echo "$(cat /sys/class/power_supply/BAT1/capacity)% Battery Level"
+#}
 #}}}
 #{{{ Fixing the wifi
 zpp() {
@@ -309,6 +313,12 @@ z-rdp-college() {
         -P -z 2>/dev/null &
 }
 #}}}
+#{{{ fix internet (reload) "arch-way"
+fix-network() {
+ip link set $NICCARD down
+systemctl restart netctl@$ESSID.service
+}
+#}}}
 #{{{ Fixing Xresources on Xterm
 z-xrdb() {
 	xrdb ~/.Xresources
@@ -326,4 +336,7 @@ z-xrdb() {
     youtube-dl -u $SAFARI_EMAIL -p $SAFARI_PASSWORD -o '%(playlist_index)s. %(title)s.%(ext)s' $@
     }
 #}}}
+#}}}
+#{{{ dummy webcam
+#ffmpeg -re -i $1 -f v4l2 /dev/video2D
 #}}}

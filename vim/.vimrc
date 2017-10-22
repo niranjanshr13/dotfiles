@@ -24,8 +24,9 @@ call vundle#end()
 "{{{ Color Scheme
 " http://vimawesome.com
 " http://vimcolors.com
-colorscheme Revolution 
-colorscheme base
+colorscheme pablo
+"colorscheme Revolution 
+"colorscheme base
 "colorscheme darkblue
 "}}}
 "{{{ Setting set
@@ -68,11 +69,13 @@ endfunction
 "}}}
 "{{{ Mapping Keys
 "{{{ Disabling Key
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+"noremap <Up> <NOP>
+"noremap <Down> <NOP>
+"noremap <Left> <NOP>
+"noremap <Right> <NOP>
 nnoremap <C-m> <NOP>
+"nnoremap <C-m> <ESC>i<C-m><ESC>
+"nnoremap <BS> <ESC>i<BS><ESC>
 nnoremap <BS> <NOP>
 "}}}
 "{{{ Normal Mode
@@ -86,6 +89,8 @@ command Wq wq!
 "{{{ Leader Mode
 let mapleader=","
 nnoremap <leader>t gt
+nnoremap <leader>qq :q!
+nnoremap <leader>wq :wq
 "}}}
 nnoremap <space><space> <Esc>/<++><Enter>"_c4l
 "}}}
@@ -94,23 +99,26 @@ autocmd BufNewFile,BufRead *.md setlocal spell
 "}}}
 "{{{ Local Leader 
 let maplocalleader=" "
-autocmd BufNewFile,BufRead * nnoremap <buffer> <localleader>[[ I#{{{  <++><C-m>#}}}<esc>k3l
+autocmd BufNewFile,BufRead * nnoremap <buffer> <localleader>[[ I#{{{  
+autocmd BufNewFile,BufRead * nnoremap <buffer> <localleader>]] I#}}}<esc>
 "{{{ Bash autocmd
 autocmd FileType bash	    nnoremap <buffer> <localleader># I#!/bin/bash<C-m><esc> 
 "}}}
 "{{{ Python autocmd
-autocmd FileType python     nnoremap <buffer> <localleader># I#!/usr/bin/env python3<C-m><esc>
+autocmd FileType python     nnoremap <buffer> <localleader>3 I#!/usr/bin/env python3<C-m><esc>
+autocmd FileType python     nnoremap <buffer> <localleader>2 I#!/usr/bin/env python2<C-m><esc>
 autocmd FileType python     nnoremap <buffer> <localleader>' I'''<C-m><++><C-m>'''<esc>2k0<esc>
 autocmd FileType python     nnoremap <buffer> <localleader>f Ifor <++> in range(<++>,<++>):<C-m><++><esc>k0
 autocmd FileType python     nnoremap <buffer> <localleader>fi Ifor <++> in <++>.split('\n'):<C-m>if '<++>' in <++>:<C-m>print(<++>)<esc>2k0
 autocmd FileType python     nnoremap <buffer> <localleader>im Iimport   
-autocmd FileType python     nnoremap <buffer> <localleader>imbs Ifrom bs4 import BeautifulSoup<C-m>
-autocmd FileType python     nnoremap <buffer> <localleader>imo Iimport os<C-m><esc>
-autocmd FileType python     nnoremap <buffer> <localleader>imr iimport requests<C-m>r = requests.get('<++>')<C-m>rx = r.text<esc>2k
+autocmd FileType python     nnoremap <buffer> <localleader>imbs <esc>mbggofrom bs4 import BeautifulSoup<C-m><ESC>'bibs = BeautifulSoup(<++>,'lxml')<ESC>0
+autocmd FileType python     nnoremap <buffer> <localleader>imj <esc>mjggoimport json<C-m><ESC>'jij = json.loads(<++>)<ESC>0
+autocmd FileType python     nnoremap <buffer> <localleader>imo <esc>moggoimport os<esc>'o
+autocmd FileType python     nnoremap <buffer> <localleader>imr <esc>mrggoimport requests<C-m><esc>'rir = requests.get('<++>').text<esc>0
+"autocmd FileType python     nnoremap <buffer> <localleader>imr iimport requests<C-m>r = requests.get('<++>').text<esc>0
 autocmd FileType python     nnoremap <buffer> <localleader>ims Iimport sys<C-m><esc>
-autocmd FileType python     nnoremap <buffer> <localleader>imt Iimport time<C-m><esc>
-autocmd FileType python     nnoremap <buffer> <localleader>imt Iimport time<C-m><esc>
-autocmd FileType python     nnoremap <buffer> <localleader>o I = open('<++>','w')<esc>0i
+autocmd FileType python     nnoremap <buffer> <localleader>imt <esc>mtggoimport time<esc>'titime.sleep(<++>)<esc>0
+autocmd FileType python     nnoremap <buffer> <localleader>o I <++> = open('<++>','<++>')<esc>0
 autocmd FileType python     vnoremap <buffer> <localleader>so :sort<C-m>
 "}}}
 "{{{ HTML / Pandoc

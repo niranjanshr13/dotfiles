@@ -15,3 +15,9 @@ for i in range(readline.get_current_history_length()):
 #{{{ Python History
 ~/.python_history
 #}}}
+#{{{ Cool way to transfer file.
+# on server "apply ngrok magic"
+python3 -m http.server {PICK_YOUR_PORT}
+# On client machine
+$ wget -r {ip / hostname}:{port}/{File / Directory}
+#}}}
