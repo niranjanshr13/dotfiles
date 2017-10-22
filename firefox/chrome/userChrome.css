@@ -1,0 +1,12 @@
+#urlbar {font-size: 16pt !important}
+#helpMenu, #edit-menu { display: none !important; }
+#back-button[disabled=”true”] { display: none; }
+#TabsToolbar {
+    -moz-box-ordinal-group: 2;
+}
+#content browser
+{
+    margin-right:-17px!important;
+    overflow-y:scroll;
+    overflow-x:hidden;
+}

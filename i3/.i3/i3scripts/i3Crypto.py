@@ -4,7 +4,9 @@ import requests
 import sys
 
 baseUrl = 'https://min-api.cryptocompare.com/data/price?fsym=' 
-sysargv = sys.argv[1] 
-r = requests.get(baseUrl + sys.argv[1] + '&tsyms=USD').text
+coin = sys.argv[1]
+
+r = requests.get(baseUrl + coin + '&tsyms=USD').text
 j = json.loads(r)
-print('$' + str(j['USD']))
+rounding = round(j['USD'],3)
+print('$' + str(rounding))

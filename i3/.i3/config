@@ -65,6 +65,10 @@ bindsym $ALT+F4 exec i3 kill
 bindsym $mod+Shift+r exec i3 restart
 #screenshot screen
 bindsym Print exec scrot && i3-nagbar -t warning -m 'Screenshot'
+# bind to calculator
+bindsym $mod+d exec $HOME/.i3/i3scripts/calc.sh
+# bind with crypto
+bindsym $mod+a exec $HOME/.i3/i3scripts/rofi_crypto.sh
 #mouse toggle (disable and enable mode)
 bindsym F7 exec "$(xinput list-props $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') | grep -qE \\"Device Enabled.*1$\\" && xinput disable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') || xinput enable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') && i3 restart)"
 #bindsym $mod+Escape exec "$(xinput list-props $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') | grep -qE \\"Device Enabled.*1$\\" && xinput disable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') || xinput enable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') && i3 restart)"
@@ -179,7 +183,7 @@ bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 #}}}
 #{{{ Assign Program
-assign [class="chromium-browser"] $workspace2
+#assign [class="chromium-browser"] $workspace2
 #for_window [title="peerflix  -v -r"] move to workspace $workspace19
 for_window [class="feh"] floating enable
 for_window [class="MPlayer"] floating enable
@@ -199,16 +203,27 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+#bar {
+##	status_command i3status -c ~/.i3/i3status.conf
+#	status_command i3blocks -c ~/.i3/newi3blocks.conf
+#	position top
+#	mode hide
+#    hidden_state hide
+#    tray_output none #or whatever
+#    modifier Mod4 #your empty mod key
+#	font pango: Monospace 
+#}
 # Statusbar
 bar {
 #	status_command i3status -c ~/.i3/i3status.conf
 	status_command i3blocks -c ~/.i3/i3blocks.conf
 	position top
-	font pango: Monospace 15
+	mode dock
+	font pango: Monospace 14
 colors {
-      separator $base03
-#     background $base01
-      statusline $base04
+      #separator $base03
+      #background $base01
+      #statusline $base04
 #                        border  background text
       focused_workspace  $base01 $base01    $base07
       active_workspace   $base01 $base02    $base03
