@@ -39,18 +39,19 @@ pacstrap /mnt grub os-prober &&
 arch-chroot /mnt /bin/bash -c ' grub-install /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg' &&
 #arch-chroot /mnt /bin/bash -c 'pacman -S grub os-prober && grub-install /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg' &&
 
-# installing yaourt
-echo '
-[archlinuxfr]
-SigLevel = Never
-Server = http://repo.archlinux.fr/$arch' >> '/mnt/etc/pacman.conf' &&
-arch-chroot /mnt /bin/bash -c 'pacman -S yaourt --noconfirm' &&
-
-# installing X
-pacstrap /mnt xorg i3 pulseaudio-alsa &&
 
 #-----
 # need to fix.
+
+# installing yaourt
+arch-chroot /mnt /bin/bash -c echo '
+[archlinuxfr]
+SigLevel = Never
+Server = http://repo.archlinux.fr/$arch' >> '/mnt/etc/pacman.conf' &&
+pacstrap /mnt yaourt &&
+
+# installing X
+pacstrap /mnt xorg i3 pulseaudio-alsa &&
 
 # installing packages.
 pacstrap /mnt firefox mpv mutt htop feh rofi curl wget aria2 redshift openssh irssi rdesktop scrot xsel pinta sqlitebrowser reptyr docker tmux dosfstools 
@@ -62,7 +63,6 @@ pacstrap /mnt firefox mpv mutt htop feh rofi curl wget aria2 redshift openssh ir
     chromium-browser \
     #ffmpeg \
     freerdp-x11 \
-	xterm \
     zsh \
 
 # Setting up the ranger
