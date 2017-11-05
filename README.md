@@ -1,8 +1,3 @@
-# Documentation
-	.bashrc
-	.docker.alias
-	.zshrc
-
 ![alt text](.profile.gif "niranjanshr13")
 Always move forward, even when your back hurts.
 

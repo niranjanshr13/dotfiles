@@ -1,0 +1,32 @@
+open_wit
+search mp4
+search f
+open_with firefox %s
+search off
+open_with  
+open_with q
+open_wit`h 
+open_with 
+open_with mpv
+
+rename Desktop
+empty
+shell touch %s
+shell touch %s+1
+shell touch +1
+shell touch bookmarks history+1
+shell for x in $(bookmarks history); do touch $x+1; done
+shell for x in $(bookmarks history); do touch $x+1; doneqq
+shell for x in bookmarks history; do touch $x+1; done
+shell for x in FullSizeRender (1).jpg FullSizeRender (2).jpg FullSizeRender.jpg; do mogrify -rotate "90" $x; done
+shell for x in a.jpg b.jpg; do mogrify -rotate "90" $x; done
+shell for x in FullSizeRender.jpg; do mogrify -rotate "90" $x; done
+shell for x in a.jpg b.jpg FullSizeRender.jpg; do mogrify -rotate "90" $x; done
+shell for x in a.jpg; do mogrify -rotate "90" $x; done
+open_with vim
+search jpg
+find 
+search sia
+search download
+open_with firefox
+delete
