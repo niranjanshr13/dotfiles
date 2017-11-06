@@ -103,3 +103,9 @@ yaorut -Sy rclone
 # tagging file.
 yaourt -S tmsu
 #git clone 'https://github.com/Pat-Carter/stream2chromecast'
+
+
+
+
+# vim vundle's
+# there is the script (cmd) in vimrc; find and make it executable from commandline 
