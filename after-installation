@@ -103,3 +103,7 @@ yaorut -Sy rclone
 # tagging file.
 yaourt -S tmsu
 #git clone 'https://github.com/Pat-Carter/stream2chromecast'
+
+
+
+npm install -g cliflix
