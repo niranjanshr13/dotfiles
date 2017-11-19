@@ -1,0 +1,45 @@
+{
+  "downloads": { 
+    "save": false, 
+    "path": "/tmp/" 
+  },
+  "outputs": { 
+    "available": ["Chromecast","mpv", "XBMC"], 
+    "favorites": ["mpv"] 
+  },
+  "torrents": { 
+    "limit": 30,
+    "details": { 
+      "seeders": true,
+      "leechers": true,
+      "size": true,
+      "time": false
+    },
+    "providers": { 
+      "available": ["1337x", "KickassTorrents", "Rarbg", "T411", "ThePirateBay", "Torrent9", "TorrentProject", "Torrentz2"], 
+      "active": "ThePirateBay" 
+    }
+  },
+  "subtitles": { 
+    "limit": 10,
+    "details": { 
+      "downloads": true
+    },
+    "languages": { 
+      "available": ["Afrikaans", "..."], 
+      "favorites": ["English", "..."] 
+    },
+    "opensubtitles": { 
+      "username": null,
+      "password": null,
+      "ssl": true
+    }
+  },
+  "webtorrent": {
+    "options": [] 
+  },
+  "prompt": { 
+    "fullscreen": true, 
+    "rows": 10 
+  }
+}

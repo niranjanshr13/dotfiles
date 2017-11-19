@@ -108,7 +108,7 @@ bindsym $mod+f exec z-qt-facebook.py $FB_USER $FB_PASS
 bindsym $mod+c exec chromium-browser &
 bindsym $mod+y exec mpv $(youtube-dl -g $(xclip -o))
 #bindsym $mod+s exec dmenu_run
-bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combi"
+bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combind"
 	#bindsym $mod+Shift+f exec feh $(xclip -o)
 	#bindsym Control+question exec bindsym $mod+0 workspace $workspace10 
 bindsym Control+$mod+Shift+b exec bindsym firefox

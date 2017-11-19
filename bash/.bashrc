@@ -341,3 +341,4 @@ z-xrdb() {
 #{{{ dummy webcam
 #ffmpeg -re -i $1 -f v4l2 /dev/video2D
 #}}}
+alias chrome-send='stream2chromecast -devicename SHIELD'

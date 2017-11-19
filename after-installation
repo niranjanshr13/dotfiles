@@ -107,3 +107,4 @@ yaourt -S tmsu
 
 
 npm install -g cliflix
+yaourt -S stream2chromecast
