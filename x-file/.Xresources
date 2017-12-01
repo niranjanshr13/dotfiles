@@ -2,16 +2,15 @@ XTerm*selectToClipboard: true
 xterm*loginShell: true
 xterm*scrollBar: true
 xterm*background: black
-xterm*foreground: white
+xterm*foreground: grey
 xterm*cursorColor: red
 xterm*cursorUnderline: true
 xterm*cursorBlink: true
 !xterm*color4: DodgerBlue1
-xterm*color4: black
 xterm*color12: SteelBlue1
 xterm*dynamicColors: true
 ! Use screen/tmux scrollback instead:
-xterm*saveLines: 100
+xterm*saveLines: 1000
 ! -- Allow utf8 in/out
 xterm*utf8: 2
 xterm*eightBitInput: true
@@ -24,21 +23,16 @@ xterm*faceNameDoublesize: Monospace
 xterm*wideChars: true
 xterm*wideFont: Monospace 
 ! -- Define the size increments used when changing font size
-xterm*faceSize: 10
+xterm*faceSize: 20
 xterm*faceSize1: 6
 xterm*faceSize2: 8
 xterm*faceSize3: 12
 xterm*faceSize4: 16
 xterm*faceSize5: 20
 xterm*faceSize6: 24
-! -- Scroll multiple lines at a time for faster redrawing:
-xterm*jumpScroll: true
-xterm*multiScroll: true
 ! -- trim whitespace from selection before copying
 xterm*trimSelection: true
 ! -- Hold Shift to use CLIPBOARD instead of PRIMARY to copy or paste
-! Change font size with ctrl-+/-/= (or mousewheel).
-! Add a few alt- shortcuts for quick access to special characters
 xterm*vt100.Translations: #override \n\
     ~Shift~Ctrl<Btn2Up>: insert-selection(PRIMARY, CUT_BUFFER0) \n\
     Shift~Ctrl<Btn2Up>: insert-selection(CLIPBOARD, CUT_BUFFER1) \n\
@@ -47,30 +41,12 @@ xterm*vt100.Translations: #override \n\
     Shift Ctrl <Key> =: larger-vt-font() \n\
     Shift Ctrl <Key> -: smaller-vt-font() \n\
     Shift Ctrl <Key> 0: set-vt-font(d) \n\
-    Ctrl <Btn4Down>: larger-vt-font() \n\
-    Ctrl <Btn5Down>: smaller-vt-font() \n\
-    Meta ~Shift <Key> bracketleft: string("‘") \n\
-    Meta ~Shift <Key> bracketright: string("’") \n\
-    Meta Shift <Key> bracketleft: string("“") \n\
-    Meta Shift <Key> bracketright: string("”") \n\
-    Meta ~Shift <Key> period: string("…") \n\
-    Meta ~Shift <Key> -: string("—") \n\
-    Meta Shift <Key> -: string("–") \n\
-    Meta ~Shift <Key> exclam: string("¡") \n\
-    Meta ~Shift <Key> question: string("¿") \n\
-    Meta ~Shift <Key> 0: string("ʘ") \n\
-    Meta ~Shift <Key> o: string("°") \n\
-    Meta ~Shift <Key> t: string("™") \n\
-    Meta ~Shift <Key> c: string("©") \n\
-    Meta ~Shift <Key> x: string("×") \n\
-    Meta ~Shift <Key> d: string("ಠ")
+
 ! Matches URLs and emails and selects them on double-click
 xterm*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
-! map the tab key to escape in xterm (becase we can!)
-! xterm.vt100.translations: #override\n\
-!        <Key>Tab: string("\033")\n\
 
-! rofi theme
+
+! Rofi configuration
 rofi.color-enabled: true
 rofi.color-window: #273238, #273238, #1e2529
 rofi.color-normal: #273238, #c1c1c1, #273238, #394249, #ffffff

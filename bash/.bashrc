@@ -342,3 +342,4 @@ z-xrdb() {
 #ffmpeg -re -i $1 -f v4l2 /dev/video2D
 #}}}
 alias chrome-send='stream2chromecast -devicename SHIELD'
+alias bulkrename='qmv -f do -e vim'

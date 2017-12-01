@@ -1,0 +1,11 @@
+aws
+dms
+dynamodb
+ec2
+elasticache
+mariadb
+memcached
+mysql
+postgresql
+redis
+redshift
