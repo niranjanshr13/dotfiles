@@ -5,7 +5,7 @@
 "       http://vim.wikia.com/wiki/Special:Random
 " Setting up different .vimrc file
 " - vim --cmd 'set rtp^=alternate_dir'
-set rtp+=./Vundle.vim
+set rtp+=~/.config/nvim/Vundle.vim
 call vundle#begin()
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'easymotion/vim-easymotion'
