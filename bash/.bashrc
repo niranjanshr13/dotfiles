@@ -12,6 +12,7 @@ fi
 #}}}
 #{{{ Normal Aliases
 alias gimp='pinta'
+alias f='firefox'
 alias bd='cd ../'
 alias c='cd'
 alias cc='chrome'			

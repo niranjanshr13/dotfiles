@@ -7,10 +7,13 @@
 " - vim --cmd 'set rtp^=alternate_dir'
 set rtp+=~/.config/nvim/Vundle.vim
 call vundle#begin()
+Plugin 'majutsushi/tagbar'
+		"nmap <F8> :TagbarToggle<CR>
+		nmap t :TagbarToggle<CR>
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'easymotion/vim-easymotion'
 		" binding easymotion with 's'
-		nmap s <Plug>(easymotion-s)
+		nmap f <Plug>(easymotion-s)
 		" using both uppercase and lowercase
 		let g:EasyMotion_smartcase = 1
 "Plugin 'garbas/vim-snipmate'
@@ -157,6 +160,14 @@ inoremap 99 (
 inoremap 00 )
 "}}}
 set clipboard=unnamedplus
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+    \ ]
+\ }
 
 "{{{ Split Navigation
 nmap <silent> <A-Up> :wincmd k<CR>
