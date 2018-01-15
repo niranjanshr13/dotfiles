@@ -1,18 +1,13 @@
 #!/usr/bin/env python3
-import requests
 import json
-import os
+import requests
 import sys
-
 
 def checkBalance(coinName):
     baseUrl = 'https://min-api.cryptocompare.com/data/price?fsym='
-    r = requests.get(baseUrl + coinName + '&tsyms=USD').text
-    j = json.loads(r)
-    bal = j['USD']
+    r = requests.get(baseUrl + coinName + '&tsyms=USD')
+    bal = r.json()['USD']
     return bal
-
-
 
 def scrapedData(urlId):
     r = requests.get('https://www.cryptocompare.com/portfolio-public/?id=' + sys.argv[y]).text
@@ -20,7 +15,6 @@ def scrapedData(urlId):
         if 'portfolioManager.setPortfolioData' in x:
             scraped = x.replace('  ','').replace('portfolioManager.setPortfolioData({"Data":','').split('Success')[0].replace(',"Response":"','')
     return scraped
-
 
 if __name__ == '__main__':
     symBalance = {}

@@ -1,12 +1,13 @@
 #!/bin/bash
-# $1 = device (/dev/sda)
-# $2 = root password
-# $3 = new user name
-# $4 = new user passwd
-# $5 = hostname
+hdd=$1
+rootPassword=$2
+userName=$3
+userPass=$4
+hostname=$5
 
 # setting up the drive.
-fdisk /dev/$1 && 
+# might want to change into btrfs.
+echo -e "o\nn\np\n1\n\n\nw" | fdisk /dev/$1 && 
 mkfs.ext4 /dev/$1\1 && 
 mount /dev/sda1 /mnt && 
 mkdir -p /mnt/home && 
@@ -23,13 +24,13 @@ ln -s /usr/share/zoneinfo/America/New_York /etc/localtime &&
 arch-chroot /mnt /bin/bash -c '/bin/sh hwclock --systohc --utc' &&
 
 # root passwd
-arch-chroot /mnt /bin/bash -c "echo "root:$2" | chpasswd  && useradd -m -d /home/$3 $3 && echo "$3:$4" | chpasswd" &&
+arch-chroot /mnt /bin/bash -c "echo "root:$rootPassword" | chpasswd  && useradd -m -d /home/$userName $3 && echo "$userName:$userPass" | chpasswd" &&
 
 # sudoer
 # echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> '/etc/sudoers'
 
 # hostname
-echo "$5" > '/mnt/etc/hostname' &&
+echo "$hostname" > '/mnt/etc/hostname' &&
 
 # enabling dhcpd
 arch-chroot /mnt /bin/bash -c 'systemctl enable dhcpcd' &&
@@ -43,12 +44,12 @@ arch-chroot /mnt /bin/bash -c ' grub-install /dev/sda && grub-mkconfig -o /boot/
 #-----
 # need to fix.
 
-# installing yaourt
-arch-chroot /mnt /bin/bash -c echo '
-[archlinuxfr]
-SigLevel = Never
-Server = http://repo.archlinux.fr/$arch' >> '/mnt/etc/pacman.conf' &&
-pacstrap /mnt yaourt &&
+# installing yaourt (bad idea/security risk on package)
+#arch-chroot /mnt /bin/bash -c echo '
+#[archlinuxfr]
+#SigLevel = Never
+#Server = http://repo.archlinux.fr/$arch' >> '/mnt/etc/pacman.conf' &&
+#pacstrap /mnt yaourt &&
 
 # installing X
 pacstrap /mnt xorg i3 pulseaudio-alsa &&
@@ -60,7 +61,7 @@ pacstrap /mnt firefox mpv mutt htop feh rofi curl wget aria2 redshift openssh ir
     patool \
     xbacklight \
     #byobu \
-    chromium-browser \
+    #chromium-browser \
     #ffmpeg \
     freerdp-x11 \
     zsh \
@@ -78,7 +79,6 @@ arch-chroot /mnt /bin/bash -c 'python3 /tmp/get-pip.py'
 # installing cheat
 arch-chroot /mnt /bin/bash -c 'sudo pip3 install cheat'
 rm $(ls /mnt/usr/local/lib/python3.5/dist-packages/cheat/cheatsheets/ | grep -v '__')
-
 
 sudo pip3 install \
 #   qutebrowser \
@@ -104,8 +104,23 @@ yaorut -Sy rclone
 yaourt -S tmsu
 #git clone 'https://github.com/Pat-Carter/stream2chromecast'
 
-
-
 npm install -g cliflix
 yaourt -S stream2chromecast
 pacman -S renameutils
+
+# python virtual-env, because something package conflict.
+pip3 install virtualenv
+
+# its for the pyicloud
+mkdir -p /home/$userName/.python-env/pyicloud
+virtualenv /home/$userName/.python-env/pyicloud
+source /home/$userName/.python-env/pyicloud/bin/activate
+pip3 install pyicloud
+deactivate
+
+
+
+# note:
+not completed or checked in the new machine
+remove yaourt, install pacaur {security concern}
+check on the new machine or vm

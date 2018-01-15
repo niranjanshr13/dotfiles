@@ -63,6 +63,8 @@ set $workspace10 "10"
 bindsym $ALT+F4 exec i3 kill	
 #sourced i3
 bindsym $mod+Shift+r exec i3 restart
+#lost phone indicater
+bindsym $mod+Shift+l exec $HOME/.python-env/pyicloud/bin/python3 $HOME/.i3/i3scripts/icloud_play_sound.py
 #screenshot screen
 bindsym Print exec scrot && i3-nagbar -t warning -m 'Screenshot'
 # bind to calculator
@@ -78,14 +80,17 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Logoff the user' -b 'Yes, ex
 #}}}
 #{{{ i3lock
 bindsym $mod+q exec i3lock -c 000000
+bindsym F1 exec i3lock -c 000000
 	#bindsym $mod+q exec i3lock -i ~/.i3/i3_wallpaper.png
 bindsym $mod+m exec mpv http://opus.stillstream.fm:8000/stillstream > /dev/null 2&>1
 #}}}
 #{{{ Keybinding fn keys
 #{{{ Pulse Audio controls
 bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master 1+ toggle # mute sound
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
+bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
+bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
 #}}}
 #{{{ Sreen brightness controls
 #bindsym XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
@@ -108,7 +113,7 @@ bindsym $mod+f exec z-qt-facebook.py $FB_USER $FB_PASS
 bindsym $mod+c exec chromium-browser &
 bindsym $mod+y exec mpv $(youtube-dl -g $(xclip -o))
 #bindsym $mod+s exec dmenu_run
-bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combind"
+bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combi"
 	#bindsym $mod+Shift+f exec feh $(xclip -o)
 	#bindsym Control+question exec bindsym $mod+0 workspace $workspace10 
 bindsym Control+$mod+Shift+b exec bindsym firefox
@@ -193,10 +198,10 @@ for_window [class="MPlayer"] floating enable
 bindsym $mod+r mode "resize"
 mode "resize" {
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 1 px or 1 ppt
+        bindsym Down resize grow height 1 px or 1 ppt
+        bindsym Up resize shrink height 1 px or 1 ppt
+        bindsym Right resize grow width 1 px or 1 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"

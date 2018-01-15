@@ -344,3 +344,6 @@ z-xrdb() {
 #}}}
 alias chrome-send='stream2chromecast -devicename SHIELD'
 alias bulkrename='qmv -f do -e vim'
+alias note='cd /home/learn/college-notes'
+alias stat-sync='watch grep -e Dirty: -e Writeback: /proc/meminfo'
+alias m='mutt'

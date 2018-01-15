@@ -1,14 +1,28 @@
 "{{{ Vundle's
 "Fixing vundle
 "   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"{{{ Installing Vundle
+command VundleGitInstall :! git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/Vundle.vim
+"}}}
 "Vim Websites
 "       http://vim.wikia.com/wiki/Special:Random
 " Setting up different .vimrc file
 " - vim --cmd 'set rtp^=alternate_dir'
 set rtp+=~/.config/nvim/Vundle.vim
 call vundle#begin()
+Plugin 'andmarti1424/sc-im'
 Plugin 'majutsushi/tagbar'
 		"nmap <F8> :TagbarToggle<CR>
+"{{{ Functions
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+    \ ]
+\ }
+"}}}
 		nmap t :TagbarToggle<CR>
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'easymotion/vim-easymotion'
@@ -22,7 +36,7 @@ Plugin 'easymotion/vim-easymotion'
 "Plugin 'tomtom/tlib_vim'
 call vundle#end()
 "}}}
-"{{{ Basic Set's
+"{{{ Basic Set
 colorscheme pablo
 filetype plugin indent on
 set clipboard=unnamed
@@ -35,11 +49,10 @@ set relativenumber
 set showcmd
 set smartcase
 set tabstop=4
-set undolevels=1000
+set undolevels=100
 setlocal foldclose=all
 syntax on
 "}}}
-
 let mapleader=","
 "{{{ Function
 "{{{ Function: Toggle of rnu and no
@@ -66,6 +79,21 @@ function! MouseToggle()
 	endif
 endfunction
 "}}}
+"{{{ Folder Toggle
+let b:foldertoggle = "on"
+nnoremap F :call FolderToggle()<CR>
+function! FolderToggle()
+    if b:foldertoggle == 'on'
+        set nofoldenable
+		echo 'Folder Toggle Off'
+		let b:foldertoggle = "off"
+    else
+        set foldenable
+		echo 'Folder Toggle On'
+		let b:foldertoggle = "on"
+    endif
+endfunction
+"}}}
 "}}}
 "{{{ Mapping Keys
 "{{{ Disabling Key
@@ -88,42 +116,41 @@ command Wq wq!
 "}}}
 "{{{ Leader Mode
 nnoremap <leader>t gt
-nnoremap <leader>qq :q!
+nnoremap <leader>qq <ESC>:q!
 nnoremap <leader>wq :wq
 "}}}
-nnoremap <space><space> <Esc>/<++><Enter>"_c4l
+nnoremap <space><space> <ESC>/<++><Enter>"_c4l
 "}}}
 "{{{ Autocmd
-autocmd BufNewFile,BufRead *.md setlocal spell
+autocmd BufNewFile,BufRead *.md setlocal spelllang=en
 "}}}
 "{{{ Local Leader 
 let maplocalleader=" "
 autocmd BufNewFile,BufRead * nnoremap <buffer> <localleader>[[ I#{{{  
-autocmd BufNewFile,BufRead * nnoremap <buffer> <localleader>]] I#}}}<esc>
+autocmd BufNewFile,BufRead * nnoremap <buffer> <localleader>]] I#}}}<ESC>
 "{{{ Bash autocmd
-autocmd FileType bash	    nnoremap <buffer> <localleader>c maggO#!/bin/bash<C-m><esc>'a
+autocmd FileType bash	    nnoremap <buffer> <localleader>c maggO#!/bin/bash<C-m><ESC>'a
 "}}}
 "{{{ Python autocmd
-autocmd FileType python     nnoremap <buffer> <localleader>3 I#!/usr/bin/env python3<C-m><esc>
+autocmd FileType python     nnoremap <buffer> <localleader>3 I#!/usr/bin/env python3<C-m><ESC>
 " try and except:
-autocmd FileType python     nnoremap <buffer> <localleader>t msVip<esc>mt<esc>oexcept:<esc>k<c-v>'sI    <esc>O<esc>itry:<esc>/except:<C-m>
-autocmd FileType python     nnoremap <buffer> <localleader>2 I#!/usr/bin/env python2<C-m><esc>
-autocmd FileType python     nnoremap <buffer> <localleader>' I'''<C-m><++><C-m>'''<esc>2k0<esc>
-autocmd FileType python     nnoremap <buffer> <localleader>f Ifor <++> in range(<++>,<++>):<C-m><++><esc>k0
-autocmd FileType python     nnoremap <buffer> <localleader>fi Ifor <++> in <++>.split('\n'):<C-m>if '<++>' in <++>:<C-m>print(<++>)<esc>2k0
+autocmd FileType python     nnoremap <buffer> <localleader>t msVip<ESC>mt<ESC>oexcept:<ESC>k<c-v>'sI    <ESC>O<ESC>itry:<ESC>/except:<C-m>
+autocmd FileType python     nnoremap <buffer> <localleader>2 I#!/usr/bin/env python2<C-m><ESC>
+autocmd FileType python     nnoremap <buffer> <localleader>' I'''<C-m><++><C-m>'''<ESC>2k0<ESC>
+autocmd FileType python     nnoremap <buffer> <localleader>f Ifor <++> in range(<++>,<++>):<C-m><++><ESC>k0
+autocmd FileType python     nnoremap <buffer> <localleader>fi Ifor <++> in <++>.split('\n'):<C-m>if '<++>' in <++>:<C-m>print(<++>)<ESC>2k0
 autocmd FileType python     nnoremap <buffer> <localleader>im Iimport   
-autocmd FileType python     nnoremap <buffer> <localleader>imbs <esc>mbggofrom bs4 import BeautifulSoup<C-m><ESC>'bibs = BeautifulSoup(<++>,'lxml')<ESC>0
-autocmd FileType python     nnoremap <buffer> <localleader>imj <esc>mjggoimport json<C-m><ESC>'jij = json.loads(<++>)<ESC>0
-autocmd FileType python     nnoremap <buffer> <localleader>imo <esc>moggoimport os<esc>'o
-autocmd FileType python     nnoremap <buffer> <localleader>imr <esc>mrggoimport requests<C-m><esc>'rir = requests.get('<++>').text<esc>0
-"autocmd FileType python     nnoremap <buffer> <localleader>imr iimport requests<C-m>r = requests.get('<++>').text<esc>0
-autocmd FileType python     nnoremap <buffer> <localleader>ims Iimport sys<C-m><esc>
-autocmd FileType python     nnoremap <buffer> <localleader>imt <esc>mtggoimport time<esc>'titime.sleep(<++>)<esc>0
-autocmd FileType python     nnoremap <buffer> <localleader>o I <++> = open('<++>','<++>')<esc>0
+autocmd FileType python     nnoremap <buffer> <localleader>imbs <ESC>mbggofrom bs4 import BeautifulSoup<C-m><ESC>'bibs = BeautifulSoup(<++>,'lxml')<ESC>0
+autocmd FileType python     nnoremap <buffer> <localleader>imj <ESC>mjggoimport json<C-m><ESC>'jij = json.loads(<++>)<ESC>0
+autocmd FileType python     nnoremap <buffer> <localleader>imo <ESC>moggoimport os<ESC>'o
+autocmd FileType python     nnoremap <buffer> <localleader>imr <ESC>mrggoimport requests<C-m><ESC>'rir = requests.get('<++>').text<ESC>0
+"autocmd FileType python     nnoremap <buffer> <localleader>imr iimport requests<C-m>r = requests.get('<++>').text<ESC>0
+autocmd FileType python     nnoremap <buffer> <localleader>ims Iimport sys<C-m><ESC>
+autocmd FileType python     nnoremap <buffer> <localleader>imt <ESC>mtggoimport time<ESC>'titime.sleep(<++>)<ESC>0
+autocmd FileType python     nnoremap <buffer> <localleader>o I <++> = open('<++>','<++>')<ESC>0
 autocmd FileType python     vnoremap <buffer> <localleader>so :sort<C-m>
-"}}}
-"{{{ HTML / Pandoc
- 
+autocmd FileType python     inoremap <buffer> 99 (
+autocmd FileType python     inoremap <buffer> 00 )
 "}}}
 "}}}
 "{{{ gpg config.
@@ -148,30 +175,20 @@ augroup encrypted
 augroup END
 "}}}
 "{{{ Testing
-"{{{ Installing Vundle
-command VundleGitInstall :! git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/Vundle.vim
-"}}}
 "{{{ Testing map
 map <F5> :!%:p
 "}}}
-inoremap jk <esc>
-inoremap kj <esc>
-inoremap 99 (
-inoremap 00 )
+inoremap jk <ESC>
+inoremap kj <ESC>
 "}}}
-set clipboard=unnamedplus
-let g:tagbar_type_markdown = {
-    \ 'ctagstype' : 'markdown',
-    \ 'kinds' : [
-        \ 'h:Heading_L1',
-        \ 'i:Heading_L2',
-        \ 'k:Heading_L3'
-    \ ]
-\ }
-
 "{{{ Split Navigation
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
+"nmap <silent> <A-Up> :wincmd k<CR>
+"nmap <silent> <A-Down> :wincmd j<CR>
+"nmap <silent> <A-Left> :wincmd h<CR>
+"nmap <silent> <A-Right> :wincmd l<CR>
+nmap gh :wincmd h<CR>
+nmap gj :wincmd j<CR>
+nmap gk :wincmd k<CR>
+nmap gl :wincmd l<CR>
 "}}}
+nmap ? <ESC>:help 
