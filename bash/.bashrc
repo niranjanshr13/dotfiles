@@ -344,6 +344,12 @@ z-xrdb() {
 #}}}
 alias chrome-send='stream2chromecast -devicename SHIELD'
 alias bulkrename='qmv -f do -e vim'
-alias note='cd /home/learn/college-notes'
 alias stat-sync='watch grep -e Dirty: -e Writeback: /proc/meminfo'
 alias m='mutt'
+#{{{ Tmux on startup
+#if command -v tmux>/dev/null; then
+#  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+#fi
+#}}}
+alias ci3='vim ~/.i3/config'
+alias cdot='cd /home/dotfiles/'

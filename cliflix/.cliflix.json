@@ -4,7 +4,7 @@
     "path": "/tmp/" 
   },
   "outputs": { 
-    "available": ["Chromecast","mpv", "XBMC"], 
+    "available": ["Chromecast","mpv"], 
     "favorites": ["mpv"] 
   },
   "torrents": { 
@@ -21,7 +21,7 @@
     }
   },
   "subtitles": { 
-    "limit": 10,
+    "limit": 5,
     "details": { 
       "downloads": true
     },
