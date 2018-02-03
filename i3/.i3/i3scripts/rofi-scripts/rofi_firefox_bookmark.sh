@@ -12,11 +12,13 @@ function gen_webpage()
 
 # a simple way, might need firefox to create a copy / a backup 1 day.
 # using that backup.
-dejsonlz4 ~/.mozilla/firefox/$FIREFOX_UID/bookmarkbackups/$(ls ~/.mozilla/firefox/$FIREFOX_UID/bookmarkbackups/ | tail -1) | sed 's/,/\n/g' | grep uri | grep -v iconuri |  sed 's/"uri":"//g' | sed 's/"}//g'
+#dejsonlz4 ~/.mozilla/firefox/$FIREFOX_UID/bookmarkbackups/$(ls ~/.mozilla/firefox/$FIREFOX_UID/bookmarkbackups/ | tail -1) | sed 's/,/\n/g' | grep uri | grep -v iconuri |  sed 's/"uri":"//g' | sed 's/"}//g'
+sqlite3 ~/.mozilla/firefox/$FIREFOX_UID/places.sqlite 'SELECT url FROM moz_places'
 
 }
 
-WEBPAGE=$( (echo google.com;gen_webpage)  | rofi -dmenu -p "WWW:")
+#WEBPAGE=$( (echo google.com;gen_webpage)  | rofi -dmenu -p "WWW:")
+WEBPAGE=$( (gen_webpage)  | rofi -dmenu -p "WWW:")
 
 if [ -n "${WEBPAGE}" ]
 then
