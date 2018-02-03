@@ -178,3 +178,17 @@ git clone https://github.com/niranjanshr13/dotfiles.git /home/public/
 not completed or checked in the new machine
 remove yaourt, install pacaur {security concern}
 check on the new machine or vm
+
+# installing this too.
+pip3 install xdotool
+pacaur -S keynav
+
+# install dejsonlz4 (( extract firefox bookmark; to be ported into rofi. )) 
+git clone 'https://github.com/avih/dejsonlz4'
+gcc -Wall -o dejsonlz4 src/dejsonlz4.c src/lz4.c
+mv dejsonlz4 /usr/local/sbin
+
+# install greenclip // (clipboard manager)
+# https://github.com/erebe/greenclip
+## pacman -S greenclip
+pacaur -S greenclip

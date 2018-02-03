@@ -37,12 +37,11 @@ fi
 
 answer=$(echo "$@" | bc -l | sed '/\./ s/\.\{0,1\}0\{1,\}$//')
 
-action=$(echo -e "Copy to clipboard\nClear\nClose" |
+action=$(echo -e "Close\nCopy to clipboard" |
 $menu -p "= $answer")
 
 case $action in
-    "Clear") $0 ;;
-    "Copy to clipboard") echo -n "$answer" | xclip ;;
+    "Copy to clipboard") echo -n "$answer" | xclip -selection clipboard;;
     "Close") ;;
     "") ;;
     *) $0 "$answer $action" ;;

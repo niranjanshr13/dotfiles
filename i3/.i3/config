@@ -8,6 +8,10 @@
 #	xev
 #}}}
 
+# {{{ hiding the title bar
+for_window [class="^.*"] border pixel 1
+# }}}
+
 client.focused #000000 #000000 #fdf6e3 #859900
 
 #{{{ Color Set
@@ -64,13 +68,13 @@ bindsym $ALT+F4 exec i3 kill
 #sourced i3
 bindsym $mod+Shift+r exec i3 restart
 #lost phone indicater
-bindsym $mod+Shift+l exec $HOME/.python-env/pyicloud/bin/python3 $HOME/.i3/i3scripts/icloud_play_sound.py && i3-nagbar -t warning -m "Finding Phone"
+#bindsym $mod+Shift+l exec $HOME/.python-env/pyicloud/bin/python3 $HOME/.i3/i3scripts/icloud_play_sound.py && i3-nagbar -t warning -m "Finding Phone"
 #screenshot screen
 bindsym Print exec scrot && i3-nagbar -t warning -m 'Screenshot'
 # bind to calculator
-bindsym $mod+d exec $HOME/.i3/i3scripts/calc.sh
+#bindsym $mod+d exec $HOME/.i3/i3scripts/calc.sh
 # bind with crypto
-bindsym $mod+a exec $HOME/.i3/i3scripts/rofi_crypto.sh
+#bindsym $mod+a exec $HOME/.i3/i3scripts/rofi_crypto.sh
 #mouse toggle (disable and enable mode)
 bindsym F7 exec "$(xinput list-props $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') | grep -qE \\"Device Enabled.*1$\\" && xinput disable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') || xinput enable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') && i3 restart)"
 #bindsym $mod+Escape exec "$(xinput list-props $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') | grep -qE \\"Device Enabled.*1$\\" && xinput disable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') || xinput enable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') && i3 restart)"
@@ -114,7 +118,8 @@ bindsym $mod+f exec /home/z/.i3/i3scripts/rofi_firefox.sh &
 bindsym $mod+c exec chromium-browser &
 bindsym $mod+y exec mpv $(youtube-dl -g $(xclip -o))
 #bindsym $mod+s exec dmenu_run
-bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combi"
+#bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combi"
+bindsym $mod+s exec $HOME/.i3/i3scripts/rofi-scripts/rofi-bangs.sh
 	#bindsym $mod+Shift+f exec feh $(xclip -o)
 	#bindsym Control+question exec bindsym $mod+0 workspace $workspace10 
 bindsym Control+$mod+Shift+b exec bindsym firefox
@@ -232,7 +237,7 @@ colors {
       #statusline $base04
 #                        border  background text
       focused_workspace  $base01 $base01    $base07
-      active_workspace   $base01 $base02    $base03
+      #active_workspace   $base01 $base02    $base03
       inactive_workspace $base01 $base01    $base03
       urgent_workspace   $base01 $base01    $base08
      }

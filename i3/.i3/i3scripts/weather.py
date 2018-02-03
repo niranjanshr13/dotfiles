@@ -23,5 +23,6 @@ def condition(r):
 
 if __name__ == '__main__':
     degreeX = degree(r)
+    print('a')
     conditionX = condition(r)
     print(str(degreeX) + ' ' + str(conditionX))

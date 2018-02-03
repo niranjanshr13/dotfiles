@@ -1,6 +1,6 @@
 #{{{ Bash history
-	HISTSIZE=100
-	HISTFILESIZE=100
+	HISTSIZE=10000
+	HISTFILESIZE=10000
 #}}}
 #{{{ bash autocompletion
 if [ -f /etc/bash_completion ]; then
@@ -9,44 +9,56 @@ fi
 #}}}
 #{{{Export
 #export CHEATPATH="$CHEATPATH:/path/dir"
+export BROWSER='firefox'
+export EDITOR='nvim'
 #}}}
 #{{{ Normal Aliases
-alias gimp='pinta'
-alias f='firefox'
+#alias z-peerflix="peerflix "$@" -v -r"
 alias bd='cd ../'
+alias bulkrename='qmv -f do -e vim'
 alias c='cd'
+alias c='clear'                                                                               
 alias cc='chrome'			
+alias cdot='cd /home/dotfiles/'
+alias cfg-bash='vim ~/.bashrc'
+alias chrome-send='stream2chromecast -devicename SHIELD'
 alias chrome='chromium-browser > /dev/null'						
 alias cls='clear'                                                                               
 alias csl='clear'                                                                               
-alias c='clear'                                                                               
 alias cx='chmod +x'	
 alias df='df -h'
 alias egrep='egrep --color=auto'
 alias eog='feh --scale-down'						
+alias f='firefox'
 alias feh='feh --scale-down'							
 alias ff='firefox'				
 alias fgrep='fgrep --color=auto'
+alias gimp='pinta'
 alias grep='grep --color=auto'
+alias hist='vim ~/.zsh_history'
 alias l='ls -CF'
 alias la='ls -a --color=auto'
 alias ll='ls -alF'
 alias ls='ls --color=auto'
 alias lsa='ls -a'
+alias m='mutt'
 alias mk='mkdir'
 alias mplayer='mpv'
-alias py='python3'
+alias n='nload -u M'
 alias nano='vim'                                                                            
 alias nload='nload -u M'
 alias nn='vim'										
+alias py='python3'
 alias q='exit'
 alias qq='exit'			
-alias rm='trash-put'
 alias r='ranger'									
+alias rm='trash-put'
 alias sl='ls'                                                                                   
 alias ss='startx'
-alias vv='vim'
+alias stat-sync='watch grep -e Dirty: -e Writeback: /proc/meminfo'
+alias tplay='cliflix'
 alias v='vim'
+alias vv='vim'
 alias yt='youtube-dl'
 alias z-gist-list='gist --list'
 alias z-git-add='git add'
@@ -55,9 +67,6 @@ alias z-git-push='git push'
 alias z-git-stat='git status'
 alias z-kill-chrome='kill -9 $(ps aux  | grep chromium | grep -v 'grep' | awk "{print $2}")'
 alias z-loop='while : ; do $@ ; done'
-alias n='nload -u M'
-#alias z-peerflix="peerflix "$@" -v -r"
-alias tplay='cliflix'
 alias z-reboot='init 6'										
 alias z-screenshot='scrot'                                                    
 alias z-shutdown='init 0'								
@@ -149,39 +158,35 @@ ffmpeg -loop 1 -i $1 -i $2 -shortest -c:v libx264 -c:a copy $3
 #}}}
 #}}}
 #{{{ config Files
-z-cfg-vim-snippet-py() {
+cfg-vim-snippet-py() {
 	nano $HOME/.vim/bundle/vim-snippets/snippets/python.snippets
 }
 
-z-cfg-docker() {
+cfg-docker() {
 	nano $HOME/.docker.alias
 }
 
-z-cfg-vim(){
-	nano $HOME/.vimrc
+cfg-nvim(){
+	nano $HOME/.config/nvim/init.vim
 }
 
-z-cfg-bash(){
-	nano $HOMER/.bashrc
-}
-
-z-cfg-i3(){
+cfg-i3(){
 	nano $HOME/.i3/config
 }
 
-z-cfg-ranger(){
+cfg-ranger(){
 	nano $HOME/.config/ranger/rc.conf 	
 }
 
-z-cfg-crontab(){
+cfg-crontab(){
 	nano /etc/crontab
 }
 
-z-cfg-rclocal(){
+cfg-rclocal(){
 	nano /etc/rc.local
 }
 
-z-cfg-Xresources(){
+cfg-Xresources(){
 	nano ~/.Xresources
 }
 # }}}
@@ -201,17 +206,8 @@ z-sms-2-phone(){
 }
 #}}}
 #{{{ Rclone
-z-rclone-list(){
-	rclone listremotes
-}
-z-rclone-available-size(){
-	rclone size $1 
-}
-#}}}
-#{{{ Reptyr
-z-reptyr(){
-	reptyr
-}
+alias rls='rclone listremotes'
+alias rlsl='rclone size' 
 #}}}
 #{{{ Docker Aliases
 z-dock-run-rm(){
@@ -317,12 +313,12 @@ z-rdp-college() {
 #}}}
 #{{{ fix internet (reload) "arch-way"
 fix-network() {
-ip link set $NICCARD down
-systemctl restart netctl@$ESSID.service
+sudo ip link set $NICCARD down
+sudo systemctl restart netctl@$ESSID.service
 }
 #}}}
 #{{{ Fixing Xresources on Xterm
-z-xrdb() {
+xrdb() {
 	xrdb ~/.Xresources
 }
 #}}}
@@ -339,17 +335,18 @@ z-xrdb() {
     }
 #}}}
 #}}}
-#{{{ dummy webcam
-#ffmpeg -re -i $1 -f v4l2 /dev/video2D
+#{{{ create dummy webcam
+# ffmpeg -re -i $1 -f v4l2 /dev/video2D
 #}}}
-alias chrome-send='stream2chromecast -devicename SHIELD'
-alias bulkrename='qmv -f do -e vim'
-alias stat-sync='watch grep -e Dirty: -e Writeback: /proc/meminfo'
-alias m='mutt'
+
+#set -o vi
+
 #{{{ Tmux on startup
 #if command -v tmux>/dev/null; then
-#  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+#  [[ ! $TERM =~ xterm ]] && [ -z $TMUX ] && exec tmux
 #fi
 #}}}
-alias ci3='vim ~/.i3/config'
-alias cdot='cd /home/dotfiles/'
+
+# note fix this.
+# dejsonlz4 ~/.mozilla/firefox/$FIREFOX_UID/bookmarkbackups/$(ls ~/.mozilla/firefox/$FIREFOX_UID/bookmarkbackups/ | tail -1) | grep -Eo "(http|https)://[\da-z./?A-Z0-9\D=_-]*"
+#alias ar=$(arecord)

@@ -1,26 +1,33 @@
+!{{{ Rofi configuration
+rofi.modi: run, window,ssh
+rofi.color-enabled: true
+rofi.color-window: #273238, #273238, #1e2529
+rofi.color-normal: #273238, #c1c1c1, #273238, #394249, #ffffff
+rofi.color-active: #273238, #80cbc4, #273238, #394249, #80cbc4
+rofi.color-urgent: #273238, #ff1844, #273238, #394249, #ff1844
+!}}}
 XTerm*selectToClipboard: true
-xterm*loginShell: true
-xterm*scrollBar: true
+! xterm*scrollBar: true
 xterm*background: black
 xterm*foreground: grey
 xterm*cursorColor: red
 xterm*cursorUnderline: true
 xterm*cursorBlink: true
-!xterm*color4: DodgerBlue1
+xterm*color4: DodgerBlue1
 xterm*color12: SteelBlue1
 xterm*dynamicColors: true
-! Use screen/tmux scrollback instead:
-xterm*saveLines: 1000
+! Customize the buffer history
+XTerm.vt100.saveLines: 4096
 ! -- Allow utf8 in/out
-xterm*utf8: 2
+xterm*utf8: 1
 xterm*eightBitInput: true
 xtere*eightBitControl: false
 xterm*eightBitOutput: true
 ! -- Enables True-Type rendering:
-xterm*renderFont: true
+! xterm*renderFont: true
 xterm*faceName: Monospace
 xterm*faceNameDoublesize: Monospace
-xterm*wideChars: true
+! xterm*wideChars: true
 xterm*wideFont: Monospace 
 ! -- Define the size increments used when changing font size
 xterm*faceSize: 20
@@ -30,6 +37,7 @@ xterm*faceSize3: 12
 xterm*faceSize4: 16
 xterm*faceSize5: 20
 xterm*faceSize6: 24
+xterm*faceSize7: 26
 ! -- trim whitespace from selection before copying
 xterm*trimSelection: true
 ! -- Hold Shift to use CLIPBOARD instead of PRIMARY to copy or paste
@@ -43,12 +51,5 @@ xterm*vt100.Translations: #override \n\
     Shift Ctrl <Key> 0: set-vt-font(d) \n\
 
 ! Matches URLs and emails and selects them on double-click
+!! Example: https://google.com
 xterm*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
-
-
-! Rofi configuration
-rofi.color-enabled: true
-rofi.color-window: #273238, #273238, #1e2529
-rofi.color-normal: #273238, #c1c1c1, #273238, #394249, #ffffff
-rofi.color-active: #273238, #80cbc4, #273238, #394249, #80cbc4
-rofi.color-urgent: #273238, #ff1844, #273238, #394249, #ff1844

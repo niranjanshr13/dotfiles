@@ -1,3 +1,5 @@
+" Some website:
+" 	- http://vimcolors.com
 "{{{ Vundle's
 "Fixing vundle
 "   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -10,10 +12,20 @@ command VundleGitInstall :! git clone https://github.com/VundleVim/Vundle.vim.gi
 " - vim --cmd 'set rtp^=alternate_dir'
 set rtp+=~/.config/nvim/Vundle.vim
 call vundle#begin()
-Plugin 'andmarti1424/sc-im'
+"Plugin 'andmarti1424/sc-im'
+Plugin 'vim-syntastic/syntastic'
+"{{{ .......................... Syntax Checking 'vim-syntastic/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:pymode_rope = 0
+"}}}
 Plugin 'majutsushi/tagbar'
-		"nmap <F8> :TagbarToggle<CR>
-"{{{ Functions
+"{{{ ..................... Function plugin 'majutsushi/tagbar'
 let g:tagbar_type_markdown = {
     \ 'ctagstype' : 'markdown',
     \ 'kinds' : [
@@ -23,6 +35,7 @@ let g:tagbar_type_markdown = {
     \ ]
 \ }
 "}}}
+		"nmap <F8> :TagbarToggle<CR>
 		nmap t :TagbarToggle<CR>
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'easymotion/vim-easymotion'
@@ -37,7 +50,12 @@ Plugin 'easymotion/vim-easymotion'
 call vundle#end()
 "}}}
 "{{{ Basic Set
-colorscheme pablo
+" {{{ Color 
+"colorscheme pablo
+colorscheme northpole
+" tmux color fix
+set termguicolors
+" }}}
 filetype plugin indent on
 set clipboard=unnamed
 set encoding=utf-8
@@ -192,3 +210,9 @@ nmap gk :wincmd k<CR>
 nmap gl :wincmd l<CR>
 "}}}
 nmap ? <ESC>:help 
+set statusline=%f\ -\ FileType:\ %y
+"{{{ Variable
+let $BROWSER = 'firefox'
+"}}}
+
+let g:netrw_browsex_viewer = $BROWSER
