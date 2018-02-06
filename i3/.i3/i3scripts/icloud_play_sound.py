@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 # this code is meant for me, it play sound even it is the silent mode. (finding the phone)
 from os import environ

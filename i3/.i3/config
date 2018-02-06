@@ -92,9 +92,9 @@ bindsym $mod+m exec mpv http://opus.stillstream.fm:8000/stillstream > /dev/null 
 #{{{ Pulse Audio controls
 bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master 1+ toggle # mute sound
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
-bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
+#bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
-bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
+#bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
 #}}}
 #{{{ Sreen brightness controls
 #bindsym XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
@@ -110,16 +110,17 @@ bindsym $mod+t exec xterm
 bindsym $mod+Return exec xterm
 #	bindsym $mod+t exec xfce4-terminal
 #	bindsym $mod+Return exec xfce4-terminal
-bindsym $mod+g exec chromium-browser "github.com" &
-bindsym $mod+Shift+c exec = &
+#bindsym $mod+g exec chromium-browser "github.com" &
+#bindsym $mod+Shift+c exec = &
 #bindsym $mod+f exec z-qt-facebook.py $FB_USER $FB_PASS
 #	bindsym $mod+f exec chromium-browser "facebook.com" &
-bindsym $mod+f exec /home/z/.i3/i3scripts/rofi_firefox.sh & 
-bindsym $mod+c exec chromium-browser &
-bindsym $mod+y exec mpv $(youtube-dl -g $(xclip -o))
+#bindsym $mod+f exec /home/z/.i3/i3scripts/rofi_firefox.sh & 
+#bindsym $mod+c exec chromium-browser &
+#bindsym $mod+y exec mpv $(youtube-dl -g $(xclip -o))
 #bindsym $mod+s exec dmenu_run
 #bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combi"
 bindsym $mod+s exec $HOME/.i3/i3scripts/rofi-scripts/rofi-bangs.sh
+bindsym $mod+shift+s exec "rofi -show combi -combi-modi window,drun -switchers combi"
 	#bindsym $mod+Shift+f exec feh $(xclip -o)
 	#bindsym Control+question exec bindsym $mod+0 workspace $workspace10 
 bindsym Control+$mod+Shift+b exec bindsym firefox

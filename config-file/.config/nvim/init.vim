@@ -13,6 +13,7 @@ command VundleGitInstall :! git clone https://github.com/VundleVim/Vundle.vim.gi
 set rtp+=~/.config/nvim/Vundle.vim
 call vundle#begin()
 "Plugin 'andmarti1424/sc-im'
+Plugin 'kien/ctrlp.vim'
 Plugin 'vim-syntastic/syntastic'
 "{{{ .......................... Syntax Checking 'vim-syntastic/syntastic'
 set statusline+=%#warningmsg#
@@ -216,3 +217,4 @@ let $BROWSER = 'firefox'
 "}}}
 
 let g:netrw_browsex_viewer = $BROWSER
+"vnoremap (( "sc(<C-r>s)<Esc>

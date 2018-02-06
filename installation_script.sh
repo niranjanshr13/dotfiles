@@ -192,3 +192,15 @@ mv dejsonlz4 /usr/local/sbin
 # https://github.com/erebe/greenclip
 ## pacman -S greenclip
 pacaur -S greenclip
+
+# install ts (task spooler)
+## task queue-ing software.
+wget 'vicerveza.homeunix.net/~viric/soft/ts/ts-1.0.tar.gz' -O 'somewhere'
+gunzip ''
+tar xvf ''
+cd ''
+make
+sudo make install
+
+## installing primewire.
+sudo pip3 install primewire

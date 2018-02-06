@@ -1,6 +1,6 @@
 #{{{ Bash history
-	HISTSIZE=10000
-	HISTFILESIZE=10000
+HISTSIZE=10000
+HISTFILESIZE=10000
 #}}}
 #{{{ bash autocompletion
 if [ -f /etc/bash_completion ]; then
@@ -10,187 +10,140 @@ fi
 #{{{Export
 #export CHEATPATH="$CHEATPATH:/path/dir"
 export BROWSER='firefox'
+export MYHOME='/home/z'
 export EDITOR='nvim'
+export PLAYER='mpv'
+export IMAGE='feh'
 #}}}
-#{{{ Normal Aliases
-#alias z-peerflix="peerflix "$@" -v -r"
+#{{{ Aliases
+## changing dir.
 alias bd='cd ../'
-alias bulkrename='qmv -f do -e vim'
 alias c='cd'
-alias c='clear'                                                                               
-alias cc='chrome'			
 alias cdot='cd /home/dotfiles/'
-alias cfg-bash='vim ~/.bashrc'
-alias chrome-send='stream2chromecast -devicename SHIELD'
-alias chrome='chromium-browser > /dev/null'						
-alias cls='clear'                                                                               
-alias csl='clear'                                                                               
-alias cx='chmod +x'	
-alias df='df -h'
-alias egrep='egrep --color=auto'
+alias ct='cd /tmp/'
+alias cm='cd /mnt/'
+
+## application
+alias chrome='google-chrome > /dev/null'						
 alias eog='feh --scale-down'						
 alias f='firefox'
 alias feh='feh --scale-down'							
 alias ff='firefox'				
 alias fgrep='fgrep --color=auto'
 alias gimp='pinta'
+alias gist-list='gist --list'
+alias git-add='git add'
+alias git-commit='git commit'
+alias git-push='git push'
+alias git-stat='git status'
+alias m='mutt'
+alias gm='offlineimap'
+alias mplayer='mpv'
+alias n='nload -u M'
+alias nano='$EDITOR'                                                                            
+alias nload='nload -u M'
+alias nn='$EDITOR'
+alias py='python3'
+alias q='exit'
+alias qq='exit'			
+alias r='ranger'
+alias cal='cal -y'
+alias rmx='trash-put'
+alias sndrec='arecord $1'
+alias stat-sync='watch grep -e Dirty: -e Writeback: /proc/meminfo'
+alias play-cliflix='cliflix'
+alias v='$EDITOR'                                                                            
+alias vim='$EDITOR'                                                                            
+alias vv='$EDITOR'
+alias yt='youtube-dl'
+alias extract='patool extract'
+alias clipx='xclip -i -sel clip'
+alias zo='xdg-open'		                                   
+alias z-webcam='guvcview'
+alias ffmpeg-extract-one-frame='ffmpeg -i $1 -vf "select=not(mod(n\,10))" -vsync vfr -q:v 2 img_%03d.jpg' ## Select 1 frame out of every 10 frames
+
+# ffmpeg combine image and make it a video
+# $1 = image
+# $2 = mp3
+# $3 = output.mp4
+#alias ffmpeg_comb_vid_img='ffmpeg -loop 1 -i $1 -i $2 -shortest -c:v libx264 -c:a copy $3'
+
+## other stuff
+alias c='clear'
+alias cls='clear'
+alias csl='clear'
+alias cx='chmod +x'
+alias df='df -h'
+alias egrep='egrep --color=auto'
+alias mk='mkdir'
+alias batt-stat='cat /sys/class/power_supply/BAT1/capacity' 	## battery stat
+alias bulkrename='qmv -f do -e $EDITOR' 						## bulk renaming, remember to save it for to exec
+alias chrome-send='stream2chromecast -devicename SHIELD'
 alias grep='grep --color=auto'
-alias hist='vim ~/.zsh_history'
+alias ipa='curl -s "ipinfo.io/ip"' 								## ip addresses.
+alias pastebin='echo "$@" | curl -s -F "f:1=<-" http://ix.io' 	## Send it to pastebin
+alias scan-network='sudo nmap -sP -n 192.168.0.1/24' 			## Scanning the network
+alias screenshot='scrot'
+alias shutdown='shutdown now'
+alias ss='startx'
+alias zpp='sudo rfkill unblock all' 							## unlocking all the devices.
+alias pass-gen='head /dev/urandom | sha512sum | cut -c 1-10' 	## password generator.
+alias xrdb='xrdb ~/.Xresources' 								## fixing Xresources on Xterm
+alias night-mode='xbacklight -inc 100 && xbacklight -dec 97 && redshift -b 0.7 2>&1 /dev/null &' 	## redshift 
+alias network-fix='sudo ip link set $NICCARD down && sudo systemctl restart netctl@$ESSID.service' 	## fixing network
+
+## config file.
+alias cfg-bash='$EDITOR ~/.bashrc && source ~/.bashrc'
+alias cfg-status='$EDITOR $MYHOME/.i3/i3block.conf'
+alias cfg-hist='$EDITOR ~/.zsh_history'
+alias cfg-vim-snippet-py='$EDITOR $MYHOME/.vim/bundle/vim-snippets/snippets/python.snippets'
+alias cfg-nvim='$EDITOR $MYHOME/.config/nvim/init.vim'
+alias cfg-i3='$EDITOR $MYHOME/.i3/config'
+alias cfg-ranger='$EDITOR $MYHOME/.config/ranger/rc.conf'
+alias cfg-crontab='$EDITOR /etc/crontab'
+alias cfg-rclocal='$EDITOR /etc/rc.local'
+alias cfg-Xresources='$EDITOR ~/.Xresources'
+alias cfg-rclone='$EDITOR ~/.config/rclone/.rclone.conf'
+alias cfg-env='$EDITOR /etc/environment'
+alias cfg-tmux='$EDITOR ~/.tmux.conf'
+alias cfg-zsh='$EDITOR ~/.zshrc'
+
+## ls stuff
 alias l='ls -CF'
 alias la='ls -a --color=auto'
 alias ll='ls -alF'
 alias ls='ls --color=auto'
 alias lsa='ls -a'
-alias m='mutt'
-alias mk='mkdir'
-alias mplayer='mpv'
-alias n='nload -u M'
-alias nano='vim'                                                                            
-alias nload='nload -u M'
-alias nn='vim'										
-alias py='python3'
-alias q='exit'
-alias qq='exit'			
-alias r='ranger'									
-alias rm='trash-put'
-alias sl='ls'                                                                                   
-alias ss='startx'
-alias stat-sync='watch grep -e Dirty: -e Writeback: /proc/meminfo'
-alias tplay='cliflix'
-alias v='vim'
-alias vv='vim'
-alias yt='youtube-dl'
-alias z-gist-list='gist --list'
-alias z-git-add='git add'
-alias z-git-commit='git commit'
-alias z-git-push='git push'
-alias z-git-stat='git status'
-alias z-kill-chrome='kill -9 $(ps aux  | grep chromium | grep -v 'grep' | awk "{print $2}")'
-alias z-loop='while : ; do $@ ; done'
-alias z-reboot='init 6'										
-alias z-screenshot='scrot'                                                    
-alias z-shutdown='init 0'								
-alias z-src-refresh='source ~/.zshrc'                                
-alias z-unzip='patool extract'							
-alias z-webcam='guvcview'
-alias z-xclip='xclip -i -sel clip'                                    
-alias zct='cd /tmp/'
-alias zo-fb='chrome "facebook.com" > /dev/null 2>&1 & '
-alias zo='xdg-open'		                                   
-alias zz='source ~/.zshrc'					
-#}}}
-#{{{ Redshift
-z-redshift() {
-	xbacklight -inc 100
-	xbacklight -dec 97
-	redshift -b 0.7 2>&1 /dev/null &
-}
-#}}} 
-#{{{ Is website down  
-z-down4me() {
-checker=$(curl -s "isup.me/$1" | grep 'class="domain"' | grep -o ".*<a" | sed 's/  //g' | sed 's/<a//g')
-if [ "$checker" != "" ]
-then
-echo "$checker"
-else
-echo 'Internet is down'
-fi
-}
-#}}}
-#{{{ Battery Status
-#z-batt-stat() {
-#	echo "Computer is currently $(cat /sys/class/power_supply/BAT1/status)"
-#	echo "$(cat /sys/class/power_supply/BAT1/capacity)% Battery Level"
-#}
-#}}}
-#{{{ Fixing the wifi
-zpp() {
-	sudo rfkill unblock all
-}
-#}}}
-#{{{ Network Information
-z-myip () {
-echo "curl -s 'ipinfo.io'"
-echo "Internal IP = $(ifconfig | perl -nle'/dr:(\S+)/ && print $1' | grep -v 127.0.0.1 | sed ':a;N;$!ba;s/\n/, /g')"
-echo "Gateway     = $(ip route show | awk '$3 ~ /^[1-9]+/ {print $3;}')"
-echo "Mac Address = $(ifconfig -a | grep HWaddr | awk '{print $5 }' | sed ':a;N;$!ba;s/\n/, /g' )"
-}
-#}}}
-#{{{ Send to Pastebin
-z-pastebin() {
-	echo "$@" | curl -s -F "f:1=<-" http://ix.io
-}
-#}}}
-#{{{ Searching Mac-Address by Scanning Network 
-zn-scan-network() {
-	# show all the mac-address on the network.
-	fing -r 1 --silent | grep 'HW Address' | awk '{print $3}' | sed 's/://g'
-}
-#}}}
-#{{{ find instagram follower
-zn-instagram-follower-count() {
-curl -s http://socialblade.com/instagram/user/$1 | grep '<div class="stats-top-data-content" style="font-size: 0.9em;">' | head -1 | grep -o '>.*' | sed 's/>//g' | sed 's/\/div//g' | sed 's/<//g' | sed 's/,//g'
-}
-#}}}
-#{{{ Hacking Password Collection
-zn-word() {
-mkdir -p /tmp/password/
-curl -s 'https://wiki.skullsecurity.org/Passwords' | grep txt.bz2 | grep -o "http.*.bz2" | sed "s/>.*//g" | sed 's/"//g' > /tmp/password/list
-aria2c -s16 -x16 -j5 -i /tmp/password/list -d /tmp/password/
-bunzip2 -c /tmp/password/*.bz2 > /tmp/password/wordlist
-rm /tmp/password/list
-rm /tmp/password/*.bz2
-cat /tmp/password/* | sort | uniq > /tmp/password/finished.lst
-rm /tmp/password/wordlist
-}
-#}}}
-#{{{ffmpeg alias
-#{{{ Select 1 frame out of every 10 frames
-	alias z-ffmpeg-extract-one-frame='ffmpeg -i $1 -vf "select=not(mod(n\,10))" -vsync vfr -q:v 2 img_%03d.jpg'
-#}}}
-#{{{ ffmpeg combine image and make it a video
-z-ffmpeg_comb_vid_img() {
-# $1 = image
-# $2 = mp3
-# $3 = output.mp4
-ffmpeg -loop 1 -i $1 -i $2 -shortest -c:v libx264 -c:a copy $3
-}
-#}}}
-#}}}
-#{{{ config Files
-cfg-vim-snippet-py() {
-	nano $HOME/.vim/bundle/vim-snippets/snippets/python.snippets
-}
+alias sl='ls'
 
-cfg-docker() {
-	nano $HOME/.docker.alias
-}
+## sources stuff
+alias src-refresh='source ~/.zshrc && source ~/.bashrc'                                
+alias zz='source ~/.zshrc && source ~/.bashrc'                                
 
-cfg-nvim(){
-	nano $HOME/.config/nvim/init.vim
-}
+## remote access
+alias aws-rdp='rdesktop -g 1920x1040 $aws_windows_one_ip -u "administrator" -p $aws_windows_password -p -z 2> /dev/null &'
+alias aws-ssh='ssh -i $ssh_aws_one_key $ssh_aws_one_ip'
+alias college-rdp='rdesktop -g 1920x1040 "$college_rdp_website" -u "$college_username" -p $college_password -p -z 2>/dev/null &'
 
-cfg-i3(){
-	nano $HOME/.i3/config
-}
+# Docker Aliases
+alias dock-run-rm='docker stop $(docker ps | awk {'print $3'}) && docker rmi -f $(docker ps | awk {'print $3'})'
+alias dock-stop-rm='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
+alias dock-x11-reload='export DISPLAY=":0.0" && xhost +$USER && xhost +' ##  if X11 apps doesn't work in docker.
+alias dock-selenium_ffox='docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:rw niranjanshr13/selenium_firefox /bin/bash'
+alias dock-selenium_pantomjs='docker run -it niranjanshr13/selenium_phantomjs /bin/bash'
+alias dock-jdownloader='docker run -d --name jdownloader-headless -v /config/jd2:/opt/JDownloader/cfg -v /home/user/Downloads:/root/Downloads plusminus/jdownloader2-headless'
+alias dock-python3='docker run -it --rm python:3.3.6-slim /bin/bash'
+alias dock-pyautogui='docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix niranjanshr13/python3_pyautogui /bin/bash'
+alias dock-images='docker images'
+alias dock-psa='docker ps -a'
 
-cfg-ranger(){
-	nano $HOME/.config/ranger/rc.conf 	
-}
+## Youtube-dl Aliases
+alias ytdl-ls='youtube-dl --list-extractors' 				## List Youtube-dl support link
+alias ytdl-url='youtube-dl -g' 								## print url
+alias ytdl-safaribooks='youtube-dl -u $SAFARI_EMAIL -p $SAFARI_PASSWORD -o "%(playlist_index)s. %(title)s.%(ext)s" $@}' 	## Downloading safaribooks videos.
 
-cfg-crontab(){
-	nano /etc/crontab
-}
 
-cfg-rclocal(){
-	nano /etc/rc.local
-}
-
-cfg-Xresources(){
-	nano ~/.Xresources
-}
-# }}}
-#{{{ Pinging
+# Pinging
 zp() {
 	if [[ "$1" == "" ]]
 	then
@@ -201,140 +154,22 @@ zp() {
 }
 #}}}
 #{{{ Send sms from Email
-z-sms-2-phone(){
-	z-smtp.gmail.py $PHONE_EMAIL_USER $PHONE_EMAIL_PASS $PHONE_EMAIL_TO $1
-}
+alias sms-2-phone='z-smtp.gmail.py $PHONE_EMAIL_USER $PHONE_EMAIL_PASS $PHONE_EMAIL_TO $1'
 #}}}
-#{{{ Rclone
-alias rls='rclone listremotes'
-alias rlsl='rclone size' 
-#}}}
-#{{{ Docker Aliases
-z-dock-run-rm(){
-	docker stop $(docker ps | awk {'print $3'})
-	docker rmi -f $(docker ps | awk {'print $3'})
-}
-z-dock-stop-rm(){
-	docker rm $(docker ps -qa --no-trunc --filter "status=exited")
-}
-z-x11-reload() {
-	# Things todo: if X11 apps doesn't work in docker.
-	export DISPLAY=":0.0"
-	xhost +$USER
-	xhost +
-}
-z-dock-selenium_ffox(){
-        docker run -it --rm \
-        -e DISPLAY=$DISPLAY \
-        -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
-        niranjanshr13/selenium_firefox \
-        /bin/sh
-}
-z-dock-selenium_pantomjs() {
-        docker run -it \
-        niranjanshr13/selenium_phantomjs \
-        /bin/bash
-}
-z-dock-jdownloader() {
-# https://github.com/PlusMinus0/headless-jd2-docker
-        docker run -d --name jdownloader-headless \
-        -v /config/jd2:/opt/JDownloader/cfg \
-        -v /home/user/Downloads:/root/Downloads \
-        plusminus/jdownloader2-headless
-}
-z-dock-python3() {
-        docker run -it --rm \
-        python:3.3.6-slim \
-        /bin/bash
-}
-z-dock-pyautogui() {
-        docker run -it --rm \
-        -e DISPLAY=$DISPLAY \
-        -v /tmp/.X11-unix:/tmp/.X11-unix \
-        niranjanshr13/python3_pyautogui \
-        /bin/bash
-}
-z-dock-images(){
-	docker images
-}
-z-dock-psa(){
-	docker ps -a
-}
-# }}}
 #{{{ Play primewire video from cmd
-z-primewire(){
 # https://pypi.python.org/pypi/primewire/1.0.2
 # pip3 install primewire
 ## Example:
 	# primewire Fargo --season 1 --episode 1
 	# primewire John Wick
-	primewire $@ | grep -i openload | head -1  | xargs youtube-dl -g | xargs mpv -fs 
-}
-#}}}
-#{{{ Send primewire to phone from autoremote
-z-send-primewire(){
-	primewireLink=$(primewire $@ | grep -i openload | head -1 | xargs youtube-dl -g)
-	curl -sI "http://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_ONEPLUS_ONE_KEY&message=play=:=$primewireLink" > /dev/null 2>&1
-}
+alias play-primewire='primewire $@ | grep -i openload | head -1  | xargs youtube-dl -g | xargs mpv -fs'
 #}}}
 #{{{ Send primewire to tv from autoremote
-z-send-primewire-tv(){
-	 primewireLink=$(primewire $@ | grep -i openload | head -1 | xargs youtube-dl -g)
-	curl -sI "http://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_TV&message=play=:=$primewireLink" > /dev/null 2>&1
-}
-#}}}
-#{{{ Send any online video to tv by youtube-dl
-z-send-tv(){
-	urlLink=$(youtube-dl -g $@)
-	curl -sI "http://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_TV&message=play=:="$urlLink"" > /dev/null 2>&1
-}
-#}}}
-#{{{ Remote access
-z-rdp-aws(){
-	rdesktop -g 1920x1040 \ 
-	$AWS_WINDOWS_ONE_IP \
-	-u "Administrator" \
-	-p $AWS_WINDOWS_PASSWORD \
-	-P -z 2> /dev/null &
-}
+# alias play-send-primewire-tv='primewireLink=$(primewire $@ | grep -i openload | head -1 | xargs youtube-dl -g) && curl -sI "http://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_TV&message=play=:=$primewireLink"'
 
-z-ssh-aws-one() {
-        ssh -i $SSH_AWS_ONE_KEY $SSH_AWS_ONE_IP
-}
+## Send any online video to tv by youtube-dl
+alias play-send-tv='curl -sI "http://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_TV&message=play=:="$(youtube-dl -g $@)"'
 
-z-rdp-college() {
-        rdesktop \
-        -g 1920x1040 \
-        "$COLLEGE_RDP_WEBSITE" \
-        -u "$COLLEGE_USERNAME" \
-        -p $COLLEGE_PASSWORD \
-        -P -z 2>/dev/null &
-}
-#}}}
-#{{{ fix internet (reload) "arch-way"
-fix-network() {
-sudo ip link set $NICCARD down
-sudo systemctl restart netctl@$ESSID.service
-}
-#}}}
-#{{{ Fixing Xresources on Xterm
-xrdb() {
-	xrdb ~/.Xresources
-}
-#}}}
-#{{{ Youtube-dl Aliases
-#{{{List Youtube-dl support link
-	alias z-youtubedl-ls='youtube-dl --list-extractors'
-	z-down-safaribooks(){
-	youtube-dl -u $SAFARI_EMAIL -p $SAFARI_PASSWORD -o '%(playlist_index)s. %(title)s.%(ext)s' $@
-	}
-#}}}
-#{{{ Download Safaribooks
-    z-down-safaribooks(){
-    youtube-dl -u $SAFARI_EMAIL -p $SAFARI_PASSWORD -o '%(playlist_index)s. %(title)s.%(ext)s' $@
-    }
-#}}}
-#}}}
 #{{{ create dummy webcam
 # ffmpeg -re -i $1 -f v4l2 /dev/video2D
 #}}}
@@ -347,6 +182,13 @@ xrdb() {
 #fi
 #}}}
 
-# note fix this.
-# dejsonlz4 ~/.mozilla/firefox/$FIREFOX_UID/bookmarkbackups/$(ls ~/.mozilla/firefox/$FIREFOX_UID/bookmarkbackups/ | tail -1) | grep -Eo "(http|https)://[\da-z./?A-Z0-9\D=_-]*"
-#alias ar=$(arecord)
+# Is website down  
+z-down4me() {
+checker=$(curl -s "isup.me/$1" | grep 'class="domain"' | grep -o ".*<a" | sed 's/  //g' | sed 's/<a//g')
+if [ "$checker" != "" ]
+then
+echo "$checker"
+else
+echo 'Internet is down'
+fi
+}

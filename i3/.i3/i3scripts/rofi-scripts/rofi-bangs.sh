@@ -3,7 +3,6 @@
 declare -A LABELS
 declare -A COMMANDS
 
-
 BASE_PWD='$HOME/.i3/i3scripts/rofi-scripts/'
 
 ###
@@ -58,8 +57,7 @@ function print_menu()
 function start()
 {
     # print_menu | rofi -dmenu -p "?=>" 
-    print_menu | sort | rofi -dmenu -mesg ">>> launch your collection of rofi scripts" -i -p "rofi-bangs: "
-
+    print_menu | sort | rofi -dmenu -l 10 -mesg ">>> launch your rofi scripts" -i -p "rofi-bangs: "
 }
 
 

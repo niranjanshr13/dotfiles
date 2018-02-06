@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # https://github.com/onespaceman/menu-calc
 # Calculator for use with rofi/dmenu(2)

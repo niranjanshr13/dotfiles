@@ -13,6 +13,8 @@ function gen_webpage()
 # a simple way, might need firefox to create a copy / a backup 1 day.
 # using that backup.
 #dejsonlz4 ~/.mozilla/firefox/$FIREFOX_UID/bookmarkbackups/$(ls ~/.mozilla/firefox/$FIREFOX_UID/bookmarkbackups/ | tail -1) | sed 's/,/\n/g' | grep uri | grep -v iconuri |  sed 's/"uri":"//g' | sed 's/"}//g'
+
+# not only it finds bookmark, but also history
 sqlite3 ~/.mozilla/firefox/$FIREFOX_UID/places.sqlite 'SELECT url FROM moz_places'
 
 }
