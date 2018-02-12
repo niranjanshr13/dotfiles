@@ -1,12 +1,14 @@
 #!/usr/bin/python3
-import json
 import requests
 import sys
 
-baseUrl = 'https://min-api.cryptocompare.com/data/price?fsym=' 
-coin = str(sys.argv[1]).upper()
-r = requests.get(baseUrl + coin + '&tsyms=USD').text
-j = json.loads(r)
-#rounding = round(j['USD'],3)
-rounding = j['USD']
-print('$' + str(rounding))
+def crypto(coin):
+    baseUrl = 'https://min-api.cryptocompare.com/data/price?fsym=' 
+    coin = str(coin).upper()
+    r = requests.get(baseUrl + coin + '&tsyms=USD').json()
+    rounding = round(r['USD'],3)
+    return str(rounding)
+
+if __name__ == '__main__':
+    final = crypto(sys.argv[1])
+    print('$ ' + final)

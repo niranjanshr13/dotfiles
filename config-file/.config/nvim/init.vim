@@ -59,6 +59,7 @@ set termguicolors
 " }}}
 filetype plugin indent on
 set clipboard=unnamed
+set laststatus=0
 set encoding=utf-8
 set foldmethod=syntax
 set foldmethod=marker
@@ -137,6 +138,7 @@ command Wq wq!
 nnoremap <leader>t gt
 nnoremap <leader>qq <ESC>:q!
 nnoremap <leader>wq :wq
+nnoremap <leader>b <ESC>:exec '!'.getline('.')
 "}}}
 nnoremap <space><space> <ESC>/<++><Enter>"_c4l
 "}}}

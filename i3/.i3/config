@@ -2,16 +2,11 @@
 # =========
 # testing
 #	bindsym button3 kill
-
 #{{{ key binding helper.
 # 	xmodmap -pke
 #	xev
 #}}}
-
-# {{{ hiding the title bar
-for_window [class="^.*"] border pixel 1
-# }}}
-
+for_window [class="^.*"] border pixel 0	# hide title bar
 client.focused #000000 #000000 #fdf6e3 #859900
 
 #{{{ Color Set
@@ -38,55 +33,22 @@ set $text-color #f3f4f5
 set $mod Mod4
 set $ALT Mod1
 #}}} 
-#{{{ Workspace Variable
-set $workspace1 "1"
-set $workspace2 "2"
-set $workspace3 "3"
-set $workspace4 "4"
-set $workspace5 "5"
-set $workspace6 "6"
-set $workspace7 "7"
-set $workspace8 "8"
-set $workspace9 "9"
-set $workspace10 "10"
-#{{{ Old Workstation variable
-#set $workspace1 "1:"
-#set $workspace2 "2:"
-#set $workspace3 "3:"
-#set $workspace4 "4:"
-#set $workspace5 "5:"
-#set $workspace6 "6:"
-#set $workspace7 "7:"
-#set $workspace8 "8:"
-#set $workspace9 "9:"
-#set $workspace10 "10:"
-#}}}
-#}}} 
 #{{{ Keybinding System
 #kill focused window
-bindsym $ALT+F4 exec i3 kill
-#sourced i3
-bindsym $mod+Shift+r exec i3 restart
-#lost phone indicater
-#bindsym $mod+Shift+l exec $HOME/.python-env/pyicloud/bin/python3 $HOME/.i3/i3scripts/icloud_play_sound.py && i3-nagbar -t warning -m "Finding Phone"
-#screenshot screen
-bindsym Print exec scrot && i3-nagbar -t warning -m 'Screenshot'
+bindsym $ALT+F4				exec i3 kill
+bindsym $mod+Shift+r		exec i3 restart &&		echo #sourced i3
+bindsym Print 				exec scrot && i3-nagbar -t warning -m 'Screenshot'
+bindsym F7 exec "$(xinput list-props $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') | grep -qE \\"Device Enabled.*1$\\" && xinput disable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') || xinput enable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') && i3 restart)" && echo #mouse toggle (disable and enable mode)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Logoff the user' -b 'Yes, exit i3' 'i3-msg exit'" && echo	#logs you out
 # bind to calculator
 #bindsym $mod+d exec $HOME/.i3/i3scripts/calc.sh
 # bind with crypto
 #bindsym $mod+a exec $HOME/.i3/i3scripts/rofi_crypto.sh
-#mouse toggle (disable and enable mode)
-bindsym F7 exec "$(xinput list-props $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') | grep -qE \\"Device Enabled.*1$\\" && xinput disable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') || xinput enable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') && i3 restart)"
+#lost phone indicater
+#bindsym $mod+Shift+l exec $HOME/.python-env/pyicloud/bin/python3 $HOME/.i3/i3scripts/icloud_play_sound.py && i3-nagbar -t warning -m "Finding Phone"
 #bindsym $mod+Escape exec "$(xinput list-props $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') | grep -qE \\"Device Enabled.*1$\\" && xinput disable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') || xinput enable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') && i3 restart)"
-#}}}
-#{{{ logs you out
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Logoff the user' -b 'Yes, exit i3' 'i3-msg exit'"
-#}}}
-#{{{ i3lock
-bindsym $mod+q exec i3lock -c 000000
-bindsym F1 exec i3lock -c 000000
-	#bindsym $mod+q exec i3lock -i ~/.i3/i3_wallpaper.png
-bindsym $mod+m exec mpv http://opus.stillstream.fm:8000/stillstream > /dev/null 2&>1
+bindsym $mod+q exec i3lock -c 000000	&& echo		#i3lock
+bindsym F1 exec i3lock -c 000000		&& echo		#i3lock
 #}}}
 #{{{ Keybinding fn keys
 #{{{ Pulse Audio controls
@@ -101,7 +63,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%
 #bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
 bindsym XF86MonBrightnessUp exec sudo chmod a+rw /sys/class/backlight/intel_backlight/brightness && echo 700 > /sys/class/backlight/intel_backlight/brightness # increase screen brightness
 bindsym XF86MonBrightnessDown exec sudo chmod a+rw /sys/class/backlight/intel_backlight/brightness && echo 1 > /sys/class/backlight/intel_backlight/brightness # increase screen brightness
-bindsym $mod+F4 exec redshift # nightmode
+# nightmode
+bindsym $mod+F4 exec "pkill redshift || redshift"
 #}}}
 #}}}
 #{{{ Custom Keybinding Shortcut
@@ -125,34 +88,12 @@ bindsym $mod+shift+s exec "rofi -show combi -combi-modi window,drun -switchers c
 	#bindsym Control+question exec bindsym $mod+0 workspace $workspace10 
 bindsym Control+$mod+Shift+b exec bindsym firefox
 #}}}}
-#{{{ Keybinding to autoremote
-# ========================
-bindsym Control+Shift+question exec "z-notify-autoremote.sh"
-	#bindsym Control+Shift+space exec "z-ar-oneplus-music-stop"
-	#bindsym Control+Shift+braceleft exec "z-ar-oneplus-music-previous"
-	#bindsym Control+Shift+braceright exec "z-ar-oneplus-music-next"
-	#bindsym Control+Shift+plus exec "z-ar-oneplus-volume-up"
-
-# https://i3wm.org/docs/userguide.html#line_continuation
-bindsym Control+Shift+space exec \
-"curl -sI \\"http://autoremotejoaomgcd.appspot.com/sendmessage?key=\\"$AUTOREMOTE_ONEPLUS_ONE_KEY\\"&message=music_stop\\" \
-&& notify-send \\"Music Play/Pause Signal Sended\\""
-
-bindsym Control+Shift+braceleft exec \
-"curl -sI \\"http://autoremotejoaomgcd.appspot.com/sendmessage?key=\\"$AUTOREMOTE_ONEPLUS_ONE_KEY\\"&message=music_previous\\" \
-&& notify-send \\"Music Previous Signal Sended\\""
-
-bindsym Control+Shift+braceright exec \
-"curl -sI \\"http://autoremotejoaomgcd.appspot.com/sendmessage?key=\\"$AUTOREMOTE_ONEPLUS_ONE_KEY\\"&message=music_play\\" \
-&& notify-send \\"Music Next Signal Sended\\""
-#}}}
 #{{{ Keybinding Screen
 # change focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-
 # move focused window
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
@@ -164,12 +105,23 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 # toggle tiling / floating
 bindsym $mod+$ALT+space floating toggle 
-
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
-
 #}}}
 #{{{ keybinding workspace
+
+# Workspace Variable
+set $workspace1 "1"
+set $workspace2 "2"
+set $workspace3 "3"
+set $workspace4 "4"
+set $workspace5 "5"
+set $workspace6 "6"
+set $workspace7 "7"
+set $workspace8 "8"
+set $workspace9 "9"
+set $workspace0 "10"
+
 # switiching workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
@@ -180,7 +132,7 @@ bindsym $mod+6 workspace $workspace6
 bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace10
+bindsym $mod+0 workspace $workspace0
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
@@ -192,42 +144,38 @@ bindsym $mod+Shift+6 move container to workspace $workspace6
 bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $mod+Shift+0 move container to workspace $workspace0
 #}}}
 #{{{ Assign Program
-#assign [class="chromium-browser"] $workspace2
-#for_window [title="peerflix  -v -r"] move to workspace $workspace19
+#feh assigning all the feh, to float and stick the screen + alias mpv will resize to fit in corner.
 for_window [class="feh"] floating enable
-for_window [class="MPlayer"] floating enable
-#for_window [title="ping 8.8.8.8"] move to workspace $workspace9
+for_window [class="feh"] sticky enable
+for_window [class="feh"] move absolute position 0 px 600 px
+
+#mpv assigning all the mpv, to float and stick the screen + alias mpv will resize to fit in corner.
+for_window [class="mpv"] floating enable
+for_window [class="mpv"] sticky enable
 #}}}
 #{{{ resize window
 bindsym $mod+r mode "resize"
 mode "resize" {
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 1 px or 1 ppt
-        bindsym Down resize grow height 1 px or 1 ppt
-        bindsym Up resize shrink height 1 px or 1 ppt
-        bindsym Right resize grow width 1 px or 1 ppt
+        bindsym Left resize grow width 2 px or 2 ppt
+        #bindsym Left resize shrink width 2 px or 2 ppt
+        bindsym Down resize shrink height 2 px or 2 ppt
+        #bindsym Down resize grow height 2 px or 2 ppt
+        bindsym Up resize grow height 2 px or 2 ppt
+        #bindsym Up resize shrink height 2 px or 2 ppt
+        bindsym Right resize shrink width 2 px or 2 ppt
+        #bindsym Right resize grow width 2 px or 2 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 
-#bar {
-##	status_command i3status -c ~/.i3/i3status.conf
-#	status_command i3blocks -c ~/.i3/newi3blocks.conf
-#	position top
-#	mode hide
-#    hidden_state hide
-#    tray_output none #or whatever
-#    modifier Mod4 #your empty mod key
-#	font pango: Monospace 
-#}
 # Statusbar
 bar {
-#	status_command i3status -c ~/.i3/i3status.conf
 	status_command i3blocks -c ~/.i3/i3blocks.conf
 	position top
 	mode dock
@@ -244,16 +192,15 @@ colors {
      }
 }
 #}}}
-#{{{ i3 auto Startup Application
-#exec --no-startup-id nm-applet
+#{{{ Startup Application
 exec --no-startup-id xsetroot -solid "#000000" 
 exec xrdb ~/.Xresources
 #}}}
-#{{{Font
-# I don't use it anymore Font Stuff 
-#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-#font pango:System San Francisco Display 10
-#}}}
+#{{{ scratchpad binding
+bindsym $mod+w move container to scratchpad
+bindsym $mod+shift+w scratchpad show
+#}}} 
+
 #{{{ I don't Use it anymore
 # Not Useful (So I dont use it)
 # =============================
@@ -285,4 +232,30 @@ exec xrdb ~/.Xresources
 
 # reload the configuration file
 # bindsym $mod+Shift+c reload
+#{{{Font
+# I don't use it anymore Font Stuff 
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font pango:System San Francisco Display 10
+#}}}
+#{{{ Keybinding to autoremote
+# ========================
+#bindsym Control+Shift+question exec "z-notify-autoremote.sh"
+#	#bindsym Control+Shift+space exec "z-ar-oneplus-music-stop"
+#	#bindsym Control+Shift+braceleft exec "z-ar-oneplus-music-previous"
+#	#bindsym Control+Shift+braceright exec "z-ar-oneplus-music-next"
+#	#bindsym Control+Shift+plus exec "z-ar-oneplus-volume-up"
+#
+## https://i3wm.org/docs/userguide.html#line_continuation
+#bindsym Control+Shift+space exec \
+#"curl -sI \\"http://autoremotejoaomgcd.appspot.com/sendmessage?key=\\"$AUTOREMOTE_ONEPLUS_ONE_KEY\\"&message=music_stop\\" \
+#&& notify-send \\"Music Play/Pause Signal Sended\\""
+#
+#bindsym Control+Shift+braceleft exec \
+#"curl -sI \\"http://autoremotejoaomgcd.appspot.com/sendmessage?key=\\"$AUTOREMOTE_ONEPLUS_ONE_KEY\\"&message=music_previous\\" \
+#&& notify-send \\"Music Previous Signal Sended\\""
+#
+#bindsym Control+Shift+braceright exec \
+#"curl -sI \\"http://autoremotejoaomgcd.appspot.com/sendmessage?key=\\"$AUTOREMOTE_ONEPLUS_ONE_KEY\\"&message=music_play\\" \
+#&& notify-send \\"Music Next Signal Sended\\""
+#}}}
 #}}}

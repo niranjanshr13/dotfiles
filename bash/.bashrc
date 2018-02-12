@@ -12,8 +12,8 @@ fi
 export BROWSER='firefox'
 export MYHOME='/home/z'
 export EDITOR='nvim'
-export PLAYER='mpv'
-export IMAGE='feh'
+export PLAYER='mpv --geometry=-0-0 --autofit=30%'
+export IMAGE='feh --no-menus -q -g 640x480 $@ &'
 #}}}
 #{{{ Aliases
 ## changing dir.
@@ -25,9 +25,9 @@ alias cm='cd /mnt/'
 
 ## application
 alias chrome='google-chrome > /dev/null'						
-alias eog='feh --scale-down'						
+alias eog=$IMAGE						
 alias f='firefox'
-alias feh='feh --scale-down'							
+alias feh=$IMAGE							
 alias ff='firefox'				
 alias fgrep='fgrep --color=auto'
 alias gimp='pinta'
@@ -38,8 +38,10 @@ alias git-push='git push'
 alias git-stat='git status'
 alias m='mutt'
 alias gm='offlineimap'
-alias mplayer='mpv'
+alias mplayer=$PLAYER
+alias mpv=$PLAYER
 alias n='nload -u M'
+alias nc='ncdu'
 alias nano='$EDITOR'                                                                            
 alias nload='nload -u M'
 alias nn='$EDITOR'
@@ -100,6 +102,7 @@ alias cfg-vim-snippet-py='$EDITOR $MYHOME/.vim/bundle/vim-snippets/snippets/pyth
 alias cfg-nvim='$EDITOR $MYHOME/.config/nvim/init.vim'
 alias cfg-i3='$EDITOR $MYHOME/.i3/config'
 alias cfg-ranger='$EDITOR $MYHOME/.config/ranger/rc.conf'
+alias cfg-ranger-ext='$EDITOR $MYHOME/.config/ranger/rifle.conf'
 alias cfg-crontab='$EDITOR /etc/crontab'
 alias cfg-rclocal='$EDITOR /etc/rc.local'
 alias cfg-Xresources='$EDITOR ~/.Xresources'
@@ -162,7 +165,7 @@ alias sms-2-phone='z-smtp.gmail.py $PHONE_EMAIL_USER $PHONE_EMAIL_PASS $PHONE_EM
 ## Example:
 	# primewire Fargo --season 1 --episode 1
 	# primewire John Wick
-alias play-primewire='primewire $@ | grep -i openload | head -1  | xargs youtube-dl -g | xargs mpv -fs'
+alias play-primewire="primewire $@ | grep -i openload | head -1  | xargs youtube-dl -g | xargs $PLAYER -fs"
 #}}}
 #{{{ Send primewire to tv from autoremote
 # alias play-send-primewire-tv='primewireLink=$(primewire $@ | grep -i openload | head -1 | xargs youtube-dl -g) && curl -sI "http://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_TV&message=play=:=$primewireLink"'
@@ -192,3 +195,5 @@ else
 echo 'Internet is down'
 fi
 }
+
+alias x=xterm

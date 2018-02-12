@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-
 '''
 what is this:
     this is script that take screenshot of the of x second and create a phash and rename that video to phash.
@@ -28,8 +27,6 @@ for file in files:
         os.system('mv ' + file + ' ' + str(imageValue) + '.mp4')
         os.system('rm ' + file + '.jpg')
         print(imageValue)
-
-
 '''
 
 before steps:
