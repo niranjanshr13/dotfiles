@@ -70,6 +70,7 @@ bindsym $mod+F4 exec "pkill redshift || redshift"
 #{{{ Custom Keybinding Shortcut
 bindsym $mod+question exec z-notify-master.sh # master helper
 bindsym $mod+t exec xterm
+#bindsym $ALT+f [class="Firefox"] focus
 bindsym $mod+Return exec xterm
 #	bindsym $mod+t exec xfce4-terminal
 #	bindsym $mod+Return exec xfce4-terminal
@@ -86,7 +87,6 @@ bindsym $mod+s exec $HOME/.i3/i3scripts/rofi-scripts/rofi-bangs.sh
 bindsym $mod+shift+s exec "rofi -show combi -combi-modi window,drun -switchers combi"
 	#bindsym $mod+Shift+f exec feh $(xclip -o)
 	#bindsym Control+question exec bindsym $mod+0 workspace $workspace10 
-bindsym Control+$mod+Shift+b exec bindsym firefox
 #}}}}
 #{{{ Keybinding Screen
 # change focus

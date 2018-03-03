@@ -11,4 +11,4 @@ def crypto(coin):
 
 if __name__ == '__main__':
     final = crypto(sys.argv[1])
-    print('$ ' + final)
+    print(final)

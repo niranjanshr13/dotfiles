@@ -36,13 +36,17 @@ alias git-add='git add'
 alias git-commit='git commit'
 alias git-push='git push'
 alias git-stat='git status'
+alias top='htop'
+alias h='htop'
 alias m='mutt'
-alias gm='offlineimap'
+alias gm='offlineimap && mutt'
 alias mplayer=$PLAYER
 alias mpv=$PLAYER
+alias mpg=$PLAYER
+alias mp3=$PLAYER
 alias n='nload -u M'
 alias nc='ncdu'
-alias nano='$EDITOR'                                                                            
+alias nano='$EDITOR'
 alias nload='nload -u M'
 alias nn='$EDITOR'
 alias py='python3'
@@ -71,6 +75,8 @@ alias ffmpeg-extract-one-frame='ffmpeg -i $1 -vf "select=not(mod(n\,10))" -vsync
 #alias ffmpeg_comb_vid_img='ffmpeg -loop 1 -i $1 -i $2 -shortest -c:v libx264 -c:a copy $3'
 
 ## other stuff
+alias shutdown='shutdown now'
+alias s='sync'
 alias c='clear'
 alias cls='clear'
 alias csl='clear'
@@ -96,6 +102,8 @@ alias network-fix='sudo ip link set $NICCARD down && sudo systemctl restart netc
 
 ## config file.
 alias cfg-bash='$EDITOR ~/.bashrc && source ~/.bashrc'
+alias cfg-mutt='$EDITOR ~/.muttrc'
+alias cfg-offlineimap='$EDITOR ~/.offlineimaprc'
 alias cfg-status='$EDITOR $MYHOME/.i3/i3block.conf'
 alias cfg-hist='$EDITOR ~/.zsh_history'
 alias cfg-vim-snippet-py='$EDITOR $MYHOME/.vim/bundle/vim-snippets/snippets/python.snippets'
@@ -134,6 +142,7 @@ alias dock-stop-rm='docker rm $(docker ps -qa --no-trunc --filter "status=exited
 alias dock-x11-reload='export DISPLAY=":0.0" && xhost +$USER && xhost +' ##  if X11 apps doesn't work in docker.
 alias dock-selenium_ffox='docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:rw niranjanshr13/selenium_firefox /bin/bash'
 alias dock-selenium_pantomjs='docker run -it niranjanshr13/selenium_phantomjs /bin/bash'
+alias dock-facebook-messenger='docker run -it niranjanshr13/selenium_phantomjs /bin/bash'
 alias dock-jdownloader='docker run -d --name jdownloader-headless -v /config/jd2:/opt/JDownloader/cfg -v /home/user/Downloads:/root/Downloads plusminus/jdownloader2-headless'
 alias dock-python3='docker run -it --rm python:3.3.6-slim /bin/bash'
 alias dock-pyautogui='docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix niranjanshr13/python3_pyautogui /bin/bash'
