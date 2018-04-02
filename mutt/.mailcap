@@ -1,0 +1,6 @@
+image/jpg; feh %s;
+image/jpeg; feh %s;
+application/pdf; firefox %s;
+video/quicktime; mpv %s
+video/mp4; mpv %s;
+image/png; feh %s;

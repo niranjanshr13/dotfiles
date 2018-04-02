@@ -15,11 +15,10 @@ set runtimepath+=~/.vim/bundle/neobundle.vim/
 
 " Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
-
 " Let NeoBundle manage NeoBundle
 " Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'majutsushi/tagbar'
+"NeoBundleFetch 'Shougo/neobundle.vim'
+"NeoBundle 'majutsushi/tagbar'
 "{{{ ..................... Function plugin 'majutsushi/tagbar'
 let g:tagbar_type_markdown = {
     \ 'ctagstype' : 'markdown',
@@ -45,7 +44,6 @@ let g:pymode_rope = 0
 " My Bundles here:
 " Refer to |:NeoBundle-examples|.
 " Note: You don't set neobundle setting in .gvimrc!
-
 call neobundle#end()
 "set rtp+=~/.config/nvim/Vundle.vim
 "call vundle#begin()
@@ -107,6 +105,8 @@ set relativenumber
 set showcmd
 set smartcase
 set tabstop=4
+set shiftwidth=2
+set expandtab
     
 		
 set undolevels=100
@@ -303,24 +303,22 @@ endfunction
 "noremap <Down> <NOP>
 "noremap <Left> <NOP>
 "noremap <Right> <NOP>
-"nnoremap <C-m> <NOP>
+nnoremap <C-m> <NOP>
 nnoremap <BS> <NOP>
 "}}}
 ""Normal Mode
 nnoremap ; :
-"nnoremap : ;
+"nnoremap : ; "no need because logic"
 "{{{ Ex Mode
-command Q q!
 command Math call Math()
+command Q q!
 command Wq wq!
 "}}}
 "{{{ Leader Mode
 nnoremap <leader>t gt
-"nnoremap <leader>qq <ESC>:q!
 nnoremap <leader>q <ESC>:q!
-"nnoremap <leader>wq :wq
 nnoremap <leader>w :wq
-nnoremap <leader>r <ESC>:exec '!'.getline('.')
+nnoremap <leader>. <ESC>:exec '!'.getline('.')
 "}}}
 nnoremap <space><space> <ESC>/<++><Enter>"_c4l
 "}}}
@@ -383,6 +381,8 @@ nmap ? <ESC>:help
 "" trailing tab, spaces
 		exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 		set list
+		autocmd FileType python %s/\s\+$//e
+
 
 augroup vim_ext "{{{
 		autocmd!
@@ -406,35 +406,11 @@ augroup python_autocmd "{{{
 		"autocmd FileType python nnoremap <buffer> <localleader>imr iimport requests<C-m>r = requests.get('<++>').text<ESC>0
 		autocmd FileType python nnoremap <buffer> <localleader>ims Iimport sys<C-m><ESC>
 		autocmd FileType python nnoremap <buffer> <localleader>imt <ESC>mtggoimport time<ESC>'titime.sleep(<++>)<ESC>0
-		autocmd FileType python nnoremap <buffer> <localleader>o I <++> = open('<++>','<++>')<ESC>0
-		autocmd FileType python vnoremap <buffer> <localleader>so :sort<C-m>
+		autocmd FileType python nnoremap <buffer> <localleader>o I= open('<++>','<++>')<C-m>f = f.read()<ESC>0ki
+		"autocmd FileType python vnoremap <buffer> <localleader>so :sort<C-m>
 		autocmd FileType python nnoremap <buffer> <localleader>9 a(
 		autocmd FileType python nnoremap <buffer> <localleader>0 a)
 augroup END "}}}
-
-
-" auto she-bang
-"autocmd FileType python :call SheBang()
-"function! SheBang()
-"		let firstLine = getline(1)
-"		if(firstLine == "#!/usr/bin/python3") || (firstLine == "#!/usr/bin/python2")
-"				"silent !echo SheBang Already Implemented.
-"		else
-"				exe "normal! ggO#!/usr/bin/python3\<C-m>"
-"		endif
-"endfunction
-"
-"autocmd BufNewFile *.sh :call SheBangx()
-"function! SheBangx()
-"    if(getline(1) == "#!/bin/bash")
-"    else
-"		normal ggO#!/bin/bash<C-m>
-"    endif
-"endfunction
-
-
-
-
 
 " all in one SheBang
 autocmd BufNewFile *.sh :call SheBangy("bash")
@@ -446,7 +422,7 @@ function! SheBangy(filetype)
 		if(firstLine == "#!/usr/bin/python3") || (firstLine == "#!/usr/bin/python2")
 				"silent !echo SheBang Already Implemented.
 		else
-				exe "normal! ggO#!/usr/bin/python3\<C-m>"
+				exec "normal! ggO#!/usr/bin/python3\<C-m>"
 		endif
     endif
 
@@ -457,24 +433,3 @@ function! SheBangy(filetype)
 		endif
     endif
 endfunction
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"function! SheBang()
-"    if(line(".") == 1)
-"		echo 'rnu on'
-"    else
-"		echo 'rnu off'
-"    endif
-"endfunction

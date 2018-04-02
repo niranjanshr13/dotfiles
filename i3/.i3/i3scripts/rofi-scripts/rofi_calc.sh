@@ -12,12 +12,7 @@ usage() {
     = (4+2)/(4+3)
     = 4^2
     = sqrt(4)
-    = c(2)
-
-    The answer can be used for further calculations
-
-    The expression may need quotation marks if
-    launched outside of Rofi/dmenu"
+    = c(2)"
     exit
 }
 
