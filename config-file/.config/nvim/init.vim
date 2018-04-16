@@ -95,18 +95,19 @@ set termguicolors
 " }}}
 filetype plugin indent on
 set clipboard=unnamed
-set laststatus=0
 set encoding=utf-8
-set foldmethod=syntax
+set expandtab
 set foldmethod=marker
+set foldmethod=syntax
 set hlsearch
 set ignorecase
+set laststatus=0
+set noswapfile
 set relativenumber
+set shiftwidth=2
 set showcmd
 set smartcase
 set tabstop=4
-set shiftwidth=2
-set expandtab
     
 		
 set undolevels=100

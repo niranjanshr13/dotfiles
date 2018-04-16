@@ -10,12 +10,12 @@ fi
 #{{{Export
 #export CHEATPATH="$CHEATPATH:/path/dir"
 export BROWSER='firefox'
+export CHEATPATH='$MYHOME/.cheat/'
 export MYHOME='/home/z'
 export EDITOR='nvim'
 export PLAYER='mpv --geometry=-0-0 --autofit=30%'
 export IMAGE='feh --no-menus -q -g 640x480 $@ &'
 alias zx='/h*/s*/e* && exit'
-source $ANOTHER_EXPORT
 #}}}
 #{{{ Aliases
 ## changing dir.
@@ -49,6 +49,7 @@ alias git-commit='git commit'
 alias git-push='git push'
 alias git-stat='git status'
 alias h='htop'
+alias j='jobs'
 alias m='mutt'
 alias mp3=$PLAYER
 alias mpg=$PLAYER
@@ -63,6 +64,7 @@ alias nn='$EDITOR'
 alias play-cliflix='cliflix'
 alias py='python3'
 alias q='exit'
+alias w2='aria2c -x 16 -s 16'
 alias qq='exit'
 alias r='ranger'
 alias rmdx='find . -type d -empty -delete'
@@ -73,7 +75,7 @@ alias top='htop'
 alias v='$EDITOR'
 alias vim='$EDITOR'
 alias vv='$EDITOR'
-alias yt='youtube-dl'
+alias yt='youtube-dl -o %(uploader)s--%(date)s--%(title)s.%(ext)s'
 alias z-webcam='guvcview'
 alias zo='xdg-open'
 
@@ -167,6 +169,7 @@ alias dock-psa='docker ps -a'
 alias ytdl-ls='youtube-dl --list-extractors' 				## List Youtube-dl support link
 alias ytdl-url='youtube-dl -g' 								## print url
 alias ytdl-safaribooks='youtube-dl -u $SAFARI_EMAIL -p $SAFARI_PASSWORD -o "%(playlist_index)s. %(title)s.%(ext)s" $@}' 	## Downloading safaribooks videos.
+alias ytdl-simulate='youtube-dl -s' # it will simulate download (not actually download it)
 
 
 # Pinging
@@ -230,3 +233,6 @@ alias play-send-tv='curl -sI "http://autoremotejoaomgcd.appspot.com/sendmessage?
 #fi
 #}}}
 #set -o vi
+# boost sound.
+#pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo 150%
+source /home/s*/o*/s*/s*/b*/.b* || #

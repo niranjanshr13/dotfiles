@@ -94,7 +94,7 @@ arch-chroot /mnt /bin/bash -c 'python3 /tmp/get-pip.py'
 
 # installing cheat
 arch-chroot /mnt /bin/bash -c 'sudo pip3 install cheat'
-rm $(ls /mnt/usr/local/lib/python3.5/dist-packages/cheat/cheatsheets/ | grep -v '__')
+\rm $(ls /mnt/usr/local/lib/python3.6/dist-packages/cheat/cheatsheets/ | grep -v '__')
 
 sudo pip3 install \
 #   qutebrowser \

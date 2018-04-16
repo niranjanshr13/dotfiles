@@ -35,9 +35,9 @@ set $ALT Mod1
 #}}} 
 #{{{ Keybinding System
 #kill focused window
-bindsym $ALT+F4				exec i3 kill
-bindsym $mod+Shift+r		exec i3 restart &&		echo #sourced i3
-bindsym Print 				exec scrot && i3-nagbar -t warning -m 'Screenshot'
+bindsym $ALT+F4 exec i3 kill
+bindsym $mod+Shift+r exec i3 restart && echo #sourced i3
+bindsym Print exec scrot && i3-nagbar -t warning -m 'Screenshot'
 bindsym F7 exec "$(xinput list-props $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') | grep -qE \\"Device Enabled.*1$\\" && xinput disable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') || xinput enable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') && i3 restart)" && echo #mouse toggle (disable and enable mode)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Logoff the user' -b 'Yes, exit i3' 'i3-msg exit'" && echo	#logs you out
 # bind to calculator
@@ -80,7 +80,8 @@ bindsym $mod+Return exec xterm
 #	bindsym $mod+f exec chromium-browser "facebook.com" &
 #bindsym $mod+f exec /home/z/.i3/i3scripts/rofi_firefox.sh & 
 #bindsym $mod+c exec chromium-browser &
-#bindsym $mod+y exec mpv $(youtube-dl -g $(xclip -o))
+bindsym $mod+p exec $PLAYER $(xclip -o)
+#bindsym $mod+y exec $PLAYER $(youtube-dl -g $(xclip -o))
 #bindsym $mod+s exec dmenu_run
 #bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combi"
 bindsym $mod+s exec $HOME/.i3/i3scripts/rofi-scripts/rofi-bangs.sh

@@ -8,7 +8,7 @@
     "favorites": ["mpv"] 
   },
   "torrents": { 
-    "limit": 30,
+    "limit": 50,
     "details": { 
       "seeders": true,
       "leechers": true,
@@ -26,7 +26,6 @@
       "downloads": true
     },
     "languages": { 
-      "available": ["Afrikaans", "..."], 
       "favorites": ["English", "..."] 
     },
     "opensubtitles": { 

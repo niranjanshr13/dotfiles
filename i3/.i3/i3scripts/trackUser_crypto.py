@@ -10,7 +10,7 @@ def checkBalance(coinName):
     return bal
 
 def scrapedData(urlId):
-    r = requests.get('https://www.cryptocompare.com/portfolio-public/?id=' + sys.argv[y]).text
+    r = requests.get('https://www.cryptocompare.com/portfolio-public/?id=' + urlId).text
     for x in r.split('\n'):
         if 'portfolioManager.setPortfolioData' in x:
             scraped = x.replace('  ','').replace('portfolioManager.setPortfolioData({"Data":','').split('Success')[0].replace(',"Response":"','')
@@ -19,8 +19,9 @@ def scrapedData(urlId):
 if __name__ == '__main__':
     symBalance = {}
     balance = 0
-    for y in range(1, len(sys.argv)):
-        scraped = scrapedData(y)
+    values = sys.argv[1].split(' ')
+    for value in values:
+        scraped = scrapedData(value)
         j = json.loads(scraped)
         totalCrypto = j[0]['Members']
         for x in range(len(totalCrypto)):

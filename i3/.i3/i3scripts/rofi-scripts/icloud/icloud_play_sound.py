@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 # this code is meant for me, it play sound even it is the silent mode. (find the phone)
 from os import environ
@@ -7,8 +7,8 @@ import argparse
 
 def firstTask():
     # variable's
-    userName = environ['ICLOUD_USERNAME']
-    passWord = environ['ICLOUD_PASSWORD']
+    userName = getenv('ICLOUD_USERNAME')
+    passWord = getenv('ICLOUD_PASSWORD')
     # login user.
     L = PyiCloudService(userName,passWord)
     # search devices.
