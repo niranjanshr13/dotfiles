@@ -89,7 +89,8 @@ call neobundle#end()
 "{{{ Basic Set
 " {{{ Color 
 "colorscheme pablo
-colorscheme northpole
+"colorscheme northpole
+colorscheme default
 " tmux color fix
 set termguicolors
 " }}}

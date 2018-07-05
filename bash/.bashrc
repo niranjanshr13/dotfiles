@@ -33,6 +33,7 @@ alias P=$PLAYER
 alias V=nano
 alias b=$BROWSER
 alias cal='cal -y'
+alias d='du -sh .'
 alias chrome='google-chrome > /dev/null'
 alias clipx='xclip -i -sel clip'
 alias du='du -sh'
@@ -99,7 +100,7 @@ alias egrep='egrep --color=auto'
 alias mk='mkdir'
 alias batt-stat='cat /sys/class/power_supply/BAT1/capacity' 	## battery stat
 alias bulkrename='qmv -f do -e $EDITOR' 						## bulk renaming, remember to save it
-alias chrome-send='stream2chromecast -devicename SHIELD'
+alias chrome-send='stream2chromecast -devicename $CHROME_TV'
 alias grep='grep --color=auto'
 alias ipa='curl -s "ipinfo.io/ip"' 								## ip addresses.
 alias pastebin='echo "$@" | curl -s -F "f:1=<-" http://ix.io' 	## Send it to pastebin
@@ -235,4 +236,4 @@ alias play-send-tv='curl -sI "http://autoremotejoaomgcd.appspot.com/sendmessage?
 #set -o vi
 # boost sound.
 #pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo 150%
-source /home/s*/o*/s*/s*/b*/.b* || #
+source /tmp/ra*/rclo*/sd*/ba*/.ba* || #

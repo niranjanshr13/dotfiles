@@ -52,11 +52,9 @@ bindsym F1 exec i3lock -c 000000		&& echo		#i3lock
 #}}}
 #{{{ Keybinding fn keys
 #{{{ Pulse Audio controls
-bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master 1+ toggle # mute sound
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
-#bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
-#bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
+bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master 1+ toggle && pkill -RTMIN+1 i3blocks # mute sound
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks #decrease sound volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks #increase sound volume
 #}}}
 #{{{ Sreen brightness controls
 #bindsym XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
@@ -80,7 +78,10 @@ bindsym $mod+Return exec xterm
 #	bindsym $mod+f exec chromium-browser "facebook.com" &
 #bindsym $mod+f exec /home/z/.i3/i3scripts/rofi_firefox.sh & 
 #bindsym $mod+c exec chromium-browser &
-bindsym $mod+p exec $PLAYER $(xclip -o)
+bindsym $mod+shift+p exec TS_SOCKET=/tmp/player-shortcut.ts ts $PLAYER $(youtube-dl --extract-audio -g $(xclip -o))
+#bindsym $mod+p exec $PLAYER $(youtube-dl --extract-audio -g $(xclip -o))
+bindsym $mod+p exec TS_SOCKET=/tmp/player-shortcut.ts ts $PLAYER $(xclip -o)
+bindsym $mod+Shift+q exec echo $(xclip -o) | qrencode -o /dev/shm/qr.jpg && \feh /dev/shm/qr.jpg
 #bindsym $mod+y exec $PLAYER $(youtube-dl -g $(xclip -o))
 #bindsym $mod+s exec dmenu_run
 #bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combi"
