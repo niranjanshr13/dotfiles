@@ -32,6 +32,10 @@ LABELS["clipboard"]=""
 COMMANDS["iphone"]="$BASE_PWD/icloud/rofi_icloud.sh"
 LABELS["iphone"]=""
 
+# ring iphone
+COMMANDS["pythonHistory"]="$BASE_PWD/rofi_python_history.sh"
+LABELS["pythonHistory"]=""
+
 # search local files
 #COMMANDS["locate"]="~/.scripts/rofi-scripts-collection/rofi-locate.sh"
 #LABELS["locate"]=""

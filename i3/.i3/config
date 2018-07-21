@@ -1,13 +1,18 @@
 # Variables
 # =========
 # testing
-#	bindsym button3 kill
+#   bindsym button3 kill
 #{{{ key binding helper.
-# 	xmodmap -pke
-#	xev
+#   xmodmap -pke
+#   xev
 #}}}
-for_window [class="^.*"] border pixel 0	# hide title bar
+for_window [class="^.*"] border pixel 0 #hide title bar
 client.focused #000000 #000000 #fdf6e3 #859900
+
+
+# variable's
+set $TS_SOCKET_PLAYER /dev/shm/player-shortcut.ts
+set $BRIGHTNESS_DIR /sys/class/backlight/intel_backlight/brightness
 
 #{{{ Color Set
 set $base00 #101218
@@ -28,27 +33,27 @@ set $base0E #c0b7f9
 set $base0F #fcc09e
 set $bg-color #000000
 set $text-color #f3f4f5
-#}}} 
+#}}}
 #{{{ Configuring button in Variable
 set $mod Mod4
 set $ALT Mod1
-#}}} 
+#}}}
 #{{{ Keybinding System
 #kill focused window
 bindsym $ALT+F4 exec i3 kill
-bindsym $mod+Shift+r exec i3 restart && echo #sourced i3
+bindsym $mod+shift+r exec i3 restart
 bindsym Print exec scrot && i3-nagbar -t warning -m 'Screenshot'
 bindsym F7 exec "$(xinput list-props $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') | grep -qE \\"Device Enabled.*1$\\" && xinput disable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') || xinput enable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') && i3 restart)" && echo #mouse toggle (disable and enable mode)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Logoff the user' -b 'Yes, exit i3' 'i3-msg exit'" && echo	#logs you out
+# logged out
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Logoff the user' -b 'Yes, exit i3' 'i3-msg exit'"
 # bind to calculator
 #bindsym $mod+d exec $HOME/.i3/i3scripts/calc.sh
 # bind with crypto
 #bindsym $mod+a exec $HOME/.i3/i3scripts/rofi_crypto.sh
 #lost phone indicater
 #bindsym $mod+Shift+l exec $HOME/.python-env/pyicloud/bin/python3 $HOME/.i3/i3scripts/icloud_play_sound.py && i3-nagbar -t warning -m "Finding Phone"
-#bindsym $mod+Escape exec "$(xinput list-props $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') | grep -qE \\"Device Enabled.*1$\\" && xinput disable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') || xinput enable $(xinput | grep Synaptics | grep -o '=..' | sed 's/=//g') && i3 restart)"
-bindsym $mod+q exec i3lock -c 000000	&& echo		#i3lock
-bindsym F1 exec i3lock -c 000000		&& echo		#i3lock
+bindsym $mod+q exec i3lock -c 000000 && echo #i3lock
+bindsym F1 exec i3lock -c 000000 && echo #i3lock
 #}}}
 #{{{ Keybinding fn keys
 #{{{ Pulse Audio controls
@@ -59,31 +64,23 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%
 #{{{ Sreen brightness controls
 #bindsym XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
 #bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
-bindsym XF86MonBrightnessUp exec sudo chmod a+rw /sys/class/backlight/intel_backlight/brightness && echo 700 > /sys/class/backlight/intel_backlight/brightness # increase screen brightness
-bindsym XF86MonBrightnessDown exec sudo chmod a+rw /sys/class/backlight/intel_backlight/brightness && echo 1 > /sys/class/backlight/intel_backlight/brightness # increase screen brightness
+bindsym XF86MonBrightnessUp exec sudo chmod a+rw $BRIGHTNESS_DIR && echo 700 > /sys/class/backlight/intel_backlight/brightness # increase screen brightness
+bindsym XF86MonBrightnessDown exec sudo chmod a+rw $BRIGHTNESS_DIR && echo 1 > /sys/class/backlight/intel_backlight/brightness # increase screen brightness
 # nightmode
 bindsym $mod+F4 exec "pkill redshift || redshift"
 #}}}
 #}}}
 #{{{ Custom Keybinding Shortcut
-bindsym $mod+question exec z-notify-master.sh # master helper
+#bindsym $mod+question exec z-notify-master.sh # master helper
 bindsym $mod+t exec xterm
-#bindsym $ALT+f [class="Firefox"] focus
 bindsym $mod+Return exec xterm
-#	bindsym $mod+t exec xfce4-terminal
-#	bindsym $mod+Return exec xfce4-terminal
-#bindsym $mod+g exec chromium-browser "github.com" &
-#bindsym $mod+Shift+c exec = &
-#bindsym $mod+f exec z-qt-facebook.py $FB_USER $FB_PASS
-#	bindsym $mod+f exec chromium-browser "facebook.com" &
+#bindsym $mod+f exec firefox
+#bindsym $mod+shift+f exec firefox $(xclip -selection c -o)
 #bindsym $mod+f exec /home/z/.i3/i3scripts/rofi_firefox.sh & 
-#bindsym $mod+c exec chromium-browser &
-bindsym $mod+shift+p exec TS_SOCKET=/tmp/player-shortcut.ts ts $PLAYER $(youtube-dl --extract-audio -g $(xclip -o))
-#bindsym $mod+p exec $PLAYER $(youtube-dl --extract-audio -g $(xclip -o))
-bindsym $mod+p exec TS_SOCKET=/tmp/player-shortcut.ts ts $PLAYER $(xclip -o)
-bindsym $mod+Shift+q exec echo $(xclip -o) | qrencode -o /dev/shm/qr.jpg && \feh /dev/shm/qr.jpg
-#bindsym $mod+y exec $PLAYER $(youtube-dl -g $(xclip -o))
-#bindsym $mod+s exec dmenu_run
+bindsym $mod+c exec chromium-browser &
+bindsym $mod+p exec TS_SOCKET=$TS_SOCKET_PLAYER ts -n $PLAYER `xclip -o` && pkill -RTMIN+2 i3blocks
+bindsym $mod+shift+p exec TS_SOCKET=$TS_SOCKET_PLAYER ts -n $PLAYER `youtube-dl --extract-audio -g `xclip -o`` && pkill -RTMIN+2 i3blocks
+bindsym $mod+Shift+q exec echo $(xclip -o) | qrencode -o /dev/shm/qr.jpg && \feh /dev/shm/qr.jpg && \rm /dev/shm/qr.jpg
 #bindsym $mod+s exec "rofi -show combi -combi-modi window,drun -switchers combi"
 bindsym $mod+s exec $HOME/.i3/i3scripts/rofi-scripts/rofi-bangs.sh
 bindsym $mod+shift+s exec "rofi -show combi -combi-modi window,drun -switchers combi"
@@ -103,10 +100,12 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 # split in horizontal
 bindsym $mod+h split h
+bindsym $mod+shift+\ split h
 # split in vertical
 bindsym $mod+v split v
+bindsym $mod+shift+- split v
 # toggle tiling / floating
-bindsym $mod+$ALT+space floating toggle 
+bindsym $mod+$ALT+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 #}}}
@@ -155,6 +154,7 @@ for_window [class="feh"] sticky enable
 for_window [class="feh"] move absolute position 0 px 600 px
 
 #mpv assigning all the mpv, to float and stick the screen + alias mpv will resize to fit in corner.
+no_focus [window_role="pop-up"]
 for_window [class="mpv"] floating enable
 for_window [class="mpv"] sticky enable
 #}}}
@@ -178,10 +178,10 @@ mode "resize" {
 
 # Statusbar
 bar {
-	status_command i3blocks -c ~/.i3/i3blocks.conf
-	position top
-	mode dock
-	font pango: Monospace 14
+  status_command i3blocks -c ~/.i3/i3blocks.conf
+  position top
+  mode dock
+  font pango: Monospace 16
 colors {
       #separator $base03
       #background $base01
@@ -203,11 +203,44 @@ bindsym $mod+w move container to scratchpad
 bindsym $mod+shift+w scratchpad show
 #}}} 
 
+#Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# binding mode's.
+bindsym $mod+f mode "firefox mode"
+mode "firefox mode" {
+    bindsym 9 exec firefox 9gag.com
+    bindsym a exec firefox amazon.com
+    bindsym b exec firefox $firefox_b
+    bindsym c exec firefox $firefox_c
+    bindsym d exec firefox $firefox_d
+    bindsym e exec firefox ebay.com
+    bindsym f exec firefox facebook.com
+    bindsym k exec firefox kissanime.ru
+    bindsym m exec firefox gmail.com
+    bindsym n exec firefox google.com
+    bindsym r exec firefox reddit.com
+    bindsym t exec firefox trakt.tv
+    bindsym y exec firefox youtube.com
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 #{{{ I don't Use it anymore
 # Not Useful (So I dont use it)
 # =============================
-# Use Mouse+$mod to drag floating windows to their wanted position
-# floating_modifier $mod
 
 # change container layout (stacked, tabbed, toggle split) (need to be changed)
 # ============================================================================

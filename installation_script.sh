@@ -202,5 +202,7 @@ cd ''
 make
 sudo make install
 
-## installing primewire.
-sudo pip3 install primewire
+# installing notify-send
+# notify-osd
+# libnotify
+# only works with sudo<- don't know why
